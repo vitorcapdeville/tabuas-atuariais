@@ -20,23 +20,23 @@ void Tabua::calcular_lx(double raiz) {
     {
         m_lx[i] = m_lx[i - 1] * (1 - m_qx[i - 1]);
         if (m_lx[i] == 0) {
-            m_w = i - 1;
+            m_w = (double)(i - 1);
             break;
         }
     }
 }
 
-int Tabua::tempo_futuro_maximo(int x) const {
-    return std::max(m_w - x + 1, 0);
+double Tabua::tempo_futuro_maximo(int x) const {
+    return std::max(m_w - x + 1.0, 0.0);
 }
 
 bool Tabua::possui_fechamento_plato() const {
-    return m_w == (std::numeric_limits<int>::max() - 1);
+    return isinf(m_w);
 }
 
-double Tabua::lx(int x) const {
-    int limite_superior_x = std::min(tempo_futuro_maximo(0), (int)(m_qx_size));
-    int x_trunc = std::min(x, limite_superior_x);
+double Tabua::lx(double x) const {
+    double limite_superior_x = std::min(tempo_futuro_maximo(0), (double)(m_qx_size));
+    int x_trunc = (int)std::min(x, limite_superior_x);
     double lx_ret = m_lx[x_trunc];
     if (possui_fechamento_plato() && (x > x_trunc)) {
         int extras = x - x_trunc;
@@ -49,7 +49,7 @@ double Tabua::lx(int x) const {
     return lx_ret;
 }
 
-std::vector<double> Tabua::qx(int x, std::vector<int> t) const {
+std::vector<double> Tabua::qx(int x, std::vector<double> t) const {
     std::vector<double> ret(t.size());
     int n = (int)t.size();
     for (int i = 0; i < n; i++)
@@ -59,15 +59,15 @@ std::vector<double> Tabua::qx(int x, std::vector<int> t) const {
     return ret;
 }
 
-double Tabua::qx(int x, int t) const {
-    int limite_superior_x = std::min(tempo_futuro_maximo(0), (int)(m_qx_size - 1));
+double Tabua::qx(int x, double t) const {
+    int limite_superior_x = std::min(tempo_futuro_maximo(0), (double)(m_qx_size - 1));
     x = std::min(x, limite_superior_x);
-    int limite_superior_t = std::min(tempo_futuro_maximo(x), (int)(m_qx_size - x - 1));
+    double limite_superior_t = std::min(tempo_futuro_maximo(x), (double)(m_qx_size - x - 1));
     t = std::min(t, limite_superior_t);
-    return m_qx[x + t];
+    return m_qx[x + (int)t];
 }
 
-double Tabua::tpx(int x, int t) const {
+double Tabua::tpx(int x, double t) const {
     if (t == 0) {
         return 1;
     }
@@ -79,7 +79,7 @@ double Tabua::tpx(int x, int t) const {
     return _lxt / _lx;
 }
 
-std::vector<double> Tabua::tpx(int x, std::vector<int> t) const {
+std::vector<double> Tabua::tpx(int x, std::vector<double> t) const {
     std::vector<double> ret(t.size());
     int n = (int)t.size();
     for (int i = 0; i < n; i++)
@@ -89,11 +89,11 @@ std::vector<double> Tabua::tpx(int x, std::vector<int> t) const {
     return ret;
 }
 
-double Tabua::t_qx(int x, int t) const {
-    return qx(x, t) * tpx(x, t);
+double Tabua::t_qx(int x, double t) const {
+    return qx(x, t) * tpx(x, (int)t);
 }
 
-std::vector<double> Tabua::t_qx(int x, std::vector<int> t) const {
+std::vector<double> Tabua::t_qx(int x, std::vector<double> t) const {
     std::vector<double> ret(t.size());
     int n = (int)t.size();
     for (int i = 0; i < n; i++)

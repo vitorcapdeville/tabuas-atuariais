@@ -10,5 +10,5 @@ Definição de tábuas atuariais em python com códigos em C++ para melhor perfo
 parece que os ifs estão atrasando, e a conversão de lista para array parece pesar tb. Seria legal se tivesse como eu retornar o vector[double]
 como array[float] ao inves de retornar pro python como list[float] e então converter em array do numpy.
 - Talvez eu precise de fato colocar absolutamente tudo em c++.
-- Verificar como lidar com infinito entre c++ e python (em c++ estamos usando o maior inteiro possivel, no python, np.inf.)
-- o problema do infinito é q se eu mudo mw para poder ser infinito, ele deixa de ser int e pode ser double. E se eu mudar tudo p double, mas checar que o double é na vdd um inteiro?
+- Coloquei os inputs e outputs que podem ser infinitos como double, mas ficou um pouco mais lento. Pensar numa melhor forma.
+- parece que transformar em array no output não pesou tanto no tempoo.

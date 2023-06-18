@@ -10,13 +10,13 @@ cdef class PyTabua:
     def __init__(self, qx):
         self.c_tabua = Tabua(qx)
 
-    def qx(self, int x, vector[int] t):
+    def qx(self, int x, vector[double] t):
         return np.array(self.c_tabua.qx(x, t))
 
-    def tpx(self,  int x, vector[int] t):
+    def tpx(self,  int x, vector[double] t):
         return np.array(self.c_tabua.tpx(x, t))
 
-    def t_qx(self, int x, vector[int] t):
+    def t_qx(self, int x, vector[double] t):
         return np.array(self.c_tabua.t_qx(x, t))
 
     def tempo_futuro_maximo(self, x):

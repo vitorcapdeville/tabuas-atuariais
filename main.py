@@ -8,8 +8,8 @@ from timeit import timeit
 
 
 brems_mt_f_2015 = array(pega_qx("BR-EMSmt-v.2015-f").Taxa)
-tabua_cpp = tabatu.Tabua(brems_mt_f_2015, Periodicidade.ANUAL)
-# tabua_cpp = tabatu_cpp.PyTabua(brems_mt_f_2015)
+# tabua_cpp = tabatu.Tabua(brems_mt_f_2015, Periodicidade.ANUAL)
+tabua_cpp = tabatu_cpp.PyTabua(brems_mt_f_2015)
 tabua_py = matatu.Tabua(brems_mt_f_2015, Periodicidade.ANUAL)
 
 tempo_cpp = timeit(lambda: tabua_cpp.tpx(30, arange(50)), number=1000)
