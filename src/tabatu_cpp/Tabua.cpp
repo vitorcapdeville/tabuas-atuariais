@@ -21,6 +21,7 @@ void Tabua::calcular_lx(double raiz) {
         m_lx[i] = m_lx[i - 1] * (1 - m_qx[i - 1]);
         if (m_lx[i] == 0) {
             m_w = i - 1;
+            break;
         }
     }
 }
@@ -30,7 +31,7 @@ int Tabua::tempo_futuro_maximo(int x) const {
 }
 
 bool Tabua::possui_fechamento_plato() const {
-    return m_w == std::numeric_limits<int>::max() - 1;
+    return m_w == (std::numeric_limits<int>::max() - 1);
 }
 
 double Tabua::lx(int x) const {

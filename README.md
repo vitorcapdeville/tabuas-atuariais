@@ -11,4 +11,4 @@ parece que os ifs estão atrasando, e a conversão de lista para array parece pe
 como array[float] ao inves de retornar pro python como list[float] e então converter em array do numpy.
 - Talvez eu precise de fato colocar absolutamente tudo em c++.
 - Verificar como lidar com infinito entre c++ e python (em c++ estamos usando o maior inteiro possivel, no python, np.inf.)
-- Verificar outros testes que falharam (parece que todos estão relacionados a tempo futuro max).
+- o problema do infinito é q se eu mudo mw para poder ser infinito, ele deixa de ser int e pode ser double. E se eu mudar tudo p double, mas checar que o double é na vdd um inteiro?
