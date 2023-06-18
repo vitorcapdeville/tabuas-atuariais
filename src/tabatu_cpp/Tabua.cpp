@@ -5,19 +5,11 @@
 Tabua::Tabua() {
 }
 
-Tabua::Tabua(std::vector<double> qx, double percentual, Periodicidade periodicidade) :
-    m_qx_anual(qx),
-    m_percentual(percentual),
-    m_periodicidade(periodicidade)
+Tabua::Tabua(std::vector<double> qx) :
+    m_qx(qx)
 {
-    m_fracionamento = static_cast<int>(m_periodicidade);
-    m_qx_anual_size = (int)m_qx_anual.size();
-    m_qx_size = m_qx_anual_size * m_fracionamento;
-    m_qx = m_qx_anual;
+    m_qx_size = (int)m_qx.size();
     m_lx = std::vector<double>(m_qx_size + 1);
-
-    preparar_qx();
-    explodir_qx();
 
     calcular_lx(10000.0);
 }
@@ -31,34 +23,6 @@ void Tabua::calcular_lx(double raiz) {
             m_w = i - 1;
         }
     }
-}
-
-void Tabua::agravar_qx(double& qx) {
-    qx = std::min(qx * m_percentual / 100.0, 1.0);
-}
-
-void Tabua::fracionar_qx(double& qx) {
-    qx = 1 - pow(1 - qx, 1.0 / m_fracionamento);
-}
-
-void Tabua::preparar_qx() {
-    for (int i = 0; i < m_qx_anual_size; i++)
-    {
-        agravar_qx(m_qx[i]);
-        fracionar_qx(m_qx[i]);
-    }
-}
-
-void Tabua::explodir_qx() {
-    std::vector<double> qx_explodido(m_qx_size);
-    for (int i = 0; i < m_qx_anual_size; i++)
-    {
-        for (int j = 0; j < m_fracionamento; j++)
-        {
-            qx_explodido[i * m_fracionamento + j] = m_qx_anual[i];
-        }
-    }
-    m_qx = qx_explodido;
 }
 
 int Tabua::tempo_futuro_maximo(int x) const {
@@ -104,13 +68,13 @@ double Tabua::qx(int x, int t) const {
 
 double Tabua::tpx(int x, int t) const {
     if (t == 0) {
-		return 1;
-	}
+        return 1;
+    }
     double _lx = lx(x);
     double _lxt = lx(x + t);
     if (_lx == 0) {
-		return 0;
-	}
+        return 0;
+    }
     return _lxt / _lx;
 }
 
@@ -138,14 +102,3 @@ std::vector<double> Tabua::t_qx(int x, std::vector<int> t) const {
     return ret;
 }
 
-double Tabua::pegar_percentual() const {
-    return m_percentual;
-}
-
-Periodicidade Tabua::pegar_periodicidade() const {
-    return m_periodicidade;
-}
-
-int Tabua::pegar_fracionamento() const {
-    return m_fracionamento;
-}
