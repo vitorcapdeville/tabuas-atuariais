@@ -33,6 +33,7 @@ std::vector<double> TabuaCpp::tpx(int x, std::vector<double> t) const {
 double TabuaCpp::tempo_futuro_maximo(int x) const {
     return m_tabuas[0].tempo_futuro_maximo(x);
 }
+
 bool TabuaCpp::possui_fechamento_plato() const {
     return isinf(tempo_futuro_maximo(0));
 }

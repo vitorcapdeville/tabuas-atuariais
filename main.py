@@ -12,15 +12,22 @@ brems_mt_f_2015 = array(pega_qx("BR-EMSmt-v.2015-f").Taxa)
 tabua_cpp = tabatu_cpp.Tabua(brems_mt_f_2015)
 tabua_py = matatu.Tabua(brems_mt_f_2015, Periodicidade.ANUAL)
 
-tempo_cpp = timeit(lambda: tabua_cpp.tpx(30, arange(50)), number=1000)
-tempo_python = timeit(lambda: tabua_py.tpx(30, arange(50)), number=1000)
+# tempo_cpp = timeit(lambda: tabua_cpp.tpx(30, arange(50)), number=1000)
+# tempo_python = timeit(lambda: tabua_py.tpx(30, arange(50)), number=1000)
 
-print(f"tabua tpx c++: {tempo_cpp} - {sum(tabua_cpp.tpx(30, arange(50)))}")
-print(f"tabua tpx python: {tempo_python} - {sum(tabua_py.tpx(30, arange(50)))}")
-print(f"Razao c++/python: {(tempo_python - tempo_cpp)/tempo_python}")
+# print(f"tabua tpx c++: {tempo_cpp} - {sum(tabua_cpp.tpx(30, arange(50)))}")
+# print(f"tabua tpx python: {tempo_python} - {sum(tabua_py.tpx(30, arange(50)))}")
+# print(f"Razao c++/python: {(tempo_python - tempo_cpp)/tempo_python}")
 
-tempo_cpp = timeit(lambda: tabua_cpp.t_qx(30, arange(50)), number=1000)
-tempo_python = timeit(lambda: tabua_py.t_qx(30, arange(50)), number=1000)
-print(f"tabua t_qx c++: {tempo_cpp} - {sum(tabua_cpp.t_qx(30, arange(50)))}")
-print(f"tabua t_qx python: {tempo_python} - {sum(tabua_py.t_qx(30, arange(50)))}")
-print(f"Razao c++/python: {(tempo_python - tempo_cpp)/tempo_python}")
+# tempo_cpp = timeit(lambda: tabua_cpp.t_qx(30, arange(50)), number=1000)
+# tempo_python = timeit(lambda: tabua_py.t_qx(30, arange(50)), number=1000)
+# print(f"tabua t_qx c++: {tempo_cpp} - {sum(tabua_cpp.t_qx(30, arange(50)))}")
+# print(f"tabua t_qx python: {tempo_python} - {sum(tabua_py.t_qx(30, arange(50)))}")
+# print(f"Razao c++/python: {(tempo_python - tempo_cpp)/tempo_python}")
+
+
+tabua_mdt_cpp = tabatu_cpp.TabuaMDT(tabua_cpp, tabua_cpp)
+tabua_mdt_py = matatu.TabuaMDT(tabua_py, tabua_py)
+
+print(tabua_mdt_py.qx_j(30, [3], [1]))
+print(tabua_mdt_cpp.qx_j(30, [3], [1]))

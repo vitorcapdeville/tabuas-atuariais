@@ -2,6 +2,7 @@
 
 from TabuaBaseCpp cimport TabuaBaseCpp
 from TabuaCpp cimport TabuaCpp
+from TabuaMDTCpp cimport TabuaMDTCpp
 from libcpp.vector cimport vector
 import numpy as np
 
@@ -32,6 +33,43 @@ cdef class Tabua:
 
     def __init__(self, qx):
         self.c_tabua = TabuaCpp(qx)
+
+    def qx(self, int x, vector[double] t):
+        return np.array(self.c_tabua.qx(x, t))
+
+    def tpx(self,  int x, vector[double] t):
+        return np.array(self.c_tabua.tpx(x, t))
+
+    def t_qx(self, int x, vector[double] t):
+        return np.array(self.c_tabua.t_qx(x, t))
+
+    def tempo_futuro_maximo(self, x):
+        return self.c_tabua.tempo_futuro_maximo(x)
+
+    def possui_fechamento_plato(self):
+        return self.c_tabua.possui_fechamento_plato()
+
+    @property
+    def numero_vidas(self):
+        return self.c_tabua.pega_numero_vidas()
+
+    @property
+    def numero_vidas(self):
+        return self.c_tabua.pega_numero_vidas()
+
+cdef class TabuaMDT:
+    cdef TabuaMDTCpp c_tabua
+
+
+    def __init__(self, *tabuas):
+        cdef vector[TabuaCpp] tabuas_vec
+        for i in range(len(tabuas)):
+            tabua: Tabua = tabuas[i]
+            tabuas_vec.push_back(tabua.c_tabua)
+        self.c_tabua = TabuaMDTCpp(tabuas_vec)
+
+    def qx_j(self, int x, vector[double] t, vector[int] j):
+        return np.array(self.c_tabua.qx_j(x, t, j))
 
     def qx(self, int x, vector[double] t):
         return np.array(self.c_tabua.qx(x, t))
