@@ -2,17 +2,15 @@ from __future__ import annotations
 
 from typing import Union
 
-from numpy import arange
 from numpy import atleast_1d
 from numpy import ndarray
 from numpy.typing import ArrayLike
+import tabatu_cpp
 
 from matatu.periodicidade import Periodicidade
-from tabatu.tabua_base import TabuaBase
-from tabatu.tabua_interface import TabuaInterface
 
 
-class Tabua(TabuaInterface):
+class Tabua(tabatu_cpp.Tabua):
     """Representação de tábuas de únicos decrementos.
 
     Fornece métodos para cálculo das probabilidades de falha e sobrevivência,
@@ -40,23 +38,13 @@ class Tabua(TabuaInterface):
         >>> tabua = Tabua(qx1, periodicidade=Periodicidade["ANUAL"])
     """
 
-    def __init__(self, qx: ndarray[float], periodicidade: Periodicidade = Periodicidade.ANUAL):
-        self._tabuas = (TabuaBase(qx, periodicidade),)
-        self._numero_vidas = 1
-        self._numero_decrementos = 1
-        self._periodicidade = self._tabuas[0].periodicidade
+    __slots__ = "_tabuas", "_numero_vidas", "_numero_decrementos", "_periodicidade"
 
-    @classmethod
-    def from_tabua_base(cls, tabua: TabuaBase) -> Tabua:
-        """Cria uma Tabua a partir de uma TabuaBase.
-
-        Args:
-            tabua (TabuaBase): TabuaBase a ser usada como base.
-
-        Returns:
-            Tabua: Tabua criada.
-        """
-        return cls(tabua.qx(0, arange(tabua.tempo_futuro_max(0) + 1)), tabua.periodicidade)
+    def __init__(
+        self, qx: ndarray[float], periodicidade: Periodicidade = Periodicidade.ANUAL
+    ):
+        super().__init__(qx)
+        self._periodicidade = periodicidade
 
     def tpx(self, x: ArrayLike, t: ArrayLike) -> ndarray[float]:
         """Probabilidade de um indivíduo com idade x sobreviver a idade
@@ -81,7 +69,7 @@ class Tabua(TabuaInterface):
                    0.13486216])
         """
         x = atleast_1d(x).item()
-        return self.tabuas[0].tpx(x, t)
+        return super().tpx(x, t)
 
     def t_qx(self, x: ArrayLike, t: ArrayLike) -> ndarray[float]:
         """Probabilidade de um indivíduo com idade x falhar com
@@ -127,7 +115,7 @@ class Tabua(TabuaInterface):
             array([0.31, 0.32, 0.33, 0.34, 0.35, 0.36])
         """
         x = atleast_1d(x).item()
-        return self.tabuas[0].qx(x, t)
+        return super().qx(x, t)
 
     def tempo_futuro_max(self, x: ArrayLike) -> Union[int, float]:
         """Tempo de vida futuro máximo.
@@ -148,4 +136,9 @@ class Tabua(TabuaInterface):
             100
         """
         x = atleast_1d(x).item()
-        return self.tabuas[0].tempo_futuro_max(x)
+        return super().tempo_futuro_max(x)
+
+    @property
+    def periodicidade(self) -> Periodicidade:
+        """Periodicidade da tábua."""
+        return self._periodicidade

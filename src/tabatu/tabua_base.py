@@ -4,8 +4,9 @@ from numpy import atleast_1d
 from numpy import ndarray
 from numpy.typing import ArrayLike
 
-from tabatu_cpp import PyTabua
+import tabatu_cpp
 from matatu.periodicidade import Periodicidade
+
 
 def validar_qx(qx: ArrayLike) -> ndarray:
     """Valida que qx é um array 1D com valores entre 0 e 1."""
@@ -23,33 +24,26 @@ def validar_qx(qx: ArrayLike) -> ndarray:
 
 
 class TabuaBase:
-    def __init__(self, qx: ArrayLike, periodicidade: Periodicidade = Periodicidade["ANUAL"]):
+    __slots__ = "_tabua", "_periodicidade"
+
+    def __init__(
+        self, qx: ArrayLike, periodicidade: Periodicidade = Periodicidade["ANUAL"]
+    ):
         qx: ndarray[float] = validar_qx(qx)
-        self._tabua = PyTabua(qx)
+        self._tabua = tabatu_cpp.TabuaBase(qx)
         self._periodicidade: Periodicidade = Periodicidade(periodicidade)
 
     @property
     def periodicidade(self) -> Periodicidade:
         return self._periodicidade
 
-
     def tpx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        if x < 0:
-            raise ValueError("x deve ser >= 0.")
-        t = atleast_1d(t)
-        if (t < 0).any():
-            raise ValueError("t deve ser >= 0.")
         return self._tabua.tpx(x, t)
 
     def t_qx(self, x: int, t: ArrayLike) -> ndarray[float]:
         return self.tpx(x, t) * self.qx(x, t)
 
     def qx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        if x < 0:
-            raise ValueError("x deve ser >= 0.")
-        t = atleast_1d(t)
-        if (t < 0).any():
-            raise ValueError("t deve ser >= 0.")
         return self._tabua.qx(x, t)
 
     def tempo_futuro_max(self, x: int) -> Union[int, float]:

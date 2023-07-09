@@ -12,3 +12,12 @@ como array[float] ao inves de retornar pro python como list[float] e então conv
 - Talvez eu precise de fato colocar absolutamente tudo em c++.
 - Coloquei os inputs e outputs que podem ser infinitos como double, mas ficou um pouco mais lento. Pensar numa melhor forma.
 - parece que transformar em array no output não pesou tanto no tempoo.
+
+
+Compilar Cython
+
+python setup.py build_ext --inplace
+
+Intalar pacote (Também compila o cython)
+
+pip install -e . 

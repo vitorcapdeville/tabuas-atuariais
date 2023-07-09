@@ -3,7 +3,7 @@
 #include <limits>
 
 
-class Tabua final
+class TabuaBaseCpp final
 {
 private:
     std::vector<double> m_qx;
@@ -12,8 +12,8 @@ private:
     int m_qx_size;
 
 public:
-    Tabua();
-    Tabua(std::vector<double> qx);
+    TabuaBaseCpp();
+    TabuaBaseCpp(std::vector<double> qx);
     double qx(int x, double t) const;
     double tpx(int x, double t) const;
     double t_qx(int x, double t) const;
@@ -22,6 +22,7 @@ public:
     std::vector<double> t_qx(int x, std::vector<double> t) const;
     double tempo_futuro_maximo(int x) const;
     bool possui_fechamento_plato() const;
+    std::vector<double> pega_qx() const;
 
 private:
     double lx(double x) const;
