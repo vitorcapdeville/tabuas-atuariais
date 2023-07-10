@@ -39,23 +39,23 @@ def test_qx_falha_quando_tamanho_de_x_eh_incompativel_com_a_qntd_de_tabuas(mock_
 
 def test_tempo_futuro_max_retorna_o_menor_dos_tempos_quando_status_eh_joint(mock_tabua1, mock_tabua2):
     tabua = TabuaMultiplasVidas(mock_tabua1, mock_tabua2, status=StatusVidasConjuntas.JOINT)
-    assert tabua.tempo_futuro_max([0, 0]) == min(
-        mock_tabua1.tabuas[0].tempo_futuro_max(0),
-        mock_tabua2.tabuas[0].tempo_futuro_max(0)
+    assert tabua.tempo_futuro_maximo([0, 0]) == min(
+        mock_tabua1.tabuas[0].tempo_futuro_maximo(0),
+        mock_tabua2.tabuas[0].tempo_futuro_maximo(0)
     )
 
 
 def test_tempo_futuro_max_retorna_o_maior_dos_tempos_quando_status_eh_last(mock_tabua1, mock_tabua2):
     tabua = TabuaMultiplasVidas(mock_tabua1, mock_tabua2, status=StatusVidasConjuntas.LAST)
-    assert tabua.tempo_futuro_max([0, 0]) == max(
-        mock_tabua1.tabuas[0].tempo_futuro_max(0),
-        mock_tabua2.tabuas[0].tempo_futuro_max(0)
+    assert tabua.tempo_futuro_maximo([0, 0]) == max(
+        mock_tabua1.tabuas[0].tempo_futuro_maximo(0),
+        mock_tabua2.tabuas[0].tempo_futuro_maximo(0)
     )
 
 
 def test_tempo_futuro_max_falha_quando_o_tamanho_de_x_eh_incompativel_com_a_qntd_de_tabuas(mock_tabua1, mock_tabua2):
     tabua = TabuaMultiplasVidas(mock_tabua1, mock_tabua2, status=StatusVidasConjuntas.LAST)
     with pytest.raises(ValueError):
-        tabua.tempo_futuro_max([0])
+        tabua.tempo_futuro_maximo([0])
     with pytest.raises(ValueError):
-        tabua.tempo_futuro_max([0, 0, 0])
+        tabua.tempo_futuro_maximo([0, 0, 0])

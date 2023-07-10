@@ -145,7 +145,7 @@ class TabuaMultiplasVidas(TabuaInterface):
             return 1 - (1 - qx).prod(axis=0)
         return qx.prod(axis=0)
 
-    def tempo_futuro_max(self, x: ArrayLike) -> int:
+    def tempo_futuro_maximo(self, x: ArrayLike) -> int:
         """Tempo de vida futuro máximo.
 
         A idade deve ser composta por um array com tamanho igual ao número de vidas.
@@ -166,19 +166,19 @@ class TabuaMultiplasVidas(TabuaInterface):
             continua se pelo menos uma vida está viva.
 
             >>> tabua = TabuaMultiplasVidas(Tabua(qx1), Tabua(qx1), status = StatusVidasConjuntas.LAST)
-            >>> tabua.tempo_futuro_max([50, 30])
+            >>> tabua.tempo_futuro_maximo([50, 30])
             70
 
             Já para o status "joint", quando a primeira vida morre, a tabua se encerra.
 
             >>> tabua = TabuaMultiplasVidas(Tabua(qx1), Tabua(qx1), status = StatusVidasConjuntas.JOINT)
-            >>> tabua.tempo_futuro_max([50, 30])
+            >>> tabua.tempo_futuro_maximo([50, 30])
             50
         """
         x = atleast_1d(x)
         if len(x) != self._numero_vidas:
             raise ValueError("Deve ser fornecida uma idade para cada vida.")
-        w = [tabua.tempo_futuro_max(idade) for idade, tabua in zip(x, self._tabuas)]
+        w = [tabua.tempo_futuro_maximo(idade) for idade, tabua in zip(x, self._tabuas)]
         if self._status == StatusVidasConjuntas.LAST:
             return max(w)
         return min(w)

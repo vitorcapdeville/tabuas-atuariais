@@ -281,7 +281,7 @@ class TabuaMDT(tabatu_cpp.TabuaMDT):
         j = atleast_1d(j)
         return atleast_2d(self.tpx(x, t) * self.qx_j(x, t, j))
 
-    def tempo_futuro_max(self, x: ArrayLike) -> int:
+    def tempo_futuro_maximo(self, x: ArrayLike) -> int:
         """Tempo de vida futuro máximo.
 
         A idade pode ser composta de duas idades diferentes, como, por exemplo,
@@ -300,12 +300,12 @@ class TabuaMDT(tabatu_cpp.TabuaMDT):
             >>> qx1 = (np.arange(100) + 1)/100
             >>> qx2 = np.repeat(0.01, 100)
             >>> tabua = TabuaMDT(Tabua(qx1), Tabua(qx2))
-            >>> tabua.tempo_futuro_max(30)
+            >>> tabua.tempo_futuro_maximo(30)
             70
-            >>> tabua.tempo_futuro_max([50, 0])
+            >>> tabua.tempo_futuro_maximo([50, 0])
             50
         """
-        return super().tempo_futuro_max(x)
+        return super().tempo_futuro_maximo(x)
 
     def possui_causa_principal(self) -> bool:
         """Verifica se existe uma causa principal."""

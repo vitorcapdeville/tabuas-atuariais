@@ -69,7 +69,7 @@ def todas_tabuas(request):
 @pytest.mark.parametrize("x", [0, 50, 1000])
 def test_tempo_futuro_max_eh_sempre_infinito_para_tabua_plato(x, tabuas_plato):
     x = repeat(x, tabuas_plato.numero_decrementos * tabuas_plato.numero_vidas)
-    assert isinf(tabuas_plato.tempo_futuro_max(x))
+    assert isinf(tabuas_plato.tempo_futuro_maximo(x))
 
 
 def test_possui_fechamento_plato_retorna_true_quando_a_tabua_eh_plato(tabuas_plato):
@@ -91,33 +91,32 @@ def test_qx_eh_igual_ao_ultimo_qx_quando_x_mais_t_for_maior_ou_igual_ao_tempo_fu
 ):
     """A probabilidade de morte no tempo futuro máximo é sempre 0."""
     x = repeat(0, tabuas_plato.numero_decrementos * tabuas_plato.numero_vidas)
-    assert (tabuas_plato.qx(x, [10, 50, 100]) == tabuas_plato.qx(x, tabuas_plato.tempo_futuro_max(x))).all()
+    assert (tabuas_plato.qx(x, [10, 50, 100]) == tabuas_plato.qx(x, [tabuas_plato.tempo_futuro_maximo(x)])).all()
 
 
 def test_qx_retorna_erro_se_t_for_negativo(todas_tabuas):
     x = repeat(0, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
     with pytest.raises(ValueError):
-        todas_tabuas.qx(x, -1)
+        todas_tabuas.qx(x, [-1])
 
 
 def test_qx_retorna_erro_se_x_for_negativo(todas_tabuas):
     x = repeat(-1, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
     with pytest.raises(ValueError):
-        todas_tabuas.qx(x, 0)
+        todas_tabuas.qx(x, [0])
 
 
 @pytest.mark.parametrize("x", [0, 3, 10])
 def test_tpx_eh_igual_a_1_quando_t_for_igual_a_0(x, todas_tabuas):
     """A probabilidade de sobrevivência no tempo 0 é sempre 1."""
     x = repeat(x, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
-    assert todas_tabuas.tpx(x, 0) == array([1])
     assert todas_tabuas.tpx(x, [0]) == array([1])
 
 
 def test_tpx_eh_igual_a_0_quando_t_for_maior_ou_igual_ao_tempo_futuro_max_e_a_tabua_completa(tabuas_completas):
     """A probabilidade de sobreviver ao tempo futuro máximo da tábua é zero."""
     x = repeat(3, tabuas_completas.numero_decrementos * tabuas_completas.numero_vidas)
-    t = arange(3) + tabuas_completas.tempo_futuro_max(x)
+    t = arange(3) + tabuas_completas.tempo_futuro_maximo(x)
     assert (tabuas_completas.tpx(x, t) == 0).all()
 
 
@@ -127,7 +126,7 @@ def test_tpx_eh_igual_a_zero_quando_x_maior_ou_igual_ao_tempo_futuro_max_t_maior
     """Quando a idade já é acima do tempo futuro máximo da tábua, a probabilidade de sobreviver por pelo menos
     mais 1 tempo é zero."""
     x = repeat(0, tabuas_completas.numero_decrementos * tabuas_completas.numero_vidas)
-    x = tabuas_completas.tempo_futuro_max(x) + 1
+    x = tabuas_completas.tempo_futuro_maximo(x) + 1
     x = repeat(x, tabuas_completas.numero_decrementos * tabuas_completas.numero_vidas)
     t = [1, 2, 3]
     assert (tabuas_completas.tpx(x, t) == 0).all()
@@ -136,27 +135,27 @@ def test_tpx_eh_igual_a_zero_quando_x_maior_ou_igual_ao_tempo_futuro_max_t_maior
 def test_tpx_termina_com_zero(todas_tabuas):
     """A probabilidade de sobreviver tende a zero quando t tende a infinito."""
     x = repeat(2, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
-    t = min(todas_tabuas.tempo_futuro_max(x), 100)
-    assert todas_tabuas.tpx(x, t) == pytest.approx(0)
+    t = min(todas_tabuas.tempo_futuro_maximo(x), 100)
+    assert todas_tabuas.tpx(x, [t]) == pytest.approx(0)
 
 
 def test_tpx_retorna_erro_se_t_for_negativo(todas_tabuas):
     x = repeat(0, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
     with pytest.raises(ValueError):
-        todas_tabuas.tpx(x, -1)
+        todas_tabuas.tpx(x, [-1])
 
 
 def test_tpx_retorna_erro_se_x_for_negativo(todas_tabuas):
     x = repeat(-1, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
     with pytest.raises(ValueError):
-        todas_tabuas.tpx(x, 0)
+        todas_tabuas.tpx(x, [0])
 
 
 @pytest.mark.parametrize("x", [0, 3, 10])
 def test_t_qx_soma_1_quando_t_sao_todos_os_tempos_futuros(x, todas_tabuas):
     """A probabilidade de falha em algum tempo futuro é 1."""
     x = repeat(x, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
-    limite = min(todas_tabuas.tempo_futuro_max(x), 100)
+    limite = min(todas_tabuas.tempo_futuro_maximo(x), 100)
     t = arange(limite + 1)
     assert sum(todas_tabuas.t_qx(x, t)) == pytest.approx(1)
 
@@ -165,9 +164,9 @@ def test_t_qx_eh_igual_a_1_quando_t_eh_zero_e_x_eh_superior_ao_tempo_futuro_maxi
     """Supondo que o indivíduo excedeu o tempo limite da tábua, a probabilidade de falhar antes do próximo
     aniversário é igual a 1."""
     x = repeat(0, tabuas_completas.numero_decrementos * tabuas_completas.numero_vidas)
-    x = tabuas_completas.tempo_futuro_max(x)
+    x = tabuas_completas.tempo_futuro_maximo(x)
     x = repeat(x, tabuas_completas.numero_decrementos * tabuas_completas.numero_vidas)
-    t = 0
+    t = [0]
     assert (tabuas_completas.t_qx(x - 2, t) < 1).all()
     assert (tabuas_completas.t_qx(x, t) == 1).all()
     assert (tabuas_completas.t_qx(x + 2, t) == 1).all()
@@ -180,7 +179,7 @@ def test_t_qx_eh_igual_a_zero_quando_x_eh_superior_ao_tempo_futuro_max_e_t_eh_ma
     aniversário é 1, logo, a probabilidade de sobreviver ao próximo aniversário e falhar em algum tempo futuro é
     zero."""
     x = repeat(0, tabuas_completas.numero_decrementos * tabuas_completas.numero_vidas)
-    x = tabuas_completas.tempo_futuro_max(x) + 1
+    x = tabuas_completas.tempo_futuro_maximo(x) + 1
     x = repeat(x, tabuas_completas.numero_decrementos * tabuas_completas.numero_vidas)
     t = [1, 2, 3]
     assert (tabuas_completas.t_qx(x, t) == 0).all()
@@ -189,13 +188,13 @@ def test_t_qx_eh_igual_a_zero_quando_x_eh_superior_ao_tempo_futuro_max_e_t_eh_ma
 def test_t_qx_retorna_erro_se_t_for_negativo(todas_tabuas):
     x = repeat(0, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
     with pytest.raises(ValueError):
-        todas_tabuas.t_qx(x, -1)
+        todas_tabuas.t_qx(x, [-1])
 
 
 def test_t_qx_retorna_erro_se_x_for_negativo(todas_tabuas):
     x = repeat(-1, todas_tabuas.numero_decrementos * todas_tabuas.numero_vidas)
     with pytest.raises(ValueError):
-        todas_tabuas.t_qx(x, 0)
+        todas_tabuas.t_qx(x, [0])
 
 
 @pytest.fixture(
@@ -252,8 +251,8 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = aumentar_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_max(0)
-        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_max(0)
+        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_maximo(0)
+        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_maximo(0)
         assert tempo_menor_periodicidade - 1 == converter_periodicidade(
             tempo_maior_periodicidade - 1, maior_periodicidade, menor_periodicidade
         ).item()
@@ -262,8 +261,8 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = reduzir_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_max(0)
-        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_max(0)
+        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_maximo(0)
+        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_maximo(0)
         assert tempo_menor_periodicidade - 1 == converter_periodicidade(
             tempo_maior_periodicidade - 1, maior_periodicidade, menor_periodicidade
         ).item()
@@ -272,7 +271,7 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = aumentar_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_max(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
         tempos_menor_periodicidade = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
         )
@@ -286,7 +285,7 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = reduzir_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_max(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
         tempos_menor_periodicidade = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
         )
@@ -300,8 +299,8 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = aumentar_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_max(0))
-        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_max(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
+        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_maximo(0))
         assert all(mod(tempos_menor_periodicidade, 1) == 0)
         pontos_split = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
@@ -321,8 +320,8 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = reduzir_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_max(0))
-        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_max(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
+        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_maximo(0))
         assert all(mod(tempos_menor_periodicidade, 1) == 0)
         pontos_split = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
@@ -345,18 +344,18 @@ class TestEfeitoAgravoNaTabua:
         qx_agravado = agravar_qx(qx_original, percentual=50)
         tabua_original = Tabua(qx_original)
         tabua_agravada = Tabua(qx_agravado)
-        assert tabua_original.tempo_futuro_max(0) == tabua_agravada.tempo_futuro_max(0)
+        assert tabua_original.tempo_futuro_maximo(0) == tabua_agravada.tempo_futuro_maximo(0)
 
     def test_agravar_uma_tabua_pode_diminuir_o_tempo_futuro_maximo(self):
         qx_original = array([0.1, 0.3, 0.5, 1.0])
         qx_agravado = agravar_qx(qx_original, percentual=300)
         tabua_original = Tabua(qx_original)
         tabua_agravada = Tabua(qx_agravado)
-        assert tabua_original.tempo_futuro_max(0) > tabua_agravada.tempo_futuro_max(0)
+        assert tabua_original.tempo_futuro_maximo(0) > tabua_agravada.tempo_futuro_maximo(0)
 
     def test_agravar_uma_tabua_pode_nao_alterar_o_tempo_futuro_maximo(self):
         qx_original = array([0.1, 0.3, 0.5, 1.0])
         qx_agravado = agravar_qx(qx_original, percentual=110)
         tabua_original = Tabua(qx_original)
         tabua_agravada = Tabua(qx_agravado)
-        assert tabua_original.tempo_futuro_max(0) == tabua_agravada.tempo_futuro_max(0)
+        assert tabua_original.tempo_futuro_maximo(0) == tabua_agravada.tempo_futuro_maximo(0)

@@ -117,7 +117,7 @@ class Tabua(tabatu_cpp.Tabua):
         x = atleast_1d(x).item()
         return super().qx(x, t)
 
-    def tempo_futuro_max(self, x: ArrayLike) -> Union[int, float]:
+    def tempo_futuro_maximo(self, x: ArrayLike) -> Union[int, float]:
         """Tempo de vida futuro máximo.
 
         Args:
@@ -130,13 +130,13 @@ class Tabua(tabatu_cpp.Tabua):
 
             >>> import numpy as np
             >>> qx = (np.arange(100) + 1)/100
-            >>> Tabua(qx).tempo_futuro_max(30)
+            >>> Tabua(qx).tempo_futuro_maximo(30)
             70
-            >>> Tabua(qx).tempo_futuro_max(0)
+            >>> Tabua(qx).tempo_futuro_maximo(0)
             100
         """
         x = atleast_1d(x).item()
-        return super().tempo_futuro_max(x)
+        return super().tempo_futuro_maximo(x)
 
     @property
     def periodicidade(self) -> Periodicidade:

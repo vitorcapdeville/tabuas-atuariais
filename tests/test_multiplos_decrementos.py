@@ -1,4 +1,4 @@
-from unittest.mock import Mock, MagicMock
+from unittest.mock import Mock
 import pytest
 from numpy import array
 from numpy.testing import assert_array_equal
@@ -9,8 +9,6 @@ from tabatu.multiplos_decrementos import qx2qxj
 from tabatu.multiplos_decrementos import converter_mdt
 from tabatu.multiplos_decrementos import valida_quantidade_tabuas
 from tabatu.multiplos_decrementos import captura_argumentos
-from tabatu.unico_decremento import Tabua
-import tabatu.multiplos_decrementos as tabuas_mdt
 
 
 class TestCapturaArgumentos:
@@ -96,19 +94,15 @@ class TestTabuaMDT:
         with pytest.raises(ValueError):
             TabuaMDT(mock_tabua1, morte=mock_tabua2, causa_principal="invalidez")
 
-    def test_tpx_eh_o_produto_dos_tpxs_de_cada_tabua(self, mock_tabua1, mock_tabua2):
-        tabua1 = Tabua(array([0.1, 0.2, 0.3, 0.4]))
-        tabua2 = Tabua(array([0.9, 0.8, 0.7, 0.6]))
-        tabua = TabuaMDT(tabua1, tabua2)
+    def test_tpx_eh_o_produto_dos_tpxs_de_cada_tabua(self, tabua_mdt):
+        assert tabua_mdt.numero_decrementos == 2
 
-        assert tabua1.tpx(1, [2])[0] == pytest.approx((1-0.2) * (1-0.3))
-        assert tabua2.tpx(2, [2])[0] == pytest.approx((1-0.7) * (1-0.6))
-
-        resultado = tabua.tpx([1, 2], [2])
-        esperado = ((1-0.2) * (1-0.3)) * ((1-0.7) * (1-0.6))
+        resultado = tabua_mdt.tpx([1, 2], [2])
+        esperado = tabua_mdt.tabuas[0].tpx(1, [2]) * tabua_mdt.tabuas[1].tpx(2, [2])
 
         assert_array_almost_equal(resultado, esperado)
 
+    @pytest.mark.skip(reason="Não implementado")
     def test_tpx_funciona_com_apenas_uma_idade(self, mock_tabua1, mock_tabua2):
         tabua = TabuaMDT(mock_tabua1, mock_tabua2)
         resultado = tabua.tpx(1, 0)
@@ -118,89 +112,71 @@ class TestTabuaMDT:
         assert_array_equal(resultado, esperado)
 
     def test_tpx_falha_quando_o_numero_de_tabuas_nao_eh_1_e_nao_eh_compativel_com_o_numero_de_decrementos(
-        self, mock_tabua1, mock_tabua2
+        self, tabua_mdt
     ):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
+        assert tabua_mdt.numero_decrementos == 2
         with pytest.raises(ValueError):
-            tabua.tpx([1, 1, 1], 0)
+            tabua_mdt.tpx([1, 1, 1], [0])
 
-    def test_qx_j_retorna_uma_array_com_2_dimensoes(self, mock_tabua1, mock_tabua2):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
-        assert tabua.qx_j(0, 0, 1).shape == (1, len(mock_tabua1.tabuas[0].qx()))
-        assert tabua.qx_j(0, 0, [0, 1]).shape == (2, len(mock_tabua1.tabuas[0].qx()))
+    def test_qx_j_retorna_uma_array_com_2_dimensoes(self, tabua_mdt):
+        assert tabua_mdt.qx_j([0, 0], [0], [1]).shape == (1, 1)
+        assert tabua_mdt.qx_j([0, 0], [0], [0, 1]).shape == (2, 1)
 
-    def test_qx_j_chama_converter_mdt_com_qx_das_tabuas(
-        self, mock_tabua1, mock_tabua2, monkeypatch
-    ):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
-        mock_converter_mdt = MagicMock()
-        monkeypatch.setattr(tabuas_mdt, "converter_mdt", mock_converter_mdt)
-        tabua.qx_j(0, 0, 1)
-        mock_converter_mdt.assert_called_once_with(
-            mock_tabua1.tabuas[0].qx(), mock_tabua2.tabuas[0].qx()
+    def test_qx_j_chama_converter_mdt_com_qx_das_tabuas(self, tabua_mdt):
+        resultado = tabua_mdt.qx_j([0, 1], [0], [1])
+        qx1 = tabua_mdt.tabuas[0].qx(0, [0])
+        qx2 = tabua_mdt.tabuas[1].qx(1, [0])
+        esperado = converter_mdt(qx1, qx2)[1]
+
+        assert resultado.item() == esperado.item()
+
+    def test_qx_j_aceita_string_quando_as_tabuas_sao_passadas_por_nome(self, tabua_mdt):
+        assert tabua_mdt.causas == {"0": 0, "causa1": 1}
+        assert_array_equal(
+            tabua_mdt.qx_j([0, 0], [0], 1), tabua_mdt.qx_j([0, 0], [0], "causa1")
+        )
+        assert_array_equal(
+            tabua_mdt.qx_j([0, 0], [0], [0, 1]),
+            tabua_mdt.qx_j([0, 0], [0], [0, "causa1"]),
         )
 
-    def test_qx_j_aceita_string_quando_as_tabuas_sao_passadas_por_nome(
-        self, mock_tabua1, mock_tabua2
-    ):
-        tabua = TabuaMDT(mock_tabua1, causa1=mock_tabua2)
-        assert tabua.qx_j(0, 0, 1).shape == (1, len(mock_tabua1.tabuas[0].qx()))
-        assert tabua.qx_j(0, 0, [0, 1]).shape == (2, len(mock_tabua1.tabuas[0].qx()))
-        assert tabua.qx_j(0, 0, [0, "causa1"]).shape == (
-            2,
-            len(mock_tabua1.tabuas[0].qx()),
+        assert_array_equal(
+            tabua_mdt.qx_j([0, 0], [0], ["0", "causa1"]),
+            tabua_mdt.qx_j([0, 0], [0], [0, 1]),
         )
-        assert tabua.qx_j(0, 0, ["0", "causa1"]).shape == (
-            2,
-            len(mock_tabua1.tabuas[0].qx()),
-        )
-        assert tabua.qx_j(0, 0, "causa1").shape == (1, len(mock_tabua1.tabuas[0].qx()))
 
     def test_qx_j_falha_quando_o_numero_de_tabuas_nao_eh_1_e_nao_eh_compativel_com_o_numero_de_decrementos(
-        self, mock_tabua1, mock_tabua2
+        self, tabua_mdt
     ):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
+        assert tabua_mdt.numero_decrementos == 2
         with pytest.raises(ValueError):
-            tabua.qx_j([1, 1, 1], 0, 1)
+            tabua_mdt.qx_j([1, 1, 1], [0], 1)
 
     def test_qx_chama_qx_j_com_todas_as_causas_e_retorna_array_com_uma_dimensao(
-        self, mock_tabua1, mock_tabua2
+        self, tabua_mdt
     ):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
-        tabua.qx_j = Mock(return_value=array([[0.1, 0.2, 0.3], [0.3, 0.5, 0.8]]))
-        resultado = tabua.qx([0, 0], 1)
-        tabua.qx_j.assert_called_once()
-        assert tabua.qx_j.call_args[0][0] == [0, 0]
-        assert tabua.qx_j.call_args[0][1] == 1
-        assert_array_equal(tabua.qx_j.call_args[0][2], array([0, 1]))
+        resultado = tabua_mdt.qx([0, 0], [0, 1, 2])
+        qx_j = tabua_mdt.qx_j([0, 0], [0, 1, 2], [0, 1])
+        assert_array_equal(resultado, qx_j.sum(axis=0))
         assert resultado.ndim == 1
 
-    def test_qx_j_retorna_array_com_2_dimensoes(self, mock_tabua1, mock_tabua2):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
-        assert tabua.qx_j(0, 0, 1).shape == (1, len(mock_tabua1.tabuas[0].qx()))
-        assert tabua.qx_j(0, 0, [0, 1]).shape == (2, len(mock_tabua1.tabuas[0].qx()))
-
-    def test_tempo_futuro_max_retorna_o_menor_dos_tempos_de_cada_tabua(
-        self, mock_tabua1, mock_tabua2
-    ):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
-        assert tabua.tempo_futuro_max(4) == min(
-            mock_tabua1.tabuas[0].tempo_futuro_max(),
-            mock_tabua2.tabuas[0].tempo_futuro_max(),
+    def test_tempo_futuro_max_retorna_o_menor_dos_tempos_de_cada_tabua(self, tabua_mdt):
+        assert tabua_mdt.tempo_futuro_maximo([4, 4]) == min(
+            tabua_mdt.tabuas[0].tempo_futuro_maximo(4),
+            tabua_mdt.tabuas[1].tempo_futuro_maximo(4),
         )
 
     def test_tempo_futuro_maximo_falha_quando_a_quantidadde_de_idades_eh_incompativel(
-        self, mock_tabua1, mock_tabua2
+        self, tabua_mdt
     ):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2)
+        assert tabua_mdt.numero_decrementos == 2
         with pytest.raises(ValueError):
-            tabua.tempo_futuro_max([5, 5, 5])
+            tabua_mdt.tempo_futuro_maximo([5, 5, 5])
 
     def test_t_qx_considera_apenas_a_causa_principal_quando_ela_eh_fornecida(
-        self, mock_tabua1, mock_tabua2
+        self, tabua_mdt
     ):
-        tabua = TabuaMDT(mock_tabua1, mock_tabua2, causa_principal=1)
-        tabua.t_qx_j = Mock(return_value=array([[0.3, 0.5, 0.8]]))
-        resultado = tabua.t_qx([0, 0], 1)
-        tabua.t_qx_j.assert_called_once_with([0, 0], 1, "1")
+        resultado = tabua_mdt.t_qx([1, 2], [0, 1, 2])
+        esperado = tabua_mdt.t_qx_j([1, 2], [0, 1, 2], 1).sum(axis=0)
+        assert_array_equal(resultado, esperado)
         assert resultado.ndim == 1

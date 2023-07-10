@@ -37,14 +37,14 @@ class TestIntegrationTestsTempoFuturoMax:
     @pytest.mark.parametrize("x", [0, 50, 1000])
     def test_tempo_futuro_max_eh_sempre_infinito_para_tabua_plato(self, x):
         tabua = TabuaBase(qx_plato)
-        assert isinf(tabua.tempo_futuro_max(x))
+        assert isinf(tabua.tempo_futuro_maximo(x))
 
     def test_tempo_futuro_max_eh_finito_quando_a_tabua_eh_completa(self):
         qx = array([0.1, 0.2, 0.4, 0.8, 1.0])
         tabua = TabuaBase(qx)
-        assert tabua.tempo_futuro_max(0) == 5
-        assert tabua.tempo_futuro_max(3) == 2
-        assert tabua.tempo_futuro_max(50) == 0
+        assert tabua.tempo_futuro_maximo(0) == 5
+        assert tabua.tempo_futuro_maximo(3) == 2
+        assert tabua.tempo_futuro_maximo(50) == 0
 
 
 class TestIntegrationTestsPossuiFechamentoPlato:
@@ -91,14 +91,14 @@ class TestIntegrationTestsTabuaBaseTpx:
     def test_tpx_eh_igual_a_0_quando_t_for_maior_ou_igual_ao_tempo_futuro_max_e_a_tabua_completa(self):
         """A probabilidade de sobreviver ao tempo futuro máximo da tábua é zero."""
         tabua = TabuaBase(qx_completo)
-        t = arange(3) + tabua.tempo_futuro_max(3)
+        t = arange(3) + tabua.tempo_futuro_maximo(3)
         assert (tabua.tpx(3, t) == 0).all()
 
     def test_tpx_eh_igual_a_zero_quando_x_maior_ou_igual_ao_tempo_futuro_max_t_maior_que_zero_e_tabua_completa(self):
         """Quando a idade já é acima do tempo futuro máximo da tábua, a probabilidade de sobreviver por pelo menos
         mais 1 tempo é zero."""
         tabua = TabuaBase(qx_completo)
-        x = tabua.tempo_futuro_max(0) + 1
+        x = tabua.tempo_futuro_maximo(0) + 1
         t = [1, 2, 3]
         assert (tabua.tpx(x, t) == 0).all()
 
@@ -107,7 +107,7 @@ class TestIntegrationTestsTabuaBaseTpx:
         """A probabilidade de sobreviver tende a zero quando t tende a infinito."""
         tabua = TabuaBase(qx)
         x = 2
-        t = min(tabua.tempo_futuro_max(x), 100)
+        t = min(tabua.tempo_futuro_maximo(x), 100)
         assert tabua.tpx(x, t) == pytest.approx(0)
 
     def test_tpx_retorna_erro_se_t_for_negativo(self):
@@ -127,7 +127,7 @@ class TestIntegrationTestsTabuaBaseTqx:
     def test_t_qx_soma_1_quando_t_sao_todos_os_tempos_futuros(self, x, qx):
         """A probabilidade de falha em algum tempo futuro é 1."""
         tabua = TabuaBase(qx)
-        limite = min(tabua.tempo_futuro_max(x), 100)
+        limite = min(tabua.tempo_futuro_maximo(x), 100)
         t = arange(limite + 1)
         assert sum(tabua.t_qx(x, t)) == pytest.approx(1)
 
@@ -136,7 +136,7 @@ class TestIntegrationTestsTabuaBaseTqx:
         aniversário é igual a 1."""
         qx = array([0.1, 0.2, 0.4, 0.8, 1.0])
         tabua = TabuaBase(qx)
-        x = tabua.tempo_futuro_max(0)
+        x = tabua.tempo_futuro_maximo(0)
         t = 0
         assert_array_equal(tabua.t_qx(x - 2, t), array([0.8]))
         assert_array_equal(tabua.t_qx(x, t), array([1.0]))
@@ -147,7 +147,7 @@ class TestIntegrationTestsTabuaBaseTqx:
         aniversário é 1, logo, a probabilidade de sobreviver ao próximo aniversário e falhar em algum tempo futuro é
         zero."""
         tabua = TabuaBase(qx_completo)
-        x = tabua.tempo_futuro_max(0) + 1
+        x = tabua.tempo_futuro_maximo(0) + 1
         t = [1, 2, 3]
         assert (tabua.t_qx(x, t) == 0).all()
 

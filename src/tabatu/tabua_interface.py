@@ -37,13 +37,13 @@ class TabuaInterface(ABC):
         pass
 
     @abstractmethod
-    def tempo_futuro_max(self, x: ArrayLike) -> Union[int, float]:
+    def tempo_futuro_maximo(self, x: ArrayLike) -> Union[int, float]:
         pass
 
     def possui_fechamento_plato(self) -> bool:
         """Verifica se a tábua possui fechamento de tipo platô."""
         x = repeat(0, self._numero_vidas * self._numero_decrementos)
-        return isinf(self.tempo_futuro_max(x))
+        return isinf(self.tempo_futuro_maximo(x))
 
     @property
     def numero_vidas(self) -> int:

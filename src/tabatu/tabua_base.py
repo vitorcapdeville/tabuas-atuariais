@@ -50,7 +50,7 @@ class TabuaBase(tabatu_cpp.TabuaBase):
         t = atleast_1d(t)
         return super().qx(x, t)
 
-    def tempo_futuro_max(self, x: int) -> Union[int, float]:
+    def tempo_futuro_maximo(self, x: int) -> Union[int, float]:
         return super().tempo_futuro_maximo(x)
 
     def possui_fechamento_plato(self) -> bool:

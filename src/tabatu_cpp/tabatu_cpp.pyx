@@ -81,16 +81,16 @@ cdef class TabuaMDT:
         self.c_tabua = TabuaMDTCpp(tabuas_vec)
 
     def qx_j(self, vector[int] x, vector[double] t, vector[int] j):
-        return np.array(self.c_tabua.qx_j(x, t, j))
+        return np.atleast_2d(self.c_tabua.qx_j(x, t, j))
 
     def qx(self, vector[int] x, vector[double] t):
-        return np.array(self.c_tabua.qx(x, t))
+        return np.atleast_1d(self.c_tabua.qx(x, t))
 
     def tpx(self,  vector[int] x, vector[double] t):
-        return np.array(self.c_tabua.tpx(x, t))
+        return np.atleast_1d(self.c_tabua.tpx(x, t))
 
     def t_qx(self, vector[int] x, vector[double] t):
-        return np.array(self.c_tabua.t_qx(x, t))
+        return np.atleast_1d(self.c_tabua.t_qx(x, t))
 
     def tempo_futuro_maximo(self, x):
         return self.c_tabua.tempo_futuro_maximo(x)

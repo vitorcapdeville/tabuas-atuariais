@@ -65,6 +65,9 @@ TabuaMDTCpp::TabuaMDTCpp(std::vector<TabuaCpp> tabuas)
 
 // comeco
 double TabuaMDTCpp::qx_j(std::vector<int> x, double t, int j) const {
+	if (x.size() != m_numero_decrementos) {
+		throw std::invalid_argument("x deve ser um vetor com tamanho igual ao numero de decrementos.");
+	}
 	if (j > m_numero_decrementos) {
 		throw std::out_of_range("");
 	}
@@ -88,7 +91,7 @@ std::vector<double> TabuaMDTCpp::qx_j(std::vector<int> x, std::vector<double> t,
 
 std::vector<std::vector<double>> TabuaMDTCpp::qx_j(std::vector<int> x, std::vector<double> t, std::vector<int> j) const {
     std::vector<std::vector<double>> ret(j.size());
-    int n = (int)t.size();
+    int n = (int)j.size();
     for (int i = 0; i < n; i++)
     {
         ret[i] = qx_j(x, t, j[i]);
@@ -106,6 +109,9 @@ double TabuaMDTCpp::qx(std::vector<int> x, double t) const {
 }
 
 double TabuaMDTCpp::tpx(std::vector<int> x, double t) const {
+	if (x.size() != m_numero_decrementos) {
+		throw std::invalid_argument("x deve ser um vetor com tamanho igual ao numero de decrementos.");
+	}
 	double ret = 1.0;
 	for (size_t i = 0; i < m_numero_decrementos; i++)
 	{
@@ -135,6 +141,9 @@ std::vector<double> TabuaMDTCpp::tpx(std::vector<int> x, std::vector<double> t) 
 }
 
 double TabuaMDTCpp::tempo_futuro_maximo(std::vector<int> x) const {
+	if (x.size() != m_numero_decrementos) {
+		throw std::invalid_argument("x deve ser um vetor com tamanho igual ao numero de decrementos.");
+	}
 	std::vector<double> ret(m_numero_decrementos);
 	for (size_t i = 0; i < m_numero_decrementos; i++)
 	{
