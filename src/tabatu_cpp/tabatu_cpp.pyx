@@ -80,16 +80,16 @@ cdef class TabuaMDT:
             tabuas_vec.push_back(tabua.c_tabua)
         self.c_tabua = TabuaMDTCpp(tabuas_vec)
 
-    def qx_j(self, int x, vector[double] t, vector[int] j):
+    def qx_j(self, vector[int] x, vector[double] t, vector[int] j):
         return np.array(self.c_tabua.qx_j(x, t, j))
 
-    def qx(self, int x, vector[double] t):
+    def qx(self, vector[int] x, vector[double] t):
         return np.array(self.c_tabua.qx(x, t))
 
-    def tpx(self,  int x, vector[double] t):
+    def tpx(self,  vector[int] x, vector[double] t):
         return np.array(self.c_tabua.tpx(x, t))
 
-    def t_qx(self, int x, vector[double] t):
+    def t_qx(self, vector[int] x, vector[double] t):
         return np.array(self.c_tabua.t_qx(x, t))
 
     def tempo_futuro_maximo(self, x):
