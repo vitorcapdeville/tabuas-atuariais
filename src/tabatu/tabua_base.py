@@ -1,3 +1,4 @@
+import stat
 from typing import Union
 
 from numpy import atleast_1d
@@ -23,31 +24,34 @@ def validar_qx(qx: ArrayLike) -> ndarray:
     return qx
 
 
-class TabuaBase:
+class TabuaBase(tabatu_cpp.TabuaBase):
     __slots__ = "_tabua", "_periodicidade"
 
     def __init__(
         self, qx: ArrayLike, periodicidade: Periodicidade = Periodicidade["ANUAL"]
     ):
         qx: ndarray[float] = validar_qx(qx)
-        self._tabua = tabatu_cpp.TabuaBase(qx)
         self._periodicidade: Periodicidade = Periodicidade(periodicidade)
+        super().__init__(qx)
 
     @property
     def periodicidade(self) -> Periodicidade:
         return self._periodicidade
 
     def tpx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        return self._tabua.tpx(x, t)
+        t = atleast_1d(t)
+        return super().tpx(x, t)
 
     def t_qx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        return self.tpx(x, t) * self.qx(x, t)
+        t = atleast_1d(t)
+        return super().t_qx(x, t)
 
     def qx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        return self._tabua.qx(x, t)
+        t = atleast_1d(t)
+        return super().qx(x, t)
 
     def tempo_futuro_max(self, x: int) -> Union[int, float]:
-        return self._tabua.tempo_futuro_maximo(x)
+        return super().tempo_futuro_maximo(x)
 
     def possui_fechamento_plato(self) -> bool:
-        return self._tabua.possui_fechamento_plato()
+        return super().possui_fechamento_plato()

@@ -1011,7 +1011,7 @@ struct __pyx_obj_10tabatu_cpp_TabuaBase {
 };
 
 
-/* "tabatu_cpp.pyx":31
+/* "tabatu_cpp.pyx":34
  * 
  * 
  * cdef class Tabua:             # <<<<<<<<<<<<<<
@@ -1024,8 +1024,8 @@ struct __pyx_obj_10tabatu_cpp_Tabua {
 };
 
 
-/* "tabatu_cpp.pyx":60
- *         return self.c_tabua.pega_numero_vidas()
+/* "tabatu_cpp.pyx":73
+ *         return tuple(tabuas)
  * 
  * cdef class TabuaMDT:             # <<<<<<<<<<<<<<
  *     cdef TabuaMDTCpp c_tabua
@@ -1264,6 +1264,30 @@ static CYTHON_INLINE void __Pyx_ErrFetchInState(PyThreadState *tstate, PyObject 
 
 /* RaiseException.proto */
 static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject *cause);
+
+/* PyObjectCallNoArg.proto */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func);
+#else
+#define __Pyx_PyObject_CallNoArg(func) __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL)
+#endif
+
+/* ListAppend.proto */
+#if CYTHON_USE_PYLIST_INTERNALS && CYTHON_ASSUME_SAFE_MACROS
+static CYTHON_INLINE int __Pyx_PyList_Append(PyObject* list, PyObject* x) {
+    PyListObject* L = (PyListObject*) list;
+    Py_ssize_t len = Py_SIZE(list);
+    if (likely(L->allocated > len) & likely(len > (L->allocated >> 1))) {
+        Py_INCREF(x);
+        PyList_SET_ITEM(list, len, x);
+        __Pyx_SET_SIZE(list, len + 1);
+        return 0;
+    }
+    return PyList_Append(list, x);
+}
+#else
+#define __Pyx_PyList_Append(L,x) PyList_Append(L,x)
+#endif
 
 /* KeywordStringCheck.proto */
 static int __Pyx_CheckKeywordStrings(PyObject *kwdict, const char* function_name, int kw_allowed);
@@ -1540,6 +1564,8 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, PyObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_10possui_fechamento_plato(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_12numero_vidas___get__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_18numero_decrementos___get__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6tabuas___get__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_10tabatu_cpp_8TabuaMDT___init__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, PyObject *__pyx_v_tabuas); /* proto */
@@ -1550,6 +1576,8 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, PyObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12possui_fechamento_plato(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12numero_vidas___get__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_18numero_decrementos___get__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_6tabuas___get__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_14__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_16__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static PyObject *__pyx_tp_new_10tabatu_cpp_TabuaBase(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
@@ -1566,9 +1594,9 @@ static PyObject *__pyx_tuple__6;
 /* "tabatu_cpp.pyx":12
  *     cdef TabuaBaseCpp c_tabua
  * 
- *     def __init__(self, qx):             # <<<<<<<<<<<<<<
- *         self.c_tabua = TabuaBaseCpp(qx)
- * 
+ *     def __init__(self, qx = None):             # <<<<<<<<<<<<<<
+ *         if qx is None:
+ *             self.c_tabua = TabuaBaseCpp()
  */
 
 /* Python wrapper */
@@ -1584,6 +1612,7 @@ static int __pyx_pw_10tabatu_cpp_9TabuaBase_1__init__(PyObject *__pyx_v_self, Py
   {
     static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_qx,0};
     PyObject* values[1] = {0};
+    values[0] = ((PyObject *)Py_None);
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
@@ -1596,22 +1625,27 @@ static int __pyx_pw_10tabatu_cpp_9TabuaBase_1__init__(PyObject *__pyx_v_self, Py
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_qx)) != 0)) kw_args--;
-        else goto __pyx_L5_argtuple_error;
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_qx);
+          if (value) { values[0] = value; kw_args--; }
+        }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 12, __pyx_L3_error)
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      switch (PyTuple_GET_SIZE(__pyx_args)) {
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
     }
     __pyx_v_qx = values[0];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 12, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 0, 0, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 12, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaBase.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1627,7 +1661,10 @@ static int __pyx_pw_10tabatu_cpp_9TabuaBase_1__init__(PyObject *__pyx_v_self, Py
 static int __pyx_pf_10tabatu_cpp_9TabuaBase___init__(struct __pyx_obj_10tabatu_cpp_TabuaBase *__pyx_v_self, PyObject *__pyx_v_qx) {
   int __pyx_r;
   __Pyx_RefNannyDeclarations
-  std::vector<double>  __pyx_t_1;
+  int __pyx_t_1;
+  int __pyx_t_2;
+  TabuaBaseCpp __pyx_t_3;
+  std::vector<double>  __pyx_t_4;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -1635,20 +1672,59 @@ static int __pyx_pf_10tabatu_cpp_9TabuaBase___init__(struct __pyx_obj_10tabatu_c
 
   /* "tabatu_cpp.pyx":13
  * 
- *     def __init__(self, qx):
- *         self.c_tabua = TabuaBaseCpp(qx)             # <<<<<<<<<<<<<<
+ *     def __init__(self, qx = None):
+ *         if qx is None:             # <<<<<<<<<<<<<<
+ *             self.c_tabua = TabuaBaseCpp()
+ *         else:
+ */
+  __pyx_t_1 = (__pyx_v_qx == Py_None);
+  __pyx_t_2 = (__pyx_t_1 != 0);
+  if (__pyx_t_2) {
+
+    /* "tabatu_cpp.pyx":14
+ *     def __init__(self, qx = None):
+ *         if qx is None:
+ *             self.c_tabua = TabuaBaseCpp()             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.c_tabua = TabuaBaseCpp(qx)
+ */
+    try {
+      __pyx_t_3 = TabuaBaseCpp();
+    } catch(...) {
+      __Pyx_CppExn2PyErr();
+      __PYX_ERR(1, 14, __pyx_L1_error)
+    }
+    __pyx_v_self->c_tabua = __pyx_t_3;
+
+    /* "tabatu_cpp.pyx":13
+ * 
+ *     def __init__(self, qx = None):
+ *         if qx is None:             # <<<<<<<<<<<<<<
+ *             self.c_tabua = TabuaBaseCpp()
+ *         else:
+ */
+    goto __pyx_L3;
+  }
+
+  /* "tabatu_cpp.pyx":16
+ *             self.c_tabua = TabuaBaseCpp()
+ *         else:
+ *             self.c_tabua = TabuaBaseCpp(qx)             # <<<<<<<<<<<<<<
  * 
  *     def qx(self, int x, vector[double] t):
  */
-  __pyx_t_1 = __pyx_convert_vector_from_py_double(__pyx_v_qx); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 13, __pyx_L1_error)
-  __pyx_v_self->c_tabua = TabuaBaseCpp(__pyx_t_1);
+  /*else*/ {
+    __pyx_t_4 = __pyx_convert_vector_from_py_double(__pyx_v_qx); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 16, __pyx_L1_error)
+    __pyx_v_self->c_tabua = TabuaBaseCpp(__pyx_t_4);
+  }
+  __pyx_L3:;
 
   /* "tabatu_cpp.pyx":12
  *     cdef TabuaBaseCpp c_tabua
  * 
- *     def __init__(self, qx):             # <<<<<<<<<<<<<<
- *         self.c_tabua = TabuaBaseCpp(qx)
- * 
+ *     def __init__(self, qx = None):             # <<<<<<<<<<<<<<
+ *         if qx is None:
+ *             self.c_tabua = TabuaBaseCpp()
  */
 
   /* function exit code */
@@ -1662,8 +1738,8 @@ static int __pyx_pf_10tabatu_cpp_9TabuaBase___init__(struct __pyx_obj_10tabatu_c
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":15
- *         self.c_tabua = TabuaBaseCpp(qx)
+/* "tabatu_cpp.pyx":18
+ *             self.c_tabua = TabuaBaseCpp(qx)
  * 
  *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.qx(x, t))
@@ -1704,11 +1780,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_9TabuaBase_3qx(PyObject *__pyx_v_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, 1); __PYX_ERR(1, 15, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, 1); __PYX_ERR(1, 18, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx") < 0)) __PYX_ERR(1, 15, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx") < 0)) __PYX_ERR(1, 18, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1716,12 +1792,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_9TabuaBase_3qx(PyObject *__pyx_v_self, Py
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 15, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 15, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 18, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 18, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 15, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 18, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaBase.qx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1747,7 +1823,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_2qx(struct __pyx_obj_10tabatu_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("qx", 0);
 
-  /* "tabatu_cpp.pyx":16
+  /* "tabatu_cpp.pyx":19
  * 
  *     def qx(self, int x, vector[double] t):
  *         return np.array(self.c_tabua.qx(x, t))             # <<<<<<<<<<<<<<
@@ -1755,18 +1831,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_2qx(struct __pyx_obj_10tabatu_
  *     def tpx(self,  int x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.qx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 16, __pyx_L1_error)
+    __PYX_ERR(1, 19, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 16, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -1781,15 +1857,15 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_2qx(struct __pyx_obj_10tabatu_
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 16, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":15
- *         self.c_tabua = TabuaBaseCpp(qx)
+  /* "tabatu_cpp.pyx":18
+ *             self.c_tabua = TabuaBaseCpp(qx)
  * 
  *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.qx(x, t))
@@ -1810,7 +1886,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_2qx(struct __pyx_obj_10tabatu_
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":18
+/* "tabatu_cpp.pyx":21
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -1852,11 +1928,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_9TabuaBase_5tpx(PyObject *__pyx_v_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, 1); __PYX_ERR(1, 18, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, 1); __PYX_ERR(1, 21, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tpx") < 0)) __PYX_ERR(1, 18, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tpx") < 0)) __PYX_ERR(1, 21, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -1864,12 +1940,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_9TabuaBase_5tpx(PyObject *__pyx_v_self, P
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 18, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 18, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 21, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 21, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 18, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 21, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaBase.tpx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -1895,7 +1971,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_4tpx(struct __pyx_obj_10tabatu
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tpx", 0);
 
-  /* "tabatu_cpp.pyx":19
+  /* "tabatu_cpp.pyx":22
  * 
  *     def tpx(self,  int x, vector[double] t):
  *         return np.array(self.c_tabua.tpx(x, t))             # <<<<<<<<<<<<<<
@@ -1903,18 +1979,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_4tpx(struct __pyx_obj_10tabatu
  *     def t_qx(self, int x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 19, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 19, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.tpx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 19, __pyx_L1_error)
+    __PYX_ERR(1, 22, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 19, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -1929,14 +2005,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_4tpx(struct __pyx_obj_10tabatu
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 19, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":18
+  /* "tabatu_cpp.pyx":21
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -1958,7 +2034,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_4tpx(struct __pyx_obj_10tabatu
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":21
+/* "tabatu_cpp.pyx":24
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2000,11 +2076,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_9TabuaBase_7t_qx(PyObject *__pyx_v_self, 
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, 1); __PYX_ERR(1, 21, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, 1); __PYX_ERR(1, 24, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "t_qx") < 0)) __PYX_ERR(1, 21, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "t_qx") < 0)) __PYX_ERR(1, 24, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2012,12 +2088,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_9TabuaBase_7t_qx(PyObject *__pyx_v_self, 
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 21, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 21, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 24, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 24, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 21, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 24, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaBase.t_qx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2043,7 +2119,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_6t_qx(struct __pyx_obj_10tabat
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("t_qx", 0);
 
-  /* "tabatu_cpp.pyx":22
+  /* "tabatu_cpp.pyx":25
  * 
  *     def t_qx(self, int x, vector[double] t):
  *         return np.array(self.c_tabua.t_qx(x, t))             # <<<<<<<<<<<<<<
@@ -2051,18 +2127,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_6t_qx(struct __pyx_obj_10tabat
  *     def tempo_futuro_maximo(self, x):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.t_qx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 22, __pyx_L1_error)
+    __PYX_ERR(1, 25, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 22, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2077,14 +2153,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_6t_qx(struct __pyx_obj_10tabat
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 22, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":21
+  /* "tabatu_cpp.pyx":24
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2106,7 +2182,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_6t_qx(struct __pyx_obj_10tabat
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":24
+/* "tabatu_cpp.pyx":27
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
@@ -2138,7 +2214,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_8tempo_futuro_maximo(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tempo_futuro_maximo", 0);
 
-  /* "tabatu_cpp.pyx":25
+  /* "tabatu_cpp.pyx":28
  * 
  *     def tempo_futuro_maximo(self, x):
  *         return self.c_tabua.tempo_futuro_maximo(x)             # <<<<<<<<<<<<<<
@@ -2146,20 +2222,20 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_8tempo_futuro_maximo(struct __
  *     def possui_fechamento_plato(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_x); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 25, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_x); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 28, __pyx_L1_error)
   try {
     __pyx_t_2 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_t_1);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 25, __pyx_L1_error)
+    __PYX_ERR(1, 28, __pyx_L1_error)
   }
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 25, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":24
+  /* "tabatu_cpp.pyx":27
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
@@ -2178,7 +2254,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_8tempo_futuro_maximo(struct __
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":27
+/* "tabatu_cpp.pyx":30
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  *     def possui_fechamento_plato(self):             # <<<<<<<<<<<<<<
@@ -2208,7 +2284,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_10possui_fechamento_plato(stru
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("possui_fechamento_plato", 0);
 
-  /* "tabatu_cpp.pyx":28
+  /* "tabatu_cpp.pyx":31
  * 
  *     def possui_fechamento_plato(self):
  *         return self.c_tabua.possui_fechamento_plato()             # <<<<<<<<<<<<<<
@@ -2216,13 +2292,13 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_10possui_fechamento_plato(stru
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->c_tabua.possui_fechamento_plato()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 28, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->c_tabua.possui_fechamento_plato()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":27
+  /* "tabatu_cpp.pyx":30
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  *     def possui_fechamento_plato(self):             # <<<<<<<<<<<<<<
@@ -2354,7 +2430,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_14__setstate_cython__(CYTHON_U
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":34
+/* "tabatu_cpp.pyx":37
  *     cdef TabuaCpp c_tabua
  * 
  *     def __init__(self, qx):             # <<<<<<<<<<<<<<
@@ -2391,7 +2467,7 @@ static int __pyx_pw_10tabatu_cpp_5Tabua_1__init__(PyObject *__pyx_v_self, PyObje
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 34, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__init__") < 0)) __PYX_ERR(1, 37, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -2402,7 +2478,7 @@ static int __pyx_pw_10tabatu_cpp_5Tabua_1__init__(PyObject *__pyx_v_self, PyObje
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 34, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 37, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.Tabua.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2424,17 +2500,17 @@ static int __pyx_pf_10tabatu_cpp_5Tabua___init__(struct __pyx_obj_10tabatu_cpp_T
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "tabatu_cpp.pyx":35
+  /* "tabatu_cpp.pyx":38
  * 
  *     def __init__(self, qx):
  *         self.c_tabua = TabuaCpp(qx)             # <<<<<<<<<<<<<<
  * 
  *     def qx(self, int x, vector[double] t):
  */
-  __pyx_t_1 = __pyx_convert_vector_from_py_double(__pyx_v_qx); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 35, __pyx_L1_error)
+  __pyx_t_1 = __pyx_convert_vector_from_py_double(__pyx_v_qx); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 38, __pyx_L1_error)
   __pyx_v_self->c_tabua = TabuaCpp(__pyx_t_1);
 
-  /* "tabatu_cpp.pyx":34
+  /* "tabatu_cpp.pyx":37
  *     cdef TabuaCpp c_tabua
  * 
  *     def __init__(self, qx):             # <<<<<<<<<<<<<<
@@ -2453,7 +2529,7 @@ static int __pyx_pf_10tabatu_cpp_5Tabua___init__(struct __pyx_obj_10tabatu_cpp_T
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":37
+/* "tabatu_cpp.pyx":40
  *         self.c_tabua = TabuaCpp(qx)
  * 
  *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2495,11 +2571,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_3qx(PyObject *__pyx_v_self, PyObje
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, 1); __PYX_ERR(1, 37, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, 1); __PYX_ERR(1, 40, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx") < 0)) __PYX_ERR(1, 37, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx") < 0)) __PYX_ERR(1, 40, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2507,12 +2583,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_3qx(PyObject *__pyx_v_self, PyObje
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 37, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 37, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 40, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 40, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 37, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 40, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.Tabua.qx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2538,7 +2614,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("qx", 0);
 
-  /* "tabatu_cpp.pyx":38
+  /* "tabatu_cpp.pyx":41
  * 
  *     def qx(self, int x, vector[double] t):
  *         return np.array(self.c_tabua.qx(x, t))             # <<<<<<<<<<<<<<
@@ -2546,18 +2622,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
  *     def tpx(self,  int x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.qx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 38, __pyx_L1_error)
+    __PYX_ERR(1, 41, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 38, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2572,14 +2648,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 38, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":37
+  /* "tabatu_cpp.pyx":40
  *         self.c_tabua = TabuaCpp(qx)
  * 
  *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2601,7 +2677,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":40
+/* "tabatu_cpp.pyx":43
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2643,11 +2719,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_5tpx(PyObject *__pyx_v_self, PyObj
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, 1); __PYX_ERR(1, 40, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, 1); __PYX_ERR(1, 43, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tpx") < 0)) __PYX_ERR(1, 40, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tpx") < 0)) __PYX_ERR(1, 43, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2655,12 +2731,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_5tpx(PyObject *__pyx_v_self, PyObj
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 40, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 40, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 43, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 43, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 40, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 43, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.Tabua.tpx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2686,7 +2762,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tpx", 0);
 
-  /* "tabatu_cpp.pyx":41
+  /* "tabatu_cpp.pyx":44
  * 
  *     def tpx(self,  int x, vector[double] t):
  *         return np.array(self.c_tabua.tpx(x, t))             # <<<<<<<<<<<<<<
@@ -2694,18 +2770,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
  *     def t_qx(self, int x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.tpx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 41, __pyx_L1_error)
+    __PYX_ERR(1, 44, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 41, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2720,14 +2796,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 41, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":40
+  /* "tabatu_cpp.pyx":43
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2749,7 +2825,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":43
+/* "tabatu_cpp.pyx":46
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2791,11 +2867,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_7t_qx(PyObject *__pyx_v_self, PyOb
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, 1); __PYX_ERR(1, 43, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, 1); __PYX_ERR(1, 46, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "t_qx") < 0)) __PYX_ERR(1, 43, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "t_qx") < 0)) __PYX_ERR(1, 46, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2803,12 +2879,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_7t_qx(PyObject *__pyx_v_self, PyOb
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 43, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 43, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 43, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 46, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.Tabua.t_qx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2834,7 +2910,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("t_qx", 0);
 
-  /* "tabatu_cpp.pyx":44
+  /* "tabatu_cpp.pyx":47
  * 
  *     def t_qx(self, int x, vector[double] t):
  *         return np.array(self.c_tabua.t_qx(x, t))             # <<<<<<<<<<<<<<
@@ -2842,18 +2918,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
  *     def tempo_futuro_maximo(self, x):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.t_qx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 44, __pyx_L1_error)
+    __PYX_ERR(1, 47, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 44, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -2868,14 +2944,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 44, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":43
+  /* "tabatu_cpp.pyx":46
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -2897,7 +2973,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":46
+/* "tabatu_cpp.pyx":49
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
@@ -2929,7 +3005,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tempo_futuro_maximo", 0);
 
-  /* "tabatu_cpp.pyx":47
+  /* "tabatu_cpp.pyx":50
  * 
  *     def tempo_futuro_maximo(self, x):
  *         return self.c_tabua.tempo_futuro_maximo(x)             # <<<<<<<<<<<<<<
@@ -2937,20 +3013,20 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_
  *     def possui_fechamento_plato(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_x); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_x); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 50, __pyx_L1_error)
   try {
     __pyx_t_2 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_t_1);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 47, __pyx_L1_error)
+    __PYX_ERR(1, 50, __pyx_L1_error)
   }
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":46
+  /* "tabatu_cpp.pyx":49
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
@@ -2969,7 +3045,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":49
+/* "tabatu_cpp.pyx":52
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  *     def possui_fechamento_plato(self):             # <<<<<<<<<<<<<<
@@ -2999,7 +3075,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_10possui_fechamento_plato(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("possui_fechamento_plato", 0);
 
-  /* "tabatu_cpp.pyx":50
+  /* "tabatu_cpp.pyx":53
  * 
  *     def possui_fechamento_plato(self):
  *         return self.c_tabua.possui_fechamento_plato()             # <<<<<<<<<<<<<<
@@ -3007,13 +3083,13 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_10possui_fechamento_plato(struct _
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->c_tabua.possui_fechamento_plato()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->c_tabua.possui_fechamento_plato()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":49
+  /* "tabatu_cpp.pyx":52
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  *     def possui_fechamento_plato(self):             # <<<<<<<<<<<<<<
@@ -3032,7 +3108,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_10possui_fechamento_plato(struct _
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":57
+/* "tabatu_cpp.pyx":56
  * 
  *     @property
  *     def numero_vidas(self):             # <<<<<<<<<<<<<<
@@ -3062,21 +3138,21 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_12numero_vidas___get__(struct __py
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "tabatu_cpp.pyx":58
+  /* "tabatu_cpp.pyx":57
  *     @property
  *     def numero_vidas(self):
  *         return self.c_tabua.pega_numero_vidas()             # <<<<<<<<<<<<<<
  * 
- * cdef class TabuaMDT:
+ *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->c_tabua.pega_numero_vidas()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 58, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->c_tabua.pega_numero_vidas()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":57
+  /* "tabatu_cpp.pyx":56
  * 
  *     @property
  *     def numero_vidas(self):             # <<<<<<<<<<<<<<
@@ -3090,6 +3166,206 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_12numero_vidas___get__(struct __py
   __Pyx_AddTraceback("tabatu_cpp.Tabua.numero_vidas.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tabatu_cpp.pyx":60
+ * 
+ *     @property
+ *     def numero_decrementos(self):             # <<<<<<<<<<<<<<
+ *         return self.c_tabua.pega_numero_decrementos()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_18numero_decrementos_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_18numero_decrementos_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10tabatu_cpp_5Tabua_18numero_decrementos___get__(((struct __pyx_obj_10tabatu_cpp_Tabua *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_18numero_decrementos___get__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tabatu_cpp.pyx":61
+ *     @property
+ *     def numero_decrementos(self):
+ *         return self.c_tabua.pega_numero_decrementos()             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->c_tabua.pega_numero_decrementos()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 61, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "tabatu_cpp.pyx":60
+ * 
+ *     @property
+ *     def numero_decrementos(self):             # <<<<<<<<<<<<<<
+ *         return self.c_tabua.pega_numero_decrementos()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("tabatu_cpp.Tabua.numero_decrementos.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tabatu_cpp.pyx":64
+ * 
+ *     @property
+ *     def tabuas(self):             # <<<<<<<<<<<<<<
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_6tabuas_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_6tabuas_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10tabatu_cpp_5Tabua_6tabuas___get__(((struct __pyx_obj_10tabatu_cpp_Tabua *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6tabuas___get__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self) {
+  std::vector<TabuaBaseCpp>  __pyx_v_tabuas_cpp;
+  PyObject *__pyx_v_tabuas = NULL;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_v_i;
+  struct __pyx_obj_10tabatu_cpp_TabuaBase *__pyx_v_tabua = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_t_2;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_t_3;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_t_4;
+  int __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tabatu_cpp.pyx":65
+ *     @property
+ *     def tabuas(self):
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()             # <<<<<<<<<<<<<<
+ *         tabuas = []
+ *         for i in range(tabuas_cpp.size()):
+ */
+  __pyx_v_tabuas_cpp = __pyx_v_self->c_tabua.pega_tabuas();
+
+  /* "tabatu_cpp.pyx":66
+ *     def tabuas(self):
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []             # <<<<<<<<<<<<<<
+ *         for i in range(tabuas_cpp.size()):
+ *             tabua = TabuaBase()
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_tabuas = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "tabatu_cpp.pyx":67
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []
+ *         for i in range(tabuas_cpp.size()):             # <<<<<<<<<<<<<<
+ *             tabua = TabuaBase()
+ *             tabua.c_tabua = tabuas_cpp[i]
+ */
+  __pyx_t_2 = __pyx_v_tabuas_cpp.size();
+  __pyx_t_3 = __pyx_t_2;
+  for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
+    __pyx_v_i = __pyx_t_4;
+
+    /* "tabatu_cpp.pyx":68
+ *         tabuas = []
+ *         for i in range(tabuas_cpp.size()):
+ *             tabua = TabuaBase()             # <<<<<<<<<<<<<<
+ *             tabua.c_tabua = tabuas_cpp[i]
+ *             tabuas.append(tabua)
+ */
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_10tabatu_cpp_TabuaBase)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_XDECREF_SET(__pyx_v_tabua, ((struct __pyx_obj_10tabatu_cpp_TabuaBase *)__pyx_t_1));
+    __pyx_t_1 = 0;
+
+    /* "tabatu_cpp.pyx":69
+ *         for i in range(tabuas_cpp.size()):
+ *             tabua = TabuaBase()
+ *             tabua.c_tabua = tabuas_cpp[i]             # <<<<<<<<<<<<<<
+ *             tabuas.append(tabua)
+ *         return tuple(tabuas)
+ */
+    __pyx_v_tabua->c_tabua = (__pyx_v_tabuas_cpp[__pyx_v_i]);
+
+    /* "tabatu_cpp.pyx":70
+ *             tabua = TabuaBase()
+ *             tabua.c_tabua = tabuas_cpp[i]
+ *             tabuas.append(tabua)             # <<<<<<<<<<<<<<
+ *         return tuple(tabuas)
+ * 
+ */
+    __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_tabuas, ((PyObject *)__pyx_v_tabua)); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(1, 70, __pyx_L1_error)
+  }
+
+  /* "tabatu_cpp.pyx":71
+ *             tabua.c_tabua = tabuas_cpp[i]
+ *             tabuas.append(tabua)
+ *         return tuple(tabuas)             # <<<<<<<<<<<<<<
+ * 
+ * cdef class TabuaMDT:
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyList_AsTuple(__pyx_v_tabuas); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 71, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "tabatu_cpp.pyx":64
+ * 
+ *     @property
+ *     def tabuas(self):             # <<<<<<<<<<<<<<
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("tabatu_cpp.Tabua.tabuas.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_tabuas);
+  __Pyx_XDECREF((PyObject *)__pyx_v_tabua);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -3208,8 +3484,8 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_14__setstate_cython__(CYTHON_UNUSE
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":64
- * 
+/* "tabatu_cpp.pyx":76
+ *     cdef TabuaMDTCpp c_tabua
  * 
  *     def __init__(self, *tabuas):             # <<<<<<<<<<<<<<
  *         cdef vector[TabuaCpp] tabuas_vec
@@ -3249,32 +3525,32 @@ static int __pyx_pf_10tabatu_cpp_8TabuaMDT___init__(struct __pyx_obj_10tabatu_cp
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "tabatu_cpp.pyx":66
+  /* "tabatu_cpp.pyx":78
  *     def __init__(self, *tabuas):
  *         cdef vector[TabuaCpp] tabuas_vec
  *         for i in range(len(tabuas)):             # <<<<<<<<<<<<<<
  *             tabua: Tabua = tabuas[i]
  *             tabuas_vec.push_back(tabua.c_tabua)
  */
-  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_tabuas); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_GET_SIZE(__pyx_v_tabuas); if (unlikely(__pyx_t_1 == ((Py_ssize_t)-1))) __PYX_ERR(1, 78, __pyx_L1_error)
   __pyx_t_2 = __pyx_t_1;
   for (__pyx_t_3 = 0; __pyx_t_3 < __pyx_t_2; __pyx_t_3+=1) {
     __pyx_v_i = __pyx_t_3;
 
-    /* "tabatu_cpp.pyx":67
+    /* "tabatu_cpp.pyx":79
  *         cdef vector[TabuaCpp] tabuas_vec
  *         for i in range(len(tabuas)):
  *             tabua: Tabua = tabuas[i]             # <<<<<<<<<<<<<<
  *             tabuas_vec.push_back(tabua.c_tabua)
  *         self.c_tabua = TabuaMDTCpp(tabuas_vec)
  */
-    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_tabuas, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 67, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetItemInt_Tuple(__pyx_v_tabuas, __pyx_v_i, Py_ssize_t, 1, PyInt_FromSsize_t, 0, 1, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 79, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_10tabatu_cpp_Tabua))))) __PYX_ERR(1, 67, __pyx_L1_error)
+    if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_10tabatu_cpp_Tabua))))) __PYX_ERR(1, 79, __pyx_L1_error)
     __Pyx_XDECREF_SET(__pyx_v_tabua, ((struct __pyx_obj_10tabatu_cpp_Tabua *)__pyx_t_4));
     __pyx_t_4 = 0;
 
-    /* "tabatu_cpp.pyx":68
+    /* "tabatu_cpp.pyx":80
  *         for i in range(len(tabuas)):
  *             tabua: Tabua = tabuas[i]
  *             tabuas_vec.push_back(tabua.c_tabua)             # <<<<<<<<<<<<<<
@@ -3285,11 +3561,11 @@ static int __pyx_pf_10tabatu_cpp_8TabuaMDT___init__(struct __pyx_obj_10tabatu_cp
       __pyx_v_tabuas_vec.push_back(__pyx_v_tabua->c_tabua);
     } catch(...) {
       __Pyx_CppExn2PyErr();
-      __PYX_ERR(1, 68, __pyx_L1_error)
+      __PYX_ERR(1, 80, __pyx_L1_error)
     }
   }
 
-  /* "tabatu_cpp.pyx":69
+  /* "tabatu_cpp.pyx":81
  *             tabua: Tabua = tabuas[i]
  *             tabuas_vec.push_back(tabua.c_tabua)
  *         self.c_tabua = TabuaMDTCpp(tabuas_vec)             # <<<<<<<<<<<<<<
@@ -3298,8 +3574,8 @@ static int __pyx_pf_10tabatu_cpp_8TabuaMDT___init__(struct __pyx_obj_10tabatu_cp
  */
   __pyx_v_self->c_tabua = TabuaMDTCpp(__pyx_v_tabuas_vec);
 
-  /* "tabatu_cpp.pyx":64
- * 
+  /* "tabatu_cpp.pyx":76
+ *     cdef TabuaMDTCpp c_tabua
  * 
  *     def __init__(self, *tabuas):             # <<<<<<<<<<<<<<
  *         cdef vector[TabuaCpp] tabuas_vec
@@ -3319,7 +3595,7 @@ static int __pyx_pf_10tabatu_cpp_8TabuaMDT___init__(struct __pyx_obj_10tabatu_cp
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":71
+/* "tabatu_cpp.pyx":83
  *         self.c_tabua = TabuaMDTCpp(tabuas_vec)
  * 
  *     def qx_j(self, int x, vector[double] t, vector[int] j):             # <<<<<<<<<<<<<<
@@ -3364,17 +3640,17 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_3qx_j(PyObject *__pyx_v_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("qx_j", 1, 3, 3, 1); __PYX_ERR(1, 71, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("qx_j", 1, 3, 3, 1); __PYX_ERR(1, 83, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (likely((values[2] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_j)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("qx_j", 1, 3, 3, 2); __PYX_ERR(1, 71, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("qx_j", 1, 3, 3, 2); __PYX_ERR(1, 83, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx_j") < 0)) __PYX_ERR(1, 71, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx_j") < 0)) __PYX_ERR(1, 83, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -3383,13 +3659,13 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_3qx_j(PyObject *__pyx_v_self, P
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
       values[2] = PyTuple_GET_ITEM(__pyx_args, 2);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 71, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 71, __pyx_L3_error)
-    __pyx_v_j = __pyx_convert_vector_from_py_int(values[2]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 71, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 83, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 83, __pyx_L3_error)
+    __pyx_v_j = __pyx_convert_vector_from_py_int(values[2]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 83, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("qx_j", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 71, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("qx_j", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 83, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.qx_j", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3415,7 +3691,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_2qx_j(struct __pyx_obj_10tabatu
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("qx_j", 0);
 
-  /* "tabatu_cpp.pyx":72
+  /* "tabatu_cpp.pyx":84
  * 
  *     def qx_j(self, int x, vector[double] t, vector[int] j):
  *         return np.array(self.c_tabua.qx_j(x, t, j))             # <<<<<<<<<<<<<<
@@ -3423,18 +3699,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_2qx_j(struct __pyx_obj_10tabatu
  *     def qx(self, int x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 72, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 72, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.qx_j(__pyx_v_x, __pyx_v_t, __pyx_v_j);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 72, __pyx_L1_error)
+    __PYX_ERR(1, 84, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_std_3a__3a_vector_3c_double_3e___(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 72, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_std_3a__3a_vector_3c_double_3e___(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3449,14 +3725,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_2qx_j(struct __pyx_obj_10tabatu
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 72, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":71
+  /* "tabatu_cpp.pyx":83
  *         self.c_tabua = TabuaMDTCpp(tabuas_vec)
  * 
  *     def qx_j(self, int x, vector[double] t, vector[int] j):             # <<<<<<<<<<<<<<
@@ -3478,7 +3754,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_2qx_j(struct __pyx_obj_10tabatu
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":74
+/* "tabatu_cpp.pyx":86
  *         return np.array(self.c_tabua.qx_j(x, t, j))
  * 
  *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -3520,11 +3796,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_5qx(PyObject *__pyx_v_self, PyO
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, 1); __PYX_ERR(1, 74, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, 1); __PYX_ERR(1, 86, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx") < 0)) __PYX_ERR(1, 74, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "qx") < 0)) __PYX_ERR(1, 86, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3532,12 +3808,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_5qx(PyObject *__pyx_v_self, PyO
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 74, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 74, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 86, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 86, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 74, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 86, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.qx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3563,7 +3839,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_4qx(struct __pyx_obj_10tabatu_c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("qx", 0);
 
-  /* "tabatu_cpp.pyx":75
+  /* "tabatu_cpp.pyx":87
  * 
  *     def qx(self, int x, vector[double] t):
  *         return np.array(self.c_tabua.qx(x, t))             # <<<<<<<<<<<<<<
@@ -3571,18 +3847,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_4qx(struct __pyx_obj_10tabatu_c
  *     def tpx(self,  int x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 75, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 75, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.qx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 75, __pyx_L1_error)
+    __PYX_ERR(1, 87, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 75, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3597,14 +3873,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_4qx(struct __pyx_obj_10tabatu_c
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 75, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":74
+  /* "tabatu_cpp.pyx":86
  *         return np.array(self.c_tabua.qx_j(x, t, j))
  * 
  *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -3626,7 +3902,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_4qx(struct __pyx_obj_10tabatu_c
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":77
+/* "tabatu_cpp.pyx":89
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -3668,11 +3944,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_7tpx(PyObject *__pyx_v_self, Py
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, 1); __PYX_ERR(1, 77, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, 1); __PYX_ERR(1, 89, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tpx") < 0)) __PYX_ERR(1, 77, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "tpx") < 0)) __PYX_ERR(1, 89, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3680,12 +3956,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_7tpx(PyObject *__pyx_v_self, Py
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 77, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 77, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 89, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 89, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 77, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("tpx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 89, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.tpx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3711,7 +3987,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_6tpx(struct __pyx_obj_10tabatu_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tpx", 0);
 
-  /* "tabatu_cpp.pyx":78
+  /* "tabatu_cpp.pyx":90
  * 
  *     def tpx(self,  int x, vector[double] t):
  *         return np.array(self.c_tabua.tpx(x, t))             # <<<<<<<<<<<<<<
@@ -3719,18 +3995,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_6tpx(struct __pyx_obj_10tabatu_
  *     def t_qx(self, int x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 78, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 78, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.tpx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 78, __pyx_L1_error)
+    __PYX_ERR(1, 90, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 78, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3745,14 +4021,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_6tpx(struct __pyx_obj_10tabatu_
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 78, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":77
+  /* "tabatu_cpp.pyx":89
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -3774,7 +4050,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_6tpx(struct __pyx_obj_10tabatu_
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":80
+/* "tabatu_cpp.pyx":92
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -3816,11 +4092,11 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_9t_qx(PyObject *__pyx_v_self, P
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_t)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, 1); __PYX_ERR(1, 80, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, 1); __PYX_ERR(1, 92, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "t_qx") < 0)) __PYX_ERR(1, 80, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "t_qx") < 0)) __PYX_ERR(1, 92, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3828,12 +4104,12 @@ static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_9t_qx(PyObject *__pyx_v_self, P
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 80, __pyx_L3_error)
-    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 80, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 92, __pyx_L3_error)
+    __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 92, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 80, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("t_qx", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(1, 92, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.t_qx", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3859,7 +4135,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("t_qx", 0);
 
-  /* "tabatu_cpp.pyx":81
+  /* "tabatu_cpp.pyx":93
  * 
  *     def t_qx(self, int x, vector[double] t):
  *         return np.array(self.c_tabua.t_qx(x, t))             # <<<<<<<<<<<<<<
@@ -3867,18 +4143,18 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu
  *     def tempo_futuro_maximo(self, x):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 81, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 81, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   try {
     __pyx_t_4 = __pyx_v_self->c_tabua.t_qx(__pyx_v_x, __pyx_v_t);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 81, __pyx_L1_error)
+    __PYX_ERR(1, 93, __pyx_L1_error)
   }
-  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 81, __pyx_L1_error)
+  __pyx_t_2 = __pyx_convert_vector_to_py_double(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_5 = NULL;
   if (CYTHON_UNPACK_METHODS && unlikely(PyMethod_Check(__pyx_t_3))) {
@@ -3893,14 +4169,14 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu
   __pyx_t_1 = (__pyx_t_5) ? __Pyx_PyObject_Call2Args(__pyx_t_3, __pyx_t_5, __pyx_t_2) : __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2);
   __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 81, __pyx_L1_error)
+  if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":80
+  /* "tabatu_cpp.pyx":92
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
@@ -3922,7 +4198,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":83
+/* "tabatu_cpp.pyx":95
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
@@ -3954,7 +4230,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("tempo_futuro_maximo", 0);
 
-  /* "tabatu_cpp.pyx":84
+  /* "tabatu_cpp.pyx":96
  * 
  *     def tempo_futuro_maximo(self, x):
  *         return self.c_tabua.tempo_futuro_maximo(x)             # <<<<<<<<<<<<<<
@@ -3962,20 +4238,20 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __
  *     def possui_fechamento_plato(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_x); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 84, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_x); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 96, __pyx_L1_error)
   try {
     __pyx_t_2 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_t_1);
   } catch(...) {
     __Pyx_CppExn2PyErr();
-    __PYX_ERR(1, 84, __pyx_L1_error)
+    __PYX_ERR(1, 96, __pyx_L1_error)
   }
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 84, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 96, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":83
+  /* "tabatu_cpp.pyx":95
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
@@ -3994,7 +4270,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":86
+/* "tabatu_cpp.pyx":98
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  *     def possui_fechamento_plato(self):             # <<<<<<<<<<<<<<
@@ -4024,7 +4300,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12possui_fechamento_plato(struc
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("possui_fechamento_plato", 0);
 
-  /* "tabatu_cpp.pyx":87
+  /* "tabatu_cpp.pyx":99
  * 
  *     def possui_fechamento_plato(self):
  *         return self.c_tabua.possui_fechamento_plato()             # <<<<<<<<<<<<<<
@@ -4032,13 +4308,13 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12possui_fechamento_plato(struc
  *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->c_tabua.possui_fechamento_plato()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 87, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_self->c_tabua.possui_fechamento_plato()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":86
+  /* "tabatu_cpp.pyx":98
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  *     def possui_fechamento_plato(self):             # <<<<<<<<<<<<<<
@@ -4057,11 +4333,12 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12possui_fechamento_plato(struc
   return __pyx_r;
 }
 
-/* "tabatu_cpp.pyx":94
+/* "tabatu_cpp.pyx":102
  * 
  *     @property
  *     def numero_vidas(self):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.pega_numero_vidas()
+ * 
  */
 
 /* Python wrapper */
@@ -4086,23 +4363,26 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12numero_vidas___get__(struct _
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__get__", 0);
 
-  /* "tabatu_cpp.pyx":95
+  /* "tabatu_cpp.pyx":103
  *     @property
  *     def numero_vidas(self):
  *         return self.c_tabua.pega_numero_vidas()             # <<<<<<<<<<<<<<
+ * 
+ *     @property
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->c_tabua.pega_numero_vidas()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 95, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->c_tabua.pega_numero_vidas()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tabatu_cpp.pyx":94
+  /* "tabatu_cpp.pyx":102
  * 
  *     @property
  *     def numero_vidas(self):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.pega_numero_vidas()
+ * 
  */
 
   /* function exit code */
@@ -4111,6 +4391,203 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12numero_vidas___get__(struct _
   __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.numero_vidas.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tabatu_cpp.pyx":106
+ * 
+ *     @property
+ *     def numero_decrementos(self):             # <<<<<<<<<<<<<<
+ *         return self.c_tabua.pega_numero_decrementos()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_18numero_decrementos_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_18numero_decrementos_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10tabatu_cpp_8TabuaMDT_18numero_decrementos___get__(((struct __pyx_obj_10tabatu_cpp_TabuaMDT *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_18numero_decrementos___get__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tabatu_cpp.pyx":107
+ *     @property
+ *     def numero_decrementos(self):
+ *         return self.c_tabua.pega_numero_decrementos()             # <<<<<<<<<<<<<<
+ * 
+ *     @property
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_self->c_tabua.pega_numero_decrementos()); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 107, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "tabatu_cpp.pyx":106
+ * 
+ *     @property
+ *     def numero_decrementos(self):             # <<<<<<<<<<<<<<
+ *         return self.c_tabua.pega_numero_decrementos()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.numero_decrementos.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tabatu_cpp.pyx":110
+ * 
+ *     @property
+ *     def tabuas(self):             # <<<<<<<<<<<<<<
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_6tabuas_1__get__(PyObject *__pyx_v_self); /*proto*/
+static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_6tabuas_1__get__(PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("__get__ (wrapper)", 0);
+  __pyx_r = __pyx_pf_10tabatu_cpp_8TabuaMDT_6tabuas___get__(((struct __pyx_obj_10tabatu_cpp_TabuaMDT *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_6tabuas___get__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self) {
+  std::vector<TabuaBaseCpp>  __pyx_v_tabuas_cpp;
+  PyObject *__pyx_v_tabuas = NULL;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_v_i;
+  struct __pyx_obj_10tabatu_cpp_TabuaBase *__pyx_v_tabua = NULL;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_t_2;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_t_3;
+  std::vector<TabuaBaseCpp> ::size_type __pyx_t_4;
+  int __pyx_t_5;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("__get__", 0);
+
+  /* "tabatu_cpp.pyx":111
+ *     @property
+ *     def tabuas(self):
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()             # <<<<<<<<<<<<<<
+ *         tabuas = []
+ *         for i in range(tabuas_cpp.size()):
+ */
+  __pyx_v_tabuas_cpp = __pyx_v_self->c_tabua.pega_tabuas();
+
+  /* "tabatu_cpp.pyx":112
+ *     def tabuas(self):
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []             # <<<<<<<<<<<<<<
+ *         for i in range(tabuas_cpp.size()):
+ *             tabua = TabuaBase()
+ */
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 112, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_v_tabuas = ((PyObject*)__pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "tabatu_cpp.pyx":113
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []
+ *         for i in range(tabuas_cpp.size()):             # <<<<<<<<<<<<<<
+ *             tabua = TabuaBase()
+ *             tabua.c_tabua = tabuas_cpp[i]
+ */
+  __pyx_t_2 = __pyx_v_tabuas_cpp.size();
+  __pyx_t_3 = __pyx_t_2;
+  for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
+    __pyx_v_i = __pyx_t_4;
+
+    /* "tabatu_cpp.pyx":114
+ *         tabuas = []
+ *         for i in range(tabuas_cpp.size()):
+ *             tabua = TabuaBase()             # <<<<<<<<<<<<<<
+ *             tabua.c_tabua = tabuas_cpp[i]
+ *             tabuas.append(tabua)
+ */
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(((PyObject *)__pyx_ptype_10tabatu_cpp_TabuaBase)); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 114, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_XDECREF_SET(__pyx_v_tabua, ((struct __pyx_obj_10tabatu_cpp_TabuaBase *)__pyx_t_1));
+    __pyx_t_1 = 0;
+
+    /* "tabatu_cpp.pyx":115
+ *         for i in range(tabuas_cpp.size()):
+ *             tabua = TabuaBase()
+ *             tabua.c_tabua = tabuas_cpp[i]             # <<<<<<<<<<<<<<
+ *             tabuas.append(tabua)
+ *         return tuple(tabuas)
+ */
+    __pyx_v_tabua->c_tabua = (__pyx_v_tabuas_cpp[__pyx_v_i]);
+
+    /* "tabatu_cpp.pyx":116
+ *             tabua = TabuaBase()
+ *             tabua.c_tabua = tabuas_cpp[i]
+ *             tabuas.append(tabua)             # <<<<<<<<<<<<<<
+ *         return tuple(tabuas)
+ */
+    __pyx_t_5 = __Pyx_PyList_Append(__pyx_v_tabuas, ((PyObject *)__pyx_v_tabua)); if (unlikely(__pyx_t_5 == ((int)-1))) __PYX_ERR(1, 116, __pyx_L1_error)
+  }
+
+  /* "tabatu_cpp.pyx":117
+ *             tabua.c_tabua = tabuas_cpp[i]
+ *             tabuas.append(tabua)
+ *         return tuple(tabuas)             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = PyList_AsTuple(__pyx_v_tabuas); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 117, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "tabatu_cpp.pyx":110
+ * 
+ *     @property
+ *     def tabuas(self):             # <<<<<<<<<<<<<<
+ *         cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+ *         tabuas = []
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.tabuas.__get__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_tabuas);
+  __Pyx_XDECREF((PyObject *)__pyx_v_tabua);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
@@ -4724,6 +5201,14 @@ static PyObject *__pyx_getprop_10tabatu_cpp_5Tabua_numero_vidas(PyObject *o, CYT
   return __pyx_pw_10tabatu_cpp_5Tabua_12numero_vidas_1__get__(o);
 }
 
+static PyObject *__pyx_getprop_10tabatu_cpp_5Tabua_numero_decrementos(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10tabatu_cpp_5Tabua_18numero_decrementos_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_10tabatu_cpp_5Tabua_tabuas(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10tabatu_cpp_5Tabua_6tabuas_1__get__(o);
+}
+
 static PyMethodDef __pyx_methods_10tabatu_cpp_Tabua[] = {
   {"qx", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_10tabatu_cpp_5Tabua_3qx, METH_VARARGS|METH_KEYWORDS, 0},
   {"tpx", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_10tabatu_cpp_5Tabua_5tpx, METH_VARARGS|METH_KEYWORDS, 0},
@@ -4737,6 +5222,8 @@ static PyMethodDef __pyx_methods_10tabatu_cpp_Tabua[] = {
 
 static struct PyGetSetDef __pyx_getsets_10tabatu_cpp_Tabua[] = {
   {(char *)"numero_vidas", __pyx_getprop_10tabatu_cpp_5Tabua_numero_vidas, 0, (char *)0, 0},
+  {(char *)"numero_decrementos", __pyx_getprop_10tabatu_cpp_5Tabua_numero_decrementos, 0, (char *)0, 0},
+  {(char *)"tabuas", __pyx_getprop_10tabatu_cpp_5Tabua_tabuas, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 
@@ -4841,6 +5328,14 @@ static PyObject *__pyx_getprop_10tabatu_cpp_8TabuaMDT_numero_vidas(PyObject *o, 
   return __pyx_pw_10tabatu_cpp_8TabuaMDT_12numero_vidas_1__get__(o);
 }
 
+static PyObject *__pyx_getprop_10tabatu_cpp_8TabuaMDT_numero_decrementos(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10tabatu_cpp_8TabuaMDT_18numero_decrementos_1__get__(o);
+}
+
+static PyObject *__pyx_getprop_10tabatu_cpp_8TabuaMDT_tabuas(PyObject *o, CYTHON_UNUSED void *x) {
+  return __pyx_pw_10tabatu_cpp_8TabuaMDT_6tabuas_1__get__(o);
+}
+
 static PyMethodDef __pyx_methods_10tabatu_cpp_TabuaMDT[] = {
   {"qx_j", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_10tabatu_cpp_8TabuaMDT_3qx_j, METH_VARARGS|METH_KEYWORDS, 0},
   {"qx", (PyCFunction)(void*)(PyCFunctionWithKeywords)__pyx_pw_10tabatu_cpp_8TabuaMDT_5qx, METH_VARARGS|METH_KEYWORDS, 0},
@@ -4855,6 +5350,8 @@ static PyMethodDef __pyx_methods_10tabatu_cpp_TabuaMDT[] = {
 
 static struct PyGetSetDef __pyx_getsets_10tabatu_cpp_TabuaMDT[] = {
   {(char *)"numero_vidas", __pyx_getprop_10tabatu_cpp_8TabuaMDT_numero_vidas, 0, (char *)0, 0},
+  {(char *)"numero_decrementos", __pyx_getprop_10tabatu_cpp_8TabuaMDT_numero_decrementos, 0, (char *)0, 0},
+  {(char *)"tabuas", __pyx_getprop_10tabatu_cpp_8TabuaMDT_tabuas, 0, (char *)0, 0},
   {0, 0, 0, 0, 0}
 };
 
@@ -5004,7 +5501,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 };
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(0, 2, __pyx_L1_error)
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(1, 67, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5133,25 +5630,25 @@ static int __Pyx_modinit_type_init_code(void) {
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_TabuaBase, (PyObject *)&__pyx_type_10tabatu_cpp_TabuaBase) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10tabatu_cpp_TabuaBase) < 0) __PYX_ERR(1, 9, __pyx_L1_error)
   __pyx_ptype_10tabatu_cpp_TabuaBase = &__pyx_type_10tabatu_cpp_TabuaBase;
-  if (PyType_Ready(&__pyx_type_10tabatu_cpp_Tabua) < 0) __PYX_ERR(1, 31, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10tabatu_cpp_Tabua) < 0) __PYX_ERR(1, 34, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_10tabatu_cpp_Tabua.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10tabatu_cpp_Tabua.tp_dictoffset && __pyx_type_10tabatu_cpp_Tabua.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_10tabatu_cpp_Tabua.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Tabua, (PyObject *)&__pyx_type_10tabatu_cpp_Tabua) < 0) __PYX_ERR(1, 31, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10tabatu_cpp_Tabua) < 0) __PYX_ERR(1, 31, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Tabua, (PyObject *)&__pyx_type_10tabatu_cpp_Tabua) < 0) __PYX_ERR(1, 34, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10tabatu_cpp_Tabua) < 0) __PYX_ERR(1, 34, __pyx_L1_error)
   __pyx_ptype_10tabatu_cpp_Tabua = &__pyx_type_10tabatu_cpp_Tabua;
-  if (PyType_Ready(&__pyx_type_10tabatu_cpp_TabuaMDT) < 0) __PYX_ERR(1, 60, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_10tabatu_cpp_TabuaMDT) < 0) __PYX_ERR(1, 73, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_10tabatu_cpp_TabuaMDT.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_10tabatu_cpp_TabuaMDT.tp_dictoffset && __pyx_type_10tabatu_cpp_TabuaMDT.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_10tabatu_cpp_TabuaMDT.tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_TabuaMDT, (PyObject *)&__pyx_type_10tabatu_cpp_TabuaMDT) < 0) __PYX_ERR(1, 60, __pyx_L1_error)
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10tabatu_cpp_TabuaMDT) < 0) __PYX_ERR(1, 60, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_TabuaMDT, (PyObject *)&__pyx_type_10tabatu_cpp_TabuaMDT) < 0) __PYX_ERR(1, 73, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_10tabatu_cpp_TabuaMDT) < 0) __PYX_ERR(1, 73, __pyx_L1_error)
   __pyx_ptype_10tabatu_cpp_TabuaMDT = &__pyx_type_10tabatu_cpp_TabuaMDT;
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -6118,6 +6615,28 @@ static void __Pyx_Raise(PyObject *type, PyObject *value, PyObject *tb, PyObject 
 bad:
     Py_XDECREF(owned_instance);
     return;
+}
+#endif
+
+/* PyObjectCallNoArg */
+#if CYTHON_COMPILING_IN_CPYTHON
+static CYTHON_INLINE PyObject* __Pyx_PyObject_CallNoArg(PyObject *func) {
+#if CYTHON_FAST_PYCALL
+    if (PyFunction_Check(func)) {
+        return __Pyx_PyFunction_FastCall(func, NULL, 0);
+    }
+#endif
+#if defined(__Pyx_CyFunction_USED) && defined(NDEBUG)
+    if (likely(PyCFunction_Check(func) || __Pyx_CyFunction_Check(func)))
+#else
+    if (likely(PyCFunction_Check(func)))
+#endif
+    {
+        if (likely(PyCFunction_GET_FLAGS(func) & METH_NOARGS)) {
+            return __Pyx_PyObject_CallMethO(func, NULL);
+        }
+    }
+    return __Pyx_PyObject_Call(func, __pyx_empty_tuple, NULL);
 }
 #endif
 

@@ -13,9 +13,9 @@ from numpy import prod
 from numpy import repeat
 from numpy.typing import ArrayLike
 
-from tabatu.tabua_interface import TabuaInterface
-from tabatu.tabua_interface import valida_periodicidade
 from tabatu.unico_decremento import Tabua
+from tabatu.tabua_interface import valida_periodicidade
+import tabatu_cpp
 
 
 def captura_argumentos(*args: Any, **kwargs: Any) -> dict[str, int]:
@@ -32,7 +32,9 @@ def captura_argumentos(*args: Any, **kwargs: Any) -> dict[str, int]:
     return result
 
 
-def qx2qxj(qx1: ndarray[float], qx2: Union[int, ndarray] = 0, qx3: Union[int, ndarray] = 0) -> ndarray[float]:
+def qx2qxj(
+    qx1: ndarray[float], qx2: Union[int, ndarray] = 0, qx3: Union[int, ndarray] = 0
+) -> ndarray[float]:
     """Converter o qx do cenário de causas independentes em qx no cenário de múltiplos decrementos."""
     return qx1 * (1 - 0.5 * (qx2 + qx3) + 1 / 3 * (qx2 * qx3))
 
@@ -54,17 +56,21 @@ def valida_quantidade_tabuas(*args: Any) -> Any:
     return args
 
 
-def valida_causa_principal(causa_principal: Union[int, str], causas: dict[str, int]) -> Optional[str]:
+def valida_causa_principal(
+    causa_principal: Union[int, str], causas: dict[str, int]
+) -> Optional[str]:
     if causa_principal is None:
         return None
     if isinstance(causa_principal, int):
         causa_principal = str(causa_principal)
     if causa_principal not in causas.keys():
-        raise ValueError(f"Causa principal invalida. Deve ser um entre {list(causas.keys())}.")
+        raise ValueError(
+            f"Causa principal invalida. Deve ser um entre {list(causas.keys())}."
+        )
     return causa_principal
 
 
-class TabuaMDT(TabuaInterface):
+class TabuaMDT(tabatu_cpp.TabuaMDT):
     """Representação de tábuas de múltiplos decrementos.
 
     Args:
@@ -94,18 +100,24 @@ class TabuaMDT(TabuaInterface):
         >>> tabua_posicao_e_nome = TabuaMDT(Tabua(qx1), morte = Tabua(qx2))
         >>> tabua_nome = TabuaMDT(cancelamento = Tabua(qx1), morte = Tabua(qx2))
     """
+
     _causa_principal: Union[int, str]
     _causas: dict[str, int]
 
-    def __init__(self, *args: Tabua, causa_principal: Union[int, str, None] = None, **kwargs: Tabua) -> None:
+    def __init__(
+        self,
+        *args: Tabua,
+        causa_principal: Union[int, str, None] = None,
+        **kwargs: Tabua,
+    ) -> None:
         tabuas: tuple[Tabua, ...] = args + tuple(kwargs.values())
         tabuas = valida_quantidade_tabuas(*tabuas)
         self._causas = captura_argumentos(*args, **kwargs)
-        self._causa_principal: Optional[str] = valida_causa_principal(causa_principal, self._causas)
-        self._numero_decrementos = len(tabuas)
-        self._numero_vidas = 1
+        self._causa_principal: Optional[str] = valida_causa_principal(
+            causa_principal, self._causas
+        )
         self._periodicidade = valida_periodicidade(*tabuas)
-        self._tabuas = tuple(tabua.tabuas[0] for tabua in tabuas)
+        super().__init__(*tabuas)
 
     @property
     def causas(self) -> dict[str, int]:
@@ -140,13 +152,7 @@ class TabuaMDT(TabuaInterface):
             array([1.        , 0.69      , 0.4692    , 0.314364  , 0.20748024,
                    0.13486216])
         """
-        t = atleast_1d(t)
-        x = atleast_1d(x)
-        if len(x) == 1:
-            x = repeat(x, self._numero_decrementos)
-        if len(x) != self._numero_decrementos:
-            raise ValueError("x deve ter tamanho igual a n_decrementos.")
-        return prod([tabua.tpx(idade, t) for idade, tabua in zip(x, self._tabuas)], axis=0)
+        return super().tpx(x, t)
 
     def t_qx(self, x: ArrayLike, t: ArrayLike) -> ndarray[float]:
         """Probabilidade de um indivíduo com idade x falhar com
@@ -209,18 +215,10 @@ class TabuaMDT(TabuaInterface):
             array([[0.50745, 0.5174 , 0.52735, 0.5373 ],
                    [0.00745, 0.0074 , 0.00735, 0.0073 ]])
         """
-        x = atleast_1d(x)
-        if len(x) == 1:
-            x = repeat(x, self._numero_decrementos)
-        if len(x) != self._numero_decrementos:
-            raise ValueError("x deve ter tamanho igual a n_decrementos.")
         j = atleast_1d(j)
         if isinstance(j[0], str):
             j = array([self._causas[x] for x in j])
-        qx_original = tuple(
-            [tabua.qx(idade, t) for idade, tabua in zip(x, self._tabuas)]
-        )
-        return converter_mdt(*qx_original)[j]
+        return super().qx_j(x, t, j)
 
     def qx(self, x: ArrayLike, t: ArrayLike) -> ndarray[float]:
         """Probabilidade de um indivíduo com idade x + t falhar por qualquer causa
@@ -248,8 +246,7 @@ class TabuaMDT(TabuaInterface):
             >>> tabua.qx([50, 0], [0, 1, 2, 3])
             array([0.5149, 0.5248, 0.5347, 0.5446])
         """
-        j = arange(self._numero_decrementos)
-        return self.qx_j(x, t, j).sum(axis=0)
+        return super().qx(x, t)
 
     def t_qx_j(self, x: ArrayLike, t: ArrayLike, j: ArrayLike) -> ndarray[float]:
         """Probabilidade de um indivíduo com idade x falhar com
@@ -308,12 +305,7 @@ class TabuaMDT(TabuaInterface):
             >>> tabua.tempo_futuro_max([50, 0])
             50
         """
-        x = atleast_1d(x)
-        if len(x) == 1:
-            x = repeat(x, self._numero_decrementos)
-        if len(x) != self._numero_decrementos:
-            raise ValueError("x deve ter tamanho igual a n_decrementos.")
-        return min([tabua.tempo_futuro_max(idade) for idade, tabua in zip(x, self._tabuas)])
+        return super().tempo_futuro_max(x)
 
     def possui_causa_principal(self) -> bool:
         """Verifica se existe uma causa principal."""

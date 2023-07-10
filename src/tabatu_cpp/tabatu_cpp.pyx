@@ -9,8 +9,11 @@ import numpy as np
 cdef class TabuaBase:
     cdef TabuaBaseCpp c_tabua
 
-    def __init__(self, qx):
-        self.c_tabua = TabuaBaseCpp(qx)
+    def __init__(self, qx = None):
+        if qx is None:
+            self.c_tabua = TabuaBaseCpp()
+        else:
+            self.c_tabua = TabuaBaseCpp(qx)
 
     def qx(self, int x, vector[double] t):
         return np.array(self.c_tabua.qx(x, t))
@@ -54,12 +57,21 @@ cdef class Tabua:
         return self.c_tabua.pega_numero_vidas()
 
     @property
-    def numero_vidas(self):
-        return self.c_tabua.pega_numero_vidas()
+    def numero_decrementos(self):
+        return self.c_tabua.pega_numero_decrementos()
+
+    @property
+    def tabuas(self):
+        cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+        tabuas = []
+        for i in range(tabuas_cpp.size()):
+            tabua = TabuaBase()
+            tabua.c_tabua = tabuas_cpp[i]
+            tabuas.append(tabua)
+        return tuple(tabuas)
 
 cdef class TabuaMDT:
     cdef TabuaMDTCpp c_tabua
-
 
     def __init__(self, *tabuas):
         cdef vector[TabuaCpp] tabuas_vec
@@ -91,5 +103,15 @@ cdef class TabuaMDT:
         return self.c_tabua.pega_numero_vidas()
 
     @property
-    def numero_vidas(self):
-        return self.c_tabua.pega_numero_vidas()
+    def numero_decrementos(self):
+        return self.c_tabua.pega_numero_decrementos()
+
+    @property
+    def tabuas(self):
+        cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
+        tabuas = []
+        for i in range(tabuas_cpp.size()):
+            tabua = TabuaBase()
+            tabua.c_tabua = tabuas_cpp[i]
+            tabuas.append(tabua)
+        return tuple(tabuas)
