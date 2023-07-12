@@ -4,13 +4,10 @@ from typing import Any
 from typing import Optional
 from typing import Union
 
-from numpy import arange
 from numpy import array
 from numpy import atleast_1d
 from numpy import atleast_2d
 from numpy import ndarray
-from numpy import prod
-from numpy import repeat
 from numpy.typing import ArrayLike
 
 from tabatu.unico_decremento import Tabua

@@ -2,17 +2,12 @@ from __future__ import annotations
 
 from enum import Enum
 
-from numpy import append
-from numpy import arange
-from numpy import array
-from numpy import atleast_1d
-from numpy import cumprod
 from numpy import ndarray
 from numpy.typing import ArrayLike
 
-from tabatu.tabua_interface import TabuaInterface
 from tabatu.tabua_interface import valida_periodicidade
 from tabatu.unico_decremento import Tabua
+import tabatu_cpp
 
 
 class StatusVidasConjuntas(Enum):
@@ -23,11 +18,12 @@ class StatusVidasConjuntas(Enum):
     é dada pela falha de pelo menos uma das vidas, ou seja, todas as vidas
     precisam estar vivas.
     """
-    LAST = "last"
-    JOINT = "joint"
+
+    JOINT = 0
+    LAST = 1
 
 
-class TabuaMultiplasVidas(TabuaInterface):
+class TabuaMultiplasVidas(tabatu_cpp.TabuaMultiplasVidas):
     """Representação de tábuas de múltiplas vidas.
 
     Args:
@@ -41,14 +37,15 @@ class TabuaMultiplasVidas(TabuaInterface):
         >>> qx1 = (np.arange(100) + 1)/100
         >>> tabua = TabuaMultiplasVidas(Tabua(qx1), Tabua(qx1), status = StatusVidasConjuntas.LAST)
     """
+
     _status: StatusVidasConjuntas
 
-    def __init__(self, *args: Tabua, status: StatusVidasConjuntas = StatusVidasConjuntas.LAST) -> None:
+    def __init__(
+        self, *args: Tabua, status: StatusVidasConjuntas = StatusVidasConjuntas.LAST
+    ) -> None:
         self._periodicidade = valida_periodicidade(*args)
         self._status = status
-        self._tabuas = tuple(tabua.tabuas[0] for tabua in args)
-        self._numero_decrementos = 1
-        self._numero_vidas = len(args)
+        super().__init__(*args, status=tabatu_cpp.StatusVidasConjuntas(status.value))
 
     def t_qx(self, x: ArrayLike, t: ArrayLike) -> ndarray[float]:
         """Probabilidade de um indivíduo com idade x falhar com
@@ -94,14 +91,7 @@ class TabuaMultiplasVidas(TabuaInterface):
             array([1.     , 0.8419 , 0.70181, 0.57906, 0.47275, 0.38174])
         """
 
-        x = atleast_1d(x).astype(int)
-        if (x < 0).any():
-            raise ValueError("x deve ser >= 0.")
-        t = atleast_1d(t).astype(int)
-        if (t < 0).any():
-            raise ValueError("t deve ser >= 0.")
-        lx = append(1, cumprod(1 - self.qx(x, arange(max(t)))))
-        return lx[t]
+        return super().tpx(x, t)
 
     def qx(self, x: ArrayLike, t: ArrayLike) -> ndarray[float]:
         """Probabilidade de falha entre as idades x + t e x + t + 1.
@@ -134,16 +124,7 @@ class TabuaMultiplasVidas(TabuaInterface):
             >>> tabua.qx([50, 30], [0, 1, 2, 3])
             array([0.6619, 0.6736, 0.6851, 0.6964])
         """
-        t = atleast_1d(t)
-        x = atleast_1d(x)
-        if len(x) != self._numero_vidas:
-            raise ValueError(
-                f"O número de idades deve ser igual ao número de vidas ({self._numero_vidas})"
-            )
-        qx = array([tabua.qx(idade, t) for idade, tabua in zip(x, self._tabuas)])
-        if self._status == StatusVidasConjuntas.JOINT:
-            return 1 - (1 - qx).prod(axis=0)
-        return qx.prod(axis=0)
+        return super().qx(x, t)
 
     def tempo_futuro_maximo(self, x: ArrayLike) -> int:
         """Tempo de vida futuro máximo.
@@ -175,13 +156,7 @@ class TabuaMultiplasVidas(TabuaInterface):
             >>> tabua.tempo_futuro_maximo([50, 30])
             50
         """
-        x = atleast_1d(x)
-        if len(x) != self._numero_vidas:
-            raise ValueError("Deve ser fornecida uma idade para cada vida.")
-        w = [tabua.tempo_futuro_maximo(idade) for idade, tabua in zip(x, self._tabuas)]
-        if self._status == StatusVidasConjuntas.LAST:
-            return max(w)
-        return min(w)
+        return super().tempo_futuro_maximo(x)
 
     @property
     def status(self) -> StatusVidasConjuntas:

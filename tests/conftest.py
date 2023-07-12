@@ -2,6 +2,7 @@ from unittest.mock import Mock
 
 import pytest
 from numpy import array
+from tabatu.multiplas_vidas import StatusVidasConjuntas, TabuaMultiplasVidas
 from tabatu.multiplos_decrementos import TabuaMDT
 
 from tabatu.unico_decremento import Tabua
@@ -44,4 +45,9 @@ def tabua_1dt_2():
 @pytest.fixture
 def tabua_mdt(tabua_1dt_1, tabua_1dt_2):
     tabua = TabuaMDT(tabua_1dt_1, causa1=tabua_1dt_2, causa_principal="causa1")
+    return tabua
+
+@pytest.fixture
+def tabua_mvd(tabua_1dt_1, tabua_1dt_2):
+    tabua = TabuaMultiplasVidas(tabua_1dt_1, causa1=tabua_1dt_2, status=StatusVidasConjuntas.LAST)
     return tabua
