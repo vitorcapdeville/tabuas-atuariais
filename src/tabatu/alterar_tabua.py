@@ -10,7 +10,7 @@ from numpy import repeat
 from numpy import split
 from numpy.typing import ArrayLike
 
-from matatu.periodicidade import Periodicidade
+from tabatu.periodicidade import Periodicidade
 
 
 def _all_equal(arr: ArrayLike) -> bool:

@@ -3,7 +3,7 @@ from numpy import ndarray
 from numpy.typing import ArrayLike
 
 import tabatu_cpp
-from matatu.periodicidade import Periodicidade
+from tabatu.periodicidade import Periodicidade
 
 
 def validar_qx(qx: ArrayLike) -> ndarray:

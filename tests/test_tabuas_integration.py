@@ -11,8 +11,8 @@ from numpy import repeat
 from numpy import split
 from numpy.testing import assert_array_almost_equal
 
-from matatu.periodicidade import Periodicidade
-from matatu.periodicidade import converter_periodicidade
+from tabatu.periodicidade import Periodicidade
+from tabatu.periodicidade import converter_periodicidade
 from tabatu import StatusVidasConjuntas
 from tabatu.alterar_tabua import agravar_qx
 from tabatu.alterar_tabua import alterar_periodicidade

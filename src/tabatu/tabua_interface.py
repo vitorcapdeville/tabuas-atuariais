@@ -1,6 +1,6 @@
 from numpy import array
 
-from matatu.periodicidade import Periodicidade
+from tabatu.periodicidade import Periodicidade
 from tabatu.tabua_base import TabuaBase
 
 

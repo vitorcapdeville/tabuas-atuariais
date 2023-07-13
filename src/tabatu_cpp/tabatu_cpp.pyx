@@ -6,6 +6,7 @@ from TabuaMDTCpp cimport TabuaMDTCpp
 from TabuaMultiplasVidasCpp cimport TabuaMultiplasVidasCpp
 from TabuaMultiplasVidasCpp cimport StatusVidasConjuntasCpp
 from libcpp.vector cimport vector
+from libcpp.string cimport string
 import numpy as np
 
 cdef class TabuaBase:
@@ -124,7 +125,9 @@ cdef extern from "TabuaMultiplasVidasCpp.h" namespace "StatusVidasConjuntasCpp":
 
 cdef class StatusVidasConjuntas:
     cdef StatusVidasConjuntasCpp c_status
-    def __cinit__(self, int val):
+    def __cinit__(self, string status):
+        cdef c = {b"LAST": <int>LAST, b"JOINT": <int>JOINT}
+        cdef int val = c[status]
         self.c_status = <StatusVidasConjuntasCpp> val
         
     def get_status(self):

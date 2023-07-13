@@ -8,8 +8,8 @@ from tabatu.unico_decremento import Tabua
 
 
 class StatusVidasConjuntas(Enum):
-    JOINT = 0
-    LAST = 1
+    JOINT = b"JOINT"
+    LAST = b"LAST"
 
 
 class TabuaMultiplasVidas(tabatu_cpp.TabuaMultiplasVidas):

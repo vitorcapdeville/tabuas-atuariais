@@ -59,13 +59,13 @@ double TabuaMultiplasVidasCpp::tpx(std::vector<int> x, double t) const {
 	if (t < 0) {
 		throw std::invalid_argument("t deve ser maior ou igual a 0");
 	}
-	std::vector<double> lx((int)t + 1);
-	lx[0] = 1.0;
+	double lx_t;
+	lx_t = 1.0;
 	for (size_t i = 1; i <= (int)t; i++)
 	{
-		lx[i] = lx[i - 1] * (1 - qx(x, (double)(i - 1)));
+		lx_t = lx_t * (1 - qx(x, (double)(i - 1)));
 	}
-	return lx[(int)t];
+	return lx_t;
 }
 
 std::vector<double> TabuaMultiplasVidasCpp::qx(std::vector<int> x, std::vector<double> t) const {

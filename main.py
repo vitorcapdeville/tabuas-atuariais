@@ -3,7 +3,7 @@ from timeit import timeit
 import matatu.tabuas as matatu
 import matatu.tabuas.multiplas_vidas as mvd
 from matatu.banco_tabuas import pega_qx
-from matatu.periodicidade import Periodicidade
+from tabatu.periodicidade import Periodicidade
 from numpy import arange, array
 
 import tabatu
@@ -23,9 +23,9 @@ tabua_cpp_mdt = tabatu.TabuaMDT(tabua_cpp, tabua_cpp, tabua_cpp)
 tabua_py_mdt = matatu.TabuaMDT(tabua_py, tabua_py, tabua_py)
 
 # 3 vidas
-tabua_cpp_mvd = tabatu.TabuaMultiplasVidas(tabua_cpp, tabua_cpp, tabua_cpp, status = tabatu.StatusVidasConjuntas.JOINT)
+tabua_cpp_mvd = tabatu.TabuaMultiplasVidas(tabua_cpp, tabua_cpp, tabua_cpp, status = tabatu.StatusVidasConjuntas.LAST)
 # tabua_cpp_mvd = tabatu_cpp.TabuaMultiplasVidas(tabua_cpp, tabua_cpp, tabua_cpp, status = tabatu_cpp.StatusVidasConjuntas(1))
-tabua_py_mvd = matatu.TabuaMultiplasVidas(tabua_py, tabua_py, tabua_py, status=mvd.StatusVidasConjuntas.JOINT)
+tabua_py_mvd = matatu.TabuaMultiplasVidas(tabua_py, tabua_py, tabua_py, status=mvd.StatusVidasConjuntas.LAST)
 
 # print(tabatu_cpp.StatusVidasConjuntas("LAST").get_status())
 

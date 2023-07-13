@@ -3,7 +3,7 @@ from unittest.mock import Mock
 import pytest
 
 from tabatu.tabua_interface import valida_periodicidade
-from matatu.periodicidade import Periodicidade
+from tabatu.periodicidade import Periodicidade
 
 
 def test_valida_periodicidade_falha_quando_recebe_tabuas_com_diferentes_periodicidades():

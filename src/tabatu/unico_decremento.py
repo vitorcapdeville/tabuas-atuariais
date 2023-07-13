@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 
-from matatu.periodicidade import Periodicidade
+from tabatu.periodicidade import Periodicidade
 from numpy import ndarray
 
 import tabatu_cpp
