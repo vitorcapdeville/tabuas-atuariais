@@ -251,8 +251,8 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = aumentar_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_maximo(0)
-        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_maximo(0)
+        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_maximo([0])
+        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_maximo([0])
         assert tempo_menor_periodicidade - 1 == converter_periodicidade(
             tempo_maior_periodicidade - 1, maior_periodicidade, menor_periodicidade
         ).item()
@@ -261,8 +261,8 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = reduzir_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_maximo(0)
-        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_maximo(0)
+        tempo_menor_periodicidade = tabua_menor_periodicidade.tempo_futuro_maximo([0])
+        tempo_maior_periodicidade = tabua_maior_periodicidade.tempo_futuro_maximo([0])
         assert tempo_menor_periodicidade - 1 == converter_periodicidade(
             tempo_maior_periodicidade - 1, maior_periodicidade, menor_periodicidade
         ).item()
@@ -271,45 +271,45 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = aumentar_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo([0]))
         tempos_menor_periodicidade = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
         )
         assert all(mod(tempos_menor_periodicidade, 1) == 0)
         assert_array_almost_equal(
-            tabua_maior_periodicidade.tpx(0, tempos_maior_periodicidade),
-            tabua_menor_periodicidade.tpx(0, tempos_menor_periodicidade.astype(int))
+            tabua_maior_periodicidade.tpx([0], tempos_maior_periodicidade),
+            tabua_menor_periodicidade.tpx([0], tempos_menor_periodicidade.astype(int))
         )
 
     def test_reduzir_periodicidade_preserva_tpx_nos_pontos_de_quebra(self, reduzir_periodicidade):
         tabua_menor_periodicidade, tabua_maior_periodicidade = reduzir_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo([0]))
         tempos_menor_periodicidade = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
         )
         assert all(mod(tempos_menor_periodicidade, 1) == 0)
         assert_array_almost_equal(
-            tabua_maior_periodicidade.tpx(0, tempos_maior_periodicidade),
-            tabua_menor_periodicidade.tpx(0, tempos_menor_periodicidade.astype(int))
+            tabua_maior_periodicidade.tpx([0], tempos_maior_periodicidade),
+            tabua_menor_periodicidade.tpx([0], tempos_menor_periodicidade.astype(int))
         )
 
     def test_aumentar_periodicidade_preserva_soma_de_t_qx_no_mesmo_periodo(self, aumentar_periodicidade):
         tabua_menor_periodicidade, tabua_maior_periodicidade = aumentar_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
-        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_maximo(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo([0]))
+        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_maximo([0]))
         assert all(mod(tempos_menor_periodicidade, 1) == 0)
         pontos_split = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
         )[1:]
         assert all(mod(pontos_split, 1) == 0)
         tempos_splitted = split(tempos_menor_periodicidade, pontos_split.astype(int))
-        t_qx_maior_periodicidade = tabua_maior_periodicidade.t_qx(0, tempos_maior_periodicidade)
+        t_qx_maior_periodicidade = tabua_maior_periodicidade.t_qx([0], tempos_maior_periodicidade)
         t_qx_menor_periodicidade = fromiter(
-            map(lambda x: tabua_menor_periodicidade.t_qx(0, x).sum(), tempos_splitted), dtype=float
+            map(lambda x: tabua_menor_periodicidade.t_qx([0], x).sum(), tempos_splitted), dtype=float
         )
         assert_array_almost_equal(
             t_qx_maior_periodicidade,
@@ -320,17 +320,17 @@ class TestEfeitoAlteracaoPeriodicidadeNaTabua:
         tabua_menor_periodicidade, tabua_maior_periodicidade = reduzir_periodicidade
         maior_periodicidade = tabua_maior_periodicidade.periodicidade
         menor_periodicidade = tabua_menor_periodicidade.periodicidade
-        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo(0))
-        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_maximo(0))
+        tempos_maior_periodicidade = arange(tabua_maior_periodicidade.tempo_futuro_maximo([0]))
+        tempos_menor_periodicidade = arange(tabua_menor_periodicidade.tempo_futuro_maximo([0]))
         assert all(mod(tempos_menor_periodicidade, 1) == 0)
         pontos_split = converter_periodicidade(
             tempos_maior_periodicidade, maior_periodicidade, menor_periodicidade
         )[1:]
         assert all(mod(pontos_split, 1) == 0)
         tempos_splitted = split(tempos_menor_periodicidade, pontos_split.astype(int))
-        t_qx_maior_periodicidade = tabua_maior_periodicidade.t_qx(0, tempos_maior_periodicidade)
+        t_qx_maior_periodicidade = tabua_maior_periodicidade.t_qx([0], tempos_maior_periodicidade)
         t_qx_menor_periodicidade = fromiter(
-            map(lambda x: tabua_menor_periodicidade.t_qx(0, x).sum(), tempos_splitted), dtype=float
+            map(lambda x: tabua_menor_periodicidade.t_qx([0], x).sum(), tempos_splitted), dtype=float
         )
         assert_array_almost_equal(
             t_qx_maior_periodicidade,
@@ -344,18 +344,18 @@ class TestEfeitoAgravoNaTabua:
         qx_agravado = agravar_qx(qx_original, percentual=50)
         tabua_original = Tabua(qx_original)
         tabua_agravada = Tabua(qx_agravado)
-        assert tabua_original.tempo_futuro_maximo(0) == tabua_agravada.tempo_futuro_maximo(0)
+        assert tabua_original.tempo_futuro_maximo([0]) == tabua_agravada.tempo_futuro_maximo([0])
 
     def test_agravar_uma_tabua_pode_diminuir_o_tempo_futuro_maximo(self):
         qx_original = array([0.1, 0.3, 0.5, 1.0])
         qx_agravado = agravar_qx(qx_original, percentual=300)
         tabua_original = Tabua(qx_original)
         tabua_agravada = Tabua(qx_agravado)
-        assert tabua_original.tempo_futuro_maximo(0) > tabua_agravada.tempo_futuro_maximo(0)
+        assert tabua_original.tempo_futuro_maximo([0]) > tabua_agravada.tempo_futuro_maximo([0])
 
     def test_agravar_uma_tabua_pode_nao_alterar_o_tempo_futuro_maximo(self):
         qx_original = array([0.1, 0.3, 0.5, 1.0])
         qx_agravado = agravar_qx(qx_original, percentual=110)
         tabua_original = Tabua(qx_original)
         tabua_agravada = Tabua(qx_agravado)
-        assert tabua_original.tempo_futuro_maximo(0) == tabua_agravada.tempo_futuro_maximo(0)
+        assert tabua_original.tempo_futuro_maximo([0]) == tabua_agravada.tempo_futuro_maximo([0])

@@ -40,16 +40,16 @@ cdef class Tabua:
     def __init__(self, qx):
         self.c_tabua = TabuaCpp(qx)
 
-    def qx(self, int x, vector[double] t):
+    def qx(self, vector[int] x, vector[double] t):
         return np.array(self.c_tabua.qx(x, t))
 
-    def tpx(self,  int x, vector[double] t):
+    def tpx(self,  vector[int] x, vector[double] t):
         return np.array(self.c_tabua.tpx(x, t))
 
-    def t_qx(self, int x, vector[double] t):
+    def t_qx(self, vector[int] x, vector[double] t):
         return np.array(self.c_tabua.t_qx(x, t))
 
-    def tempo_futuro_maximo(self, x):
+    def tempo_futuro_maximo(self, vector[int] x):
         return self.c_tabua.tempo_futuro_maximo(x)
 
     def possui_fechamento_plato(self):
@@ -95,7 +95,7 @@ cdef class TabuaMDT:
     def t_qx(self, vector[int] x, vector[double] t):
         return np.atleast_1d(self.c_tabua.t_qx(x, t))
 
-    def tempo_futuro_maximo(self, x):
+    def tempo_futuro_maximo(self, vector[int] x):
         return self.c_tabua.tempo_futuro_maximo(x)
 
     def possui_fechamento_plato(self):
@@ -154,7 +154,7 @@ cdef class TabuaMultiplasVidas:
     def t_qx(self, vector[int] x, vector[double] t):
         return np.atleast_1d(self.c_tabua.t_qx(x, t))
 
-    def tempo_futuro_maximo(self, x):
+    def tempo_futuro_maximo(self, vector[int] x):
         return self.c_tabua.tempo_futuro_maximo(x)
 
     def possui_fechamento_plato(self):

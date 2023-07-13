@@ -1,5 +1,6 @@
 #include "TabuaCpp.h"
 #include "TabuaBaseCpp.h"
+#include <stdexcept>
 
 TabuaCpp::TabuaCpp() {
 }
@@ -14,34 +15,46 @@ TabuaCpp::TabuaCpp(TabuaBaseCpp tabua)
     m_tabuas = { tabua };
 }
 
-double TabuaCpp::qx(int x, double t) const {
-    return m_tabuas[0].qx(x, t);
+double TabuaCpp::qx(std::vector<int> x, double t) const {
+    return m_tabuas[0].qx(x[0], t);
 }
 
-double TabuaCpp::tpx(int x, double t) const {
-    return m_tabuas[0].tpx(x, t);
+double TabuaCpp::tpx(std::vector<int> x, double t) const {
+    return m_tabuas[0].tpx(x[0], t);
 }
 
-std::vector<double> TabuaCpp::qx(int x, std::vector<double> t) const {
-    return m_tabuas[0].qx(x, t);
+std::vector<double> TabuaCpp::qx(std::vector<int> x, std::vector<double> t) const {
+    if (x.size() > 1) {
+        throw std::invalid_argument("x deve ter tamanho 1");
+    }
+    return m_tabuas[0].qx(x[0], t);
 }
 
-std::vector<double> TabuaCpp::tpx(int x, std::vector<double> t) const {
-    return m_tabuas[0].tpx(x, t);
+std::vector<double> TabuaCpp::tpx(std::vector<int> x, std::vector<double> t) const {
+    if (x.size() > 1) {
+        throw std::invalid_argument("x deve ter tamanho 1");
+    }
+    return m_tabuas[0].tpx(x[0], t);
 }
 
-double TabuaCpp::tempo_futuro_maximo(int x) const {
-    return m_tabuas[0].tempo_futuro_maximo(x);
+double TabuaCpp::tempo_futuro_maximo(std::vector<int> x) const {
+    if (x.size() > 1) {
+        throw std::invalid_argument("x deve ter tamanho 1");
+    }
+    return m_tabuas[0].tempo_futuro_maximo(x[0]);
 }
 
 bool TabuaCpp::possui_fechamento_plato() const {
-    return isinf(tempo_futuro_maximo(0));
+    return isinf(tempo_futuro_maximo({ 0 }));
 }
 
-double TabuaCpp::t_qx(int x, double t) const {
+double TabuaCpp::t_qx(std::vector<int> x, double t) const {
     return qx(x, t) * tpx(x, (int)t);
 }
-std::vector<double> TabuaCpp::t_qx(int x, std::vector<double> t) const {
+std::vector<double> TabuaCpp::t_qx(std::vector<int> x, std::vector<double> t) const {
+    if (x.size() > 1) {
+        throw std::invalid_argument("x deve ter tamanho 1");
+    }
     std::vector<double> ret(t.size());
     int n = (int)t.size();
     for (int i = 0; i < n; i++)

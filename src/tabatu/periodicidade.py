@@ -1,5 +1,9 @@
 from enum import Enum
 
+from numpy import atleast_1d, ndarray
+from numpy.typing import ArrayLike
+
+
 class Periodicidade(Enum):
     DIARIA = "DIARIA"
     SEMANAL = "SEMANAL"
@@ -41,3 +45,24 @@ class Periodicidade(Enum):
 
     def __ge__(self, other):
         return self.quantidade_periodos_1_ano() <= other.quantidade_periodos_1_ano()
+
+
+def converter_periodicidade(
+    tempo: ArrayLike, periodicidade: Periodicidade, nova_periodicidade: Periodicidade
+) -> ndarray[float]:
+    tempo = atleast_1d(tempo)
+    if nova_periodicidade == periodicidade:
+        return tempo
+    return tempo * nova_periodicidade.quantidade_periodos_1_periodicidade(periodicidade)
+
+
+def meses2periodicidade(
+    valor: ArrayLike, periodicidade: Periodicidade
+) -> ndarray[float]:
+    return converter_periodicidade(valor, Periodicidade.MENSAL, periodicidade)
+
+
+def periodicidade2meses(valor: ArrayLike, periodicidade: Periodicidade) -> ndarray[int]:
+    return converter_periodicidade(valor, periodicidade, Periodicidade.MENSAL).astype(
+        int
+    )

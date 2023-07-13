@@ -1643,10 +1643,10 @@ static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_10possui_fechamento_plato(stru
 static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_12__reduce_cython__(CYTHON_UNUSED struct __pyx_obj_10tabatu_cpp_TabuaBase *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_9TabuaBase_14__setstate_cython__(CYTHON_UNUSED struct __pyx_obj_10tabatu_cpp_TabuaBase *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v___pyx_state); /* proto */
 static int __pyx_pf_10tabatu_cpp_5Tabua___init__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, PyObject *__pyx_v_qx); /* proto */
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, int __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, int __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, int __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, PyObject *__pyx_v_x); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_10possui_fechamento_plato(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_12numero_vidas___get__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_18numero_decrementos___get__(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self); /* proto */
@@ -1658,7 +1658,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_2qx_j(struct __pyx_obj_10tabatu
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_4qx(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_6tpx(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
-static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, PyObject *__pyx_v_x); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, std::vector<int>  __pyx_v_x); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12possui_fechamento_plato(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_12numero_vidas___get__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_18numero_decrementos___get__(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self); /* proto */
@@ -1673,7 +1673,7 @@ static int __pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas___init__(struct __pyx_obj
 static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_2qx(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_4tpx(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_6t_qx(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t); /* proto */
-static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self, PyObject *__pyx_v_x); /* proto */
+static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self, std::vector<int>  __pyx_v_x); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_10possui_fechamento_plato(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_12numero_vidas___get__(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_18numero_decrementos___get__(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self); /* proto */
@@ -2611,7 +2611,7 @@ static int __pyx_pf_10tabatu_cpp_5Tabua___init__(struct __pyx_obj_10tabatu_cpp_T
  *     def __init__(self, qx):
  *         self.c_tabua = TabuaCpp(qx)             # <<<<<<<<<<<<<<
  * 
- *     def qx(self, int x, vector[double] t):
+ *     def qx(self, vector[int] x, vector[double] t):
  */
   __pyx_t_1 = __pyx_convert_vector_from_py_double(__pyx_v_qx); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 41, __pyx_L1_error)
   __pyx_v_self->c_tabua = TabuaCpp(__pyx_t_1);
@@ -2638,7 +2638,7 @@ static int __pyx_pf_10tabatu_cpp_5Tabua___init__(struct __pyx_obj_10tabatu_cpp_T
 /* "tabatu_cpp.pyx":43
  *         self.c_tabua = TabuaCpp(qx)
  * 
- *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
+ *     def qx(self, vector[int] x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  */
@@ -2646,7 +2646,7 @@ static int __pyx_pf_10tabatu_cpp_5Tabua___init__(struct __pyx_obj_10tabatu_cpp_T
 /* Python wrapper */
 static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_3qx(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_3qx(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  int __pyx_v_x;
+  std::vector<int>  __pyx_v_x;
   std::vector<double>  __pyx_v_t;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -2689,7 +2689,7 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_3qx(PyObject *__pyx_v_self, PyObje
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 43, __pyx_L3_error)
+    __pyx_v_x = __pyx_convert_vector_from_py_int(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 43, __pyx_L3_error)
     __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 43, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
@@ -2707,7 +2707,7 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_3qx(PyObject *__pyx_v_self, PyObje
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, int __pyx_v_x, std::vector<double>  __pyx_v_t) {
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2722,10 +2722,10 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
 
   /* "tabatu_cpp.pyx":44
  * 
- *     def qx(self, int x, vector[double] t):
+ *     def qx(self, vector[int] x, vector[double] t):
  *         return np.array(self.c_tabua.qx(x, t))             # <<<<<<<<<<<<<<
  * 
- *     def tpx(self,  int x, vector[double] t):
+ *     def tpx(self,  vector[int] x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 44, __pyx_L1_error)
@@ -2764,7 +2764,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
   /* "tabatu_cpp.pyx":43
  *         self.c_tabua = TabuaCpp(qx)
  * 
- *     def qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
+ *     def qx(self, vector[int] x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.qx(x, t))
  * 
  */
@@ -2786,7 +2786,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
 /* "tabatu_cpp.pyx":46
  *         return np.array(self.c_tabua.qx(x, t))
  * 
- *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
+ *     def tpx(self,  vector[int] x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  */
@@ -2794,7 +2794,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_2qx(struct __pyx_obj_10tabatu_cpp_
 /* Python wrapper */
 static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_5tpx(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_5tpx(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  int __pyx_v_x;
+  std::vector<int>  __pyx_v_x;
   std::vector<double>  __pyx_v_t;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -2837,7 +2837,7 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_5tpx(PyObject *__pyx_v_self, PyObj
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
+    __pyx_v_x = __pyx_convert_vector_from_py_int(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
     __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
@@ -2855,7 +2855,7 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_5tpx(PyObject *__pyx_v_self, PyObj
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, int __pyx_v_x, std::vector<double>  __pyx_v_t) {
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2870,10 +2870,10 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
 
   /* "tabatu_cpp.pyx":47
  * 
- *     def tpx(self,  int x, vector[double] t):
+ *     def tpx(self,  vector[int] x, vector[double] t):
  *         return np.array(self.c_tabua.tpx(x, t))             # <<<<<<<<<<<<<<
  * 
- *     def t_qx(self, int x, vector[double] t):
+ *     def t_qx(self, vector[int] x, vector[double] t):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 47, __pyx_L1_error)
@@ -2912,7 +2912,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
   /* "tabatu_cpp.pyx":46
  *         return np.array(self.c_tabua.qx(x, t))
  * 
- *     def tpx(self,  int x, vector[double] t):             # <<<<<<<<<<<<<<
+ *     def tpx(self,  vector[int] x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
  */
@@ -2934,7 +2934,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
 /* "tabatu_cpp.pyx":49
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
- *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
+ *     def t_qx(self, vector[int] x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  */
@@ -2942,7 +2942,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_4tpx(struct __pyx_obj_10tabatu_cpp
 /* Python wrapper */
 static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_7t_qx(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_7t_qx(PyObject *__pyx_v_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  int __pyx_v_x;
+  std::vector<int>  __pyx_v_x;
   std::vector<double>  __pyx_v_t;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -2985,7 +2985,7 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_7t_qx(PyObject *__pyx_v_self, PyOb
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_x = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
+    __pyx_v_x = __pyx_convert_vector_from_py_int(values[0]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
     __pyx_v_t = __pyx_convert_vector_from_py_double(values[1]); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
@@ -3003,7 +3003,7 @@ static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_7t_qx(PyObject *__pyx_v_self, PyOb
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, int __pyx_v_x, std::vector<double>  __pyx_v_t) {
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x, std::vector<double>  __pyx_v_t) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3018,10 +3018,10 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
 
   /* "tabatu_cpp.pyx":50
  * 
- *     def t_qx(self, int x, vector[double] t):
+ *     def t_qx(self, vector[int] x, vector[double] t):
  *         return np.array(self.c_tabua.t_qx(x, t))             # <<<<<<<<<<<<<<
  * 
- *     def tempo_futuro_maximo(self, x):
+ *     def tempo_futuro_maximo(self, vector[int] x):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 50, __pyx_L1_error)
@@ -3060,7 +3060,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
   /* "tabatu_cpp.pyx":49
  *         return np.array(self.c_tabua.tpx(x, t))
  * 
- *     def t_qx(self, int x, vector[double] t):             # <<<<<<<<<<<<<<
+ *     def t_qx(self, vector[int] x, vector[double] t):             # <<<<<<<<<<<<<<
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
  */
@@ -3082,30 +3082,42 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_6t_qx(struct __pyx_obj_10tabatu_cp
 /* "tabatu_cpp.pyx":52
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
- *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
+ *     def tempo_futuro_maximo(self, vector[int] x):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_v_x); /*proto*/
-static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_arg_x); /*proto*/
+static PyObject *__pyx_pw_10tabatu_cpp_5Tabua_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_arg_x) {
+  std::vector<int>  __pyx_v_x;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tempo_futuro_maximo (wrapper)", 0);
-  __pyx_r = __pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(((struct __pyx_obj_10tabatu_cpp_Tabua *)__pyx_v_self), ((PyObject *)__pyx_v_x));
+  assert(__pyx_arg_x); {
+    __pyx_v_x = __pyx_convert_vector_from_py_int(__pyx_arg_x); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 52, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("tabatu_cpp.Tabua.tempo_futuro_maximo", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(((struct __pyx_obj_10tabatu_cpp_Tabua *)__pyx_v_self), ((std::vector<int> )__pyx_v_x));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_Tabua *__pyx_v_self, std::vector<int>  __pyx_v_x) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  int __pyx_t_1;
-  double __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
+  double __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3113,36 +3125,35 @@ static PyObject *__pyx_pf_10tabatu_cpp_5Tabua_8tempo_futuro_maximo(struct __pyx_
 
   /* "tabatu_cpp.pyx":53
  * 
- *     def tempo_futuro_maximo(self, x):
+ *     def tempo_futuro_maximo(self, vector[int] x):
  *         return self.c_tabua.tempo_futuro_maximo(x)             # <<<<<<<<<<<<<<
  * 
  *     def possui_fechamento_plato(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_As_int(__pyx_v_x); if (unlikely((__pyx_t_1 == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 53, __pyx_L1_error)
   try {
-    __pyx_t_2 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_t_1);
+    __pyx_t_1 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_v_x);
   } catch(...) {
     __Pyx_CppExn2PyErr();
     __PYX_ERR(1, 53, __pyx_L1_error)
   }
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 53, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_r = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* "tabatu_cpp.pyx":52
  *         return np.array(self.c_tabua.t_qx(x, t))
  * 
- *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
+ *     def tempo_futuro_maximo(self, vector[int] x):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("tabatu_cpp.Tabua.tempo_futuro_maximo", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -4246,7 +4257,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu
  *     def t_qx(self, vector[int] x, vector[double] t):
  *         return np.atleast_1d(self.c_tabua.t_qx(x, t))             # <<<<<<<<<<<<<<
  * 
- *     def tempo_futuro_maximo(self, x):
+ *     def tempo_futuro_maximo(self, vector[int] x):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 96, __pyx_L1_error)
@@ -4307,30 +4318,42 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_8t_qx(struct __pyx_obj_10tabatu
 /* "tabatu_cpp.pyx":98
  *         return np.atleast_1d(self.c_tabua.t_qx(x, t))
  * 
- *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
+ *     def tempo_futuro_maximo(self, vector[int] x):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_11tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_v_x); /*proto*/
-static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_11tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_11tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_arg_x); /*proto*/
+static PyObject *__pyx_pw_10tabatu_cpp_8TabuaMDT_11tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_arg_x) {
+  std::vector<int>  __pyx_v_x;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tempo_futuro_maximo (wrapper)", 0);
-  __pyx_r = __pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(((struct __pyx_obj_10tabatu_cpp_TabuaMDT *)__pyx_v_self), ((PyObject *)__pyx_v_x));
+  assert(__pyx_arg_x); {
+    __pyx_v_x = __pyx_convert_vector_from_py_int(__pyx_arg_x); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 98, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.tempo_futuro_maximo", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(((struct __pyx_obj_10tabatu_cpp_TabuaMDT *)__pyx_v_self), ((std::vector<int> )__pyx_v_x));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMDT *__pyx_v_self, std::vector<int>  __pyx_v_x) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  std::vector<int>  __pyx_t_1;
-  double __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
+  double __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4338,36 +4361,35 @@ static PyObject *__pyx_pf_10tabatu_cpp_8TabuaMDT_10tempo_futuro_maximo(struct __
 
   /* "tabatu_cpp.pyx":99
  * 
- *     def tempo_futuro_maximo(self, x):
+ *     def tempo_futuro_maximo(self, vector[int] x):
  *         return self.c_tabua.tempo_futuro_maximo(x)             # <<<<<<<<<<<<<<
  * 
  *     def possui_fechamento_plato(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_vector_from_py_int(__pyx_v_x); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 99, __pyx_L1_error)
   try {
-    __pyx_t_2 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_t_1);
+    __pyx_t_1 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_v_x);
   } catch(...) {
     __Pyx_CppExn2PyErr();
     __PYX_ERR(1, 99, __pyx_L1_error)
   }
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 99, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_r = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 99, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* "tabatu_cpp.pyx":98
  *         return np.atleast_1d(self.c_tabua.t_qx(x, t))
  * 
- *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
+ *     def tempo_futuro_maximo(self, vector[int] x):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("tabatu_cpp.TabuaMDT.tempo_futuro_maximo", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -5703,7 +5725,7 @@ static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_6t_qx(struct __pyx_
  *     def t_qx(self, vector[int] x, vector[double] t):
  *         return np.atleast_1d(self.c_tabua.t_qx(x, t))             # <<<<<<<<<<<<<<
  * 
- *     def tempo_futuro_maximo(self, x):
+ *     def tempo_futuro_maximo(self, vector[int] x):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 155, __pyx_L1_error)
@@ -5764,30 +5786,42 @@ static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_6t_qx(struct __pyx_
 /* "tabatu_cpp.pyx":157
  *         return np.atleast_1d(self.c_tabua.t_qx(x, t))
  * 
- *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
+ *     def tempo_futuro_maximo(self, vector[int] x):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_10tabatu_cpp_19TabuaMultiplasVidas_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_v_x); /*proto*/
-static PyObject *__pyx_pw_10tabatu_cpp_19TabuaMultiplasVidas_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pw_10tabatu_cpp_19TabuaMultiplasVidas_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_arg_x); /*proto*/
+static PyObject *__pyx_pw_10tabatu_cpp_19TabuaMultiplasVidas_9tempo_futuro_maximo(PyObject *__pyx_v_self, PyObject *__pyx_arg_x) {
+  std::vector<int>  __pyx_v_x;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("tempo_futuro_maximo (wrapper)", 0);
-  __pyx_r = __pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_8tempo_futuro_maximo(((struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *)__pyx_v_self), ((PyObject *)__pyx_v_x));
+  assert(__pyx_arg_x); {
+    __pyx_v_x = __pyx_convert_vector_from_py_int(__pyx_arg_x); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 157, __pyx_L3_error)
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("tabatu_cpp.TabuaMultiplasVidas.tempo_futuro_maximo", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_8tempo_futuro_maximo(((struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *)__pyx_v_self), ((std::vector<int> )__pyx_v_x));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self, PyObject *__pyx_v_x) {
+static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_8tempo_futuro_maximo(struct __pyx_obj_10tabatu_cpp_TabuaMultiplasVidas *__pyx_v_self, std::vector<int>  __pyx_v_x) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  std::vector<int>  __pyx_t_1;
-  double __pyx_t_2;
-  PyObject *__pyx_t_3 = NULL;
+  double __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5795,36 +5829,35 @@ static PyObject *__pyx_pf_10tabatu_cpp_19TabuaMultiplasVidas_8tempo_futuro_maxim
 
   /* "tabatu_cpp.pyx":158
  * 
- *     def tempo_futuro_maximo(self, x):
+ *     def tempo_futuro_maximo(self, vector[int] x):
  *         return self.c_tabua.tempo_futuro_maximo(x)             # <<<<<<<<<<<<<<
  * 
  *     def possui_fechamento_plato(self):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_convert_vector_from_py_int(__pyx_v_x); if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 158, __pyx_L1_error)
   try {
-    __pyx_t_2 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_t_1);
+    __pyx_t_1 = __pyx_v_self->c_tabua.tempo_futuro_maximo(__pyx_v_x);
   } catch(...) {
     __Pyx_CppExn2PyErr();
     __PYX_ERR(1, 158, __pyx_L1_error)
   }
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 158, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_r = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 158, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_r = __pyx_t_2;
+  __pyx_t_2 = 0;
   goto __pyx_L0;
 
   /* "tabatu_cpp.pyx":157
  *         return np.atleast_1d(self.c_tabua.t_qx(x, t))
  * 
- *     def tempo_futuro_maximo(self, x):             # <<<<<<<<<<<<<<
+ *     def tempo_futuro_maximo(self, vector[int] x):             # <<<<<<<<<<<<<<
  *         return self.c_tabua.tempo_futuro_maximo(x)
  * 
  */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("tabatu_cpp.TabuaMultiplasVidas.tempo_futuro_maximo", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
