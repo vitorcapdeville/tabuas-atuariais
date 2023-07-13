@@ -71,12 +71,12 @@ class TestIntegrationTestsTabuaBaseQx:
     def test_qx_retorna_erro_se_t_for_negativo(self):
         tabua = TabuaBase(qx_plato)
         with pytest.raises(ValueError):
-            tabua.qx(0, -1)
+            tabua.qx(0, [-1])
 
     def test_qx_retorna_erro_se_x_for_negativo(self):
         tabua = TabuaBase(qx_plato)
         with pytest.raises(ValueError):
-            tabua.qx(-1, 0)
+            tabua.qx(-1, [0])
 
 
 class TestIntegrationTestsTabuaBaseTpx:
@@ -85,7 +85,6 @@ class TestIntegrationTestsTabuaBaseTpx:
     def test_tpx_eh_igual_a_1_quando_t_for_igual_a_0(self, qx, x):
         """A probabilidade de sobrevivência no tempo 0 é sempre 1."""
         tabua = TabuaBase(qx)
-        assert tabua.tpx(x, 0) == array([1])
         assert tabua.tpx(x, [0]) == array([1])
 
     def test_tpx_eh_igual_a_0_quando_t_for_maior_ou_igual_ao_tempo_futuro_max_e_a_tabua_completa(self):
@@ -108,17 +107,17 @@ class TestIntegrationTestsTabuaBaseTpx:
         tabua = TabuaBase(qx)
         x = 2
         t = min(tabua.tempo_futuro_maximo(x), 100)
-        assert tabua.tpx(x, t) == pytest.approx(0)
+        assert tabua.tpx(x, [t]) == pytest.approx(0)
 
     def test_tpx_retorna_erro_se_t_for_negativo(self):
         tabua = TabuaBase(qx_plato)
         with pytest.raises(ValueError):
-            tabua.tpx(0, -1)
+            tabua.tpx(0, [-1])
 
     def test_tpx_retorna_erro_se_x_for_negativo(self):
         tabua = TabuaBase(qx_plato)
         with pytest.raises(ValueError):
-            tabua.tpx(-1, 0)
+            tabua.tpx(-1, [0])
 
 
 class TestIntegrationTestsTabuaBaseTqx:
@@ -137,7 +136,7 @@ class TestIntegrationTestsTabuaBaseTqx:
         qx = array([0.1, 0.2, 0.4, 0.8, 1.0])
         tabua = TabuaBase(qx)
         x = tabua.tempo_futuro_maximo(0)
-        t = 0
+        t = [0]
         assert_array_equal(tabua.t_qx(x - 2, t), array([0.8]))
         assert_array_equal(tabua.t_qx(x, t), array([1.0]))
         assert_array_equal(tabua.t_qx(x + 2, t), array([1.0]))
@@ -154,9 +153,9 @@ class TestIntegrationTestsTabuaBaseTqx:
     def test_t_qx_retorna_erro_se_t_for_negativo(self):
         tabua = TabuaBase(qx_plato)
         with pytest.raises(ValueError):
-            tabua.t_qx(0, -1)
+            tabua.t_qx(0, [-1])
 
     def test_t_qx_retorna_erro_se_x_for_negativo(self):
         tabua = TabuaBase(qx_plato)
         with pytest.raises(ValueError):
-            tabua.t_qx(-1, 0)
+            tabua.t_qx(-1, [0])

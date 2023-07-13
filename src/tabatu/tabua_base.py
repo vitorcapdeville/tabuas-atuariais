@@ -1,6 +1,3 @@
-import stat
-from typing import Union
-
 from numpy import atleast_1d
 from numpy import ndarray
 from numpy.typing import ArrayLike
@@ -37,21 +34,3 @@ class TabuaBase(tabatu_cpp.TabuaBase):
     @property
     def periodicidade(self) -> Periodicidade:
         return self._periodicidade
-
-    def tpx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        t = atleast_1d(t)
-        return super().tpx(x, t)
-
-    def t_qx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        t = atleast_1d(t)
-        return super().t_qx(x, t)
-
-    def qx(self, x: int, t: ArrayLike) -> ndarray[float]:
-        t = atleast_1d(t)
-        return super().qx(x, t)
-
-    def tempo_futuro_maximo(self, x: int) -> Union[int, float]:
-        return super().tempo_futuro_maximo(x)
-
-    def possui_fechamento_plato(self) -> bool:
-        return super().possui_fechamento_plato()

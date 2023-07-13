@@ -1,10 +1,6 @@
-from unittest.mock import Mock
-
 import pytest
 from numpy import array
 from numpy.testing import assert_array_equal
-
-from tabatu import Tabua
 
 
 @pytest.mark.parametrize("x", [array([0]), [0], (0,), 0])
