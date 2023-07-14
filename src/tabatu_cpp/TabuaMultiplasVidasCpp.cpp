@@ -1,6 +1,8 @@
 #include "TabuaMultiplasVidasCpp.h"
 #include "TabuaCpp.h"
 #include <stdexcept>
+#include <cmath>
+#include <algorithm>
 
 
 TabuaMultiplasVidasCpp::TabuaMultiplasVidasCpp() {
@@ -105,7 +107,7 @@ double TabuaMultiplasVidasCpp::tempo_futuro_maximo(std::vector<int> x) const {
 
 
 bool TabuaMultiplasVidasCpp::possui_fechamento_plato() const {
-    return isinf(tempo_futuro_maximo(std::vector<int>(m_numero_vidas, 0)));
+    return std::isinf(tempo_futuro_maximo(std::vector<int>(m_numero_vidas, 0)));
 }
 
 double TabuaMultiplasVidasCpp::t_qx(std::vector<int> x, double t) const {

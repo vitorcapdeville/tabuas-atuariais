@@ -1,6 +1,8 @@
 #include "TabuaMDTCpp.h"
 #include "TabuaCpp.h"
 #include <stdexcept>
+#include <cmath>
+#include <algorithm>
 
 double qx2qxj(double qx1, double qx2, double qx3)
 {
@@ -155,7 +157,7 @@ double TabuaMDTCpp::tempo_futuro_maximo(std::vector<int> x) const {
 // fim
 
 bool TabuaMDTCpp::possui_fechamento_plato() const {
-    return isinf(tempo_futuro_maximo(std::vector<int>(m_numero_decrementos, 0)));
+    return std::isinf(tempo_futuro_maximo(std::vector<int>(m_numero_decrementos, 0)));
 }
 
 double TabuaMDTCpp::t_qx(std::vector<int> x, double t) const {
