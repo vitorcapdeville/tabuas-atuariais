@@ -11,7 +11,7 @@ from numpy.typing import ArrayLike
 
 from tabatu.unico_decremento import Tabua
 from tabatu.tabua_interface import valida_periodicidade
-import tabatu_cpp
+import tabatu.core as core
 
 
 def captura_argumentos(*args: Any, **kwargs: Any) -> dict[str, int]:
@@ -47,7 +47,7 @@ def valida_causa_principal(
     return causa_principal
 
 
-class TabuaMDT(tabatu_cpp.TabuaMDT):
+class TabuaMDT(core.TabuaMDT):
     _causa_principal: Union[int, str]
     _causas: dict[str, int]
 

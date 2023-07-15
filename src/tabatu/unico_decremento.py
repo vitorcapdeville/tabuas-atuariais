@@ -4,10 +4,10 @@ from __future__ import annotations
 from tabatu.periodicidade import Periodicidade
 from numpy import ndarray
 
-import tabatu_cpp
+import tabatu.core as core
 
 
-class Tabua(tabatu_cpp.Tabua):
+class Tabua(core.Tabua):
     __slots__ = "_tabuas", "_numero_vidas", "_numero_decrementos", "_periodicidade"
 
     def __init__(

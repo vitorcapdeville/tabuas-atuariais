@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from enum import Enum
 
-import tabatu_cpp
+import tabatu.core as core
 from tabatu.tabua_interface import valida_periodicidade
 from tabatu.unico_decremento import Tabua
 
@@ -12,7 +12,7 @@ class StatusVidasConjuntas(Enum):
     LAST = b"LAST"
 
 
-class TabuaMultiplasVidas(tabatu_cpp.TabuaMultiplasVidas):
+class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
     _status: StatusVidasConjuntas
 
     def __init__(
@@ -20,7 +20,7 @@ class TabuaMultiplasVidas(tabatu_cpp.TabuaMultiplasVidas):
     ) -> None:
         self._periodicidade = valida_periodicidade(*args)
         self._status = status
-        super().__init__(*args, status=tabatu_cpp.StatusVidasConjuntas(status.value))
+        super().__init__(*args, status=core.StatusVidasConjuntas(status.value))
 
     @property
     def status(self) -> StatusVidasConjuntas:

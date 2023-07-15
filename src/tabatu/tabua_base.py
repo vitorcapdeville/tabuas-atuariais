@@ -2,7 +2,7 @@ from numpy import atleast_1d
 from numpy import ndarray
 from numpy.typing import ArrayLike
 
-import tabatu_cpp
+import tabatu.core as core
 from tabatu.periodicidade import Periodicidade
 
 
@@ -21,7 +21,7 @@ def validar_qx(qx: ArrayLike) -> ndarray:
     return qx
 
 
-class TabuaBase(tabatu_cpp.TabuaBase):
+class TabuaBase(core.TabuaBase):
     __slots__ = "_tabua", "_periodicidade"
 
     def __init__(
