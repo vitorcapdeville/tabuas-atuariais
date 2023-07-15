@@ -29,6 +29,9 @@ tabua_cpp_mvd = tabatu.TabuaMultiplasVidas(tabua_cpp, tabua_cpp, tabua_cpp, stat
 tabua_py_mvd = matatu.TabuaMultiplasVidas(tabua_py, tabua_py, tabua_py, status=mvd.StatusVidasConjuntas.JOINT)
 
 # print(tabatu_cpp.StatusVidasConjuntas("LAST").get_status())
+print(tabua_cpp.tabuas)
+print(tabua_cpp_mdt.tabuas)
+print(tabua_cpp_mvd.tabuas)
 
 print("\n")
 print("Tabuas com um único decremento")

@@ -9,6 +9,15 @@ from libcpp.vector cimport vector
 from libcpp.string cimport string
 import numpy as np
 
+cdef extrair_tabuas(vector[TabuaBaseCpp] tabuas_cpp):
+    """Transforma um vetor de TabuaBaseCpp em uma tupla de TabuaBase"""
+    tabuas = []
+    for i in range(tabuas_cpp.size()):
+        tabua = TabuaBase()
+        tabua.c_tabua = tabuas_cpp[i]
+        tabuas.append(tabua)
+    return tuple(tabuas)
+
 cdef class TabuaBase:
     cdef TabuaBaseCpp c_tabua
 
@@ -65,13 +74,7 @@ cdef class Tabua:
 
     @property
     def tabuas(self):
-        cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
-        tabuas = []
-        for i in range(tabuas_cpp.size()):
-            tabua = TabuaBase()
-            tabua.c_tabua = tabuas_cpp[i]
-            tabuas.append(tabua)
-        return tuple(tabuas)
+        return extrair_tabuas(self.c_tabua.pega_tabuas())
 
 cdef class TabuaMDT:
     cdef TabuaMDTCpp c_tabua
@@ -111,13 +114,7 @@ cdef class TabuaMDT:
 
     @property
     def tabuas(self):
-        cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
-        tabuas = []
-        for i in range(tabuas_cpp.size()):
-            tabua = TabuaBase()
-            tabua.c_tabua = tabuas_cpp[i]
-            tabuas.append(tabua)
-        return tuple(tabuas)
+        return extrair_tabuas(self.c_tabua.pega_tabuas())
 
 cdef extern from "TabuaMultiplasVidasCpp.h" namespace "StatusVidasConjuntasCpp":
     cdef StatusVidasConjuntasCpp JOINT
@@ -170,10 +167,4 @@ cdef class TabuaMultiplasVidas:
 
     @property
     def tabuas(self):
-        cdef vector[TabuaBaseCpp] tabuas_cpp = self.c_tabua.pega_tabuas()
-        tabuas = []
-        for i in range(tabuas_cpp.size()):
-            tabua = TabuaBase()
-            tabua.c_tabua = tabuas_cpp[i]
-            tabuas.append(tabua)
-        return tuple(tabuas)
+        return extrair_tabuas(self.c_tabua.pega_tabuas())
