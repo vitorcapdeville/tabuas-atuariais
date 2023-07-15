@@ -52,17 +52,22 @@ std::vector<std::vector<double>> converter_mdt(std::vector<std::vector<double>> 
 	return qxj;
 }
 
-TabuaMDTCpp::TabuaMDTCpp() {
+std::vector<TabuaBaseCpp> extrairTabuasBase(std::vector<TabuaCpp> tabuas) {
+	std::vector<TabuaBaseCpp> tabuasBase;
+	tabuasBase.reserve(tabuas.size());
+	for (TabuaCpp tabua : tabuas) {
+		tabuasBase.push_back(tabua.pega_tabuas()[0]);
+	}
+	return tabuasBase;
 }
 
-TabuaMDTCpp::TabuaMDTCpp(std::vector<TabuaCpp> tabuas)
+TabuaMDTCpp::TabuaMDTCpp() : TabuaInterfaceCpp() {
+}
+
+TabuaMDTCpp::TabuaMDTCpp(std::vector<TabuaCpp> tabuas) : TabuaInterfaceCpp(tabuas.size(), 1, extrairTabuasBase(tabuas))
 {
 	m_numero_decrementos = tabuas.size();
-	m_tabuas.reserve(m_numero_decrementos);
-	for (TabuaCpp tabua : tabuas) {
-		m_tabuas.push_back(tabua.pega_tabuas()[0]);
-	}
-	
+	m_tabuas = extrairTabuasBase(tabuas);
 }
 
 // comeco
@@ -154,33 +159,3 @@ double TabuaMDTCpp::tempo_futuro_maximo(std::vector<int> x) const {
 	return *std::min_element(ret.begin(), ret.end());
 }
 
-// fim
-
-bool TabuaMDTCpp::possui_fechamento_plato() const {
-    return std::isinf(tempo_futuro_maximo(std::vector<int>(m_numero_decrementos, 0)));
-}
-
-double TabuaMDTCpp::t_qx(std::vector<int> x, double t) const {
-    return qx(x, t) * tpx(x, (int)t);
-}
-std::vector<double> TabuaMDTCpp::t_qx(std::vector<int> x, std::vector<double> t) const {
-    std::vector<double> ret(t.size());
-    int n = (int)t.size();
-    for (int i = 0; i < n; i++)
-    {
-        ret[i] = t_qx(x, t[i]);
-    }
-    return ret;
-}
-
-int TabuaMDTCpp::pega_numero_vidas() const {
-    return m_numero_vidas;
-}
-
-int TabuaMDTCpp::pega_numero_decrementos() const {
-    return m_numero_decrementos;
-}
-
-std::vector<TabuaBaseCpp> TabuaMDTCpp::pega_tabuas() const {
-    return m_tabuas;
-}
