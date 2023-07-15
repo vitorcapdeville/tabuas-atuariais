@@ -2,6 +2,15 @@
 #include "TabuaBaseCpp.h"
 #include <stdexcept>
 
+std::vector<TabuaBaseCpp> extrairTabuasBase(std::vector<TabuaCpp> tabuas) {
+	std::vector<TabuaBaseCpp> tabuasBase;
+	tabuasBase.reserve(tabuas.size());
+	for (TabuaCpp tabua : tabuas) {
+		tabuasBase.push_back(tabua.pega_tabuas()[0]);
+	}
+	return tabuasBase;
+}
+
 TabuaCpp::TabuaCpp() : TabuaInterfaceCpp() {
 }
 

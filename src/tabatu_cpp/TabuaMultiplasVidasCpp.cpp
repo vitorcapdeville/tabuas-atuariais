@@ -5,16 +5,14 @@
 #include <algorithm>
 
 
-TabuaMultiplasVidasCpp::TabuaMultiplasVidasCpp() {
+TabuaMultiplasVidasCpp::TabuaMultiplasVidasCpp() : TabuaInterfaceCpp() {
 }
 
-TabuaMultiplasVidasCpp::TabuaMultiplasVidasCpp(std::vector<TabuaCpp> tabuas, StatusVidasConjuntasCpp status_vidas_conjuntas)
+TabuaMultiplasVidasCpp::TabuaMultiplasVidasCpp(std::vector<TabuaCpp> tabuas, StatusVidasConjuntasCpp status_vidas_conjuntas) :
+	TabuaInterfaceCpp(1, tabuas.size(), extrairTabuasBase(tabuas))
 {
 	m_numero_vidas = tabuas.size();
-	m_tabuas.reserve(m_numero_vidas);
-	for (TabuaCpp tabua : tabuas) {
-		m_tabuas.push_back(tabua.pega_tabuas()[0]);
-	}
+	m_tabuas = extrairTabuasBase(tabuas);
 	m_status_vidas_conjuntas = status_vidas_conjuntas;
 }
 
@@ -29,7 +27,7 @@ double TabuaMultiplasVidasCpp::qx(std::vector<int> x, double t) const {
 		{
 			ret = ret * (1 - m_tabuas[i].qx(x[i], t));
 		}
-		return 1 - ret;	
+		return 1 - ret;
 	}
 	for (size_t i = 0; i < m_numero_vidas; i++)
 	{
@@ -72,22 +70,22 @@ double TabuaMultiplasVidasCpp::tpx(std::vector<int> x, double t) const {
 
 std::vector<double> TabuaMultiplasVidasCpp::qx(std::vector<int> x, std::vector<double> t) const {
 	std::vector<double> ret(t.size());
-    int n = (int)t.size();
-    for (int i = 0; i < n; i++)
-    {
-        ret[i] = qx(x, t[i]);
-    }
-    return ret;
+	int n = (int)t.size();
+	for (int i = 0; i < n; i++)
+	{
+		ret[i] = qx(x, t[i]);
+	}
+	return ret;
 }
 
 std::vector<double> TabuaMultiplasVidasCpp::tpx(std::vector<int> x, std::vector<double> t) const {
 	std::vector<double> ret(t.size());
-    int n = (int)t.size();
-    for (int i = 0; i < n; i++)
-    {
-        ret[i] = tpx(x, t[i]);
-    }
-    return ret;
+	int n = (int)t.size();
+	for (int i = 0; i < n; i++)
+	{
+		ret[i] = tpx(x, t[i]);
+	}
+	return ret;
 }
 
 double TabuaMultiplasVidasCpp::tempo_futuro_maximo(std::vector<int> x) const {
@@ -106,31 +104,3 @@ double TabuaMultiplasVidasCpp::tempo_futuro_maximo(std::vector<int> x) const {
 }
 
 
-bool TabuaMultiplasVidasCpp::possui_fechamento_plato() const {
-    return std::isinf(tempo_futuro_maximo(std::vector<int>(m_numero_vidas, 0)));
-}
-
-double TabuaMultiplasVidasCpp::t_qx(std::vector<int> x, double t) const {
-    return qx(x, t) * tpx(x, (int)t);
-}
-std::vector<double> TabuaMultiplasVidasCpp::t_qx(std::vector<int> x, std::vector<double> t) const {
-    std::vector<double> ret(t.size());
-    int n = (int)t.size();
-    for (int i = 0; i < n; i++)
-    {
-        ret[i] = t_qx(x, t[i]);
-    }
-    return ret;
-}
-
-int TabuaMultiplasVidasCpp::pega_numero_vidas() const {
-    return m_numero_vidas;
-}
-
-int TabuaMultiplasVidasCpp::pega_numero_decrementos() const {
-    return m_numero_decrementos;
-}
-
-std::vector<TabuaBaseCpp> TabuaMultiplasVidasCpp::pega_tabuas() const {
-    return m_tabuas;
-}
