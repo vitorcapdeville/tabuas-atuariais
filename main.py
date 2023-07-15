@@ -8,7 +8,7 @@ from tabatu.periodicidade import Periodicidade
 from numpy import arange, array
 
 import tabatu
-import tabatu_cpp
+import tabatu.core as tabatu_cpp
 
 #qx
 brems_mt_f_2015 = array(pega_qx("BR-EMSmt-v.2015-f").Taxa)

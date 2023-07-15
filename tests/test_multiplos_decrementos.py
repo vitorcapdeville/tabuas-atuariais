@@ -90,7 +90,7 @@ class TestTabuaMDT:
     def test_qx_j_aceita_string_quando_as_tabuas_sao_passadas_por_nome(self, tabua_mdt):
         assert tabua_mdt.causas == {"0": 0, "causa1": 1}
         assert_array_equal(
-            tabua_mdt.qx_j([0, 0], [0], 1), tabua_mdt.qx_j([0, 0], [0], "causa1")
+            tabua_mdt.qx_j([0, 0], [0], [1]), tabua_mdt.qx_j([0, 0], [0], ["causa1"])
         )
         assert_array_equal(
             tabua_mdt.qx_j([0, 0], [0], [0, 1]),
@@ -107,7 +107,7 @@ class TestTabuaMDT:
     ):
         assert tabua_mdt.numero_decrementos == 2
         with pytest.raises(ValueError):
-            tabua_mdt.qx_j([1, 1, 1], [0], 1)
+            tabua_mdt.qx_j([1, 1, 1], [0], [1])
 
     def test_qx_chama_qx_j_com_todas_as_causas_e_retorna_array_com_uma_dimensao(
         self, tabua_mdt
@@ -134,6 +134,6 @@ class TestTabuaMDT:
         self, tabua_mdt
     ):
         resultado = tabua_mdt.t_qx([1, 2], [0, 1, 2])
-        esperado = tabua_mdt.t_qx_j([1, 2], [0, 1, 2], 1).sum(axis=0)
+        esperado = tabua_mdt.t_qx_j([1, 2], [0, 1, 2], [1]).sum(axis=0)
         assert_array_equal(resultado, esperado)
         assert resultado.ndim == 1
