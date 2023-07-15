@@ -6,7 +6,6 @@ from typing import Union
 
 from numpy import array
 from numpy import atleast_1d
-from numpy import atleast_2d
 from numpy import ndarray
 from numpy.typing import ArrayLike
 
@@ -88,7 +87,9 @@ class TabuaMDT(tabatu_cpp.TabuaMDT):
 
     def t_qx_j(self, x: ArrayLike, t: ArrayLike, j: ArrayLike) -> ndarray[float]:
         j = atleast_1d(j)
-        return atleast_2d(self.tpx(x, t) * self.qx_j(x, t, j))
+        if isinstance(j[0], str):
+            j = array([self._causas[x] for x in j])
+        return super().t_qx_j(x, t, j)
 
     def possui_causa_principal(self) -> bool:
         """Verifica se existe uma causa principal."""

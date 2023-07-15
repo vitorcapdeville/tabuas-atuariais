@@ -20,6 +20,7 @@ public:
     std::vector<std::vector<double>> qx_j(std::vector<int> x, std::vector<double> t, std::vector<int> j) const;
     std::vector<double> qx(std::vector<int> x, std::vector<double> t) const;
     std::vector<double> tpx(std::vector<int> x, std::vector<double> t) const;
+    std::vector<double> t_qx_j(std::vector<int> x, std::vector<double> t, int j) const;
+    std::vector<std::vector<double>> t_qx_j(std::vector<int> x, std::vector<double> t, std::vector<int> j) const;
     double tempo_futuro_maximo(std::vector<int> x) const;
-
 };

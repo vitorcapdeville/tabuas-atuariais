@@ -89,6 +89,9 @@ cdef class TabuaMDT:
     def qx_j(self, vector[int] x, vector[double] t, vector[int] j):
         return np.atleast_2d(self.c_tabua.qx_j(x, t, j))
 
+    def t_qx_j(self, vector[int] x, vector[double] t, vector[int] j):
+        return np.atleast_2d(self.c_tabua.t_qx_j(x, t, j))
+
     def qx(self, vector[int] x, vector[double] t):
         return np.atleast_1d(self.c_tabua.qx(x, t))
 

@@ -97,6 +97,26 @@ std::vector<std::vector<double>> TabuaMDTCpp::qx_j(std::vector<int> x, std::vect
     return ret;
 }
 
+std::vector<double> TabuaMDTCpp::t_qx_j(std::vector<int> x, std::vector<double> t, int j) const {
+    std::vector<double> ret(t.size());
+    int n = (int)t.size();
+    for (int i = 0; i < n; i++)
+    {
+        ret[i] = tpx(x, t[i]) * qx_j(x, t[i], j);
+    }
+    return ret;
+}
+
+std::vector<std::vector<double>> TabuaMDTCpp::t_qx_j(std::vector<int> x, std::vector<double> t, std::vector<int> j) const {
+    std::vector<std::vector<double>> ret(j.size());
+    int n = (int)j.size();
+    for (int i = 0; i < n; i++)
+    {
+        ret[i] = t_qx_j(x, t, j[i]);
+    }
+    return ret;
+}
+
 double TabuaMDTCpp::qx(std::vector<int> x, double t) const {
 	double ret = 0.0;
 	for (size_t i = 0; i < m_numero_decrementos; i++)

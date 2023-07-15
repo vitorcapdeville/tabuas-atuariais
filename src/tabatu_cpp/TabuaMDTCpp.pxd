@@ -12,5 +12,6 @@ cdef extern from "TabuaMDTCpp.h":
         vector[vector[double]] qx_j(vector[int] x, vector[double] t, vector[int] j) except +
         vector[double] qx(vector[int] x, vector[double] t) except +
         vector[double] tpx(vector[int] x, vector[double] t) except +
+        vector[vector[double]] t_qx_j(vector[int] x, vector[double] t, vector[int] j) except +
         double tempo_futuro_maximo(vector[int] x) except +
 
