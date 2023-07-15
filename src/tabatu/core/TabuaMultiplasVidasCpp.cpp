@@ -9,9 +9,9 @@ TabuaMultiplasVidasCpp::TabuaMultiplasVidasCpp() : TabuaInterfaceCpp() {
 }
 
 TabuaMultiplasVidasCpp::TabuaMultiplasVidasCpp(std::vector<TabuaCpp> tabuas, StatusVidasConjuntasCpp status_vidas_conjuntas) :
-	TabuaInterfaceCpp(1, tabuas.size(), extrairTabuasBase(tabuas))
+	TabuaInterfaceCpp(1, (int)tabuas.size(), extrairTabuasBase(tabuas))
 {
-	m_numero_vidas = tabuas.size();
+	m_numero_vidas = (int)tabuas.size();
 	m_tabuas = extrairTabuasBase(tabuas);
 	m_status_vidas_conjuntas = status_vidas_conjuntas;
 }

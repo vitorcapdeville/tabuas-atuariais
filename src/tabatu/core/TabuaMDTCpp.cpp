@@ -22,7 +22,7 @@ std::vector<double> qx2qxj(std::vector<double> qx1, std::vector<double> qx2, std
 
 std::vector<double> converter_mdt(std::vector<double> qx) {
 	std::vector<double> qxj(3);
-	int tamanho = 3 - qx.size();
+	int tamanho = 3 - (int)qx.size();
 	double zeros = 0.0;
 	if (tamanho < 0) {
 		throw std::invalid_argument("O número de tábuas não pode ser maior que 3");
@@ -38,7 +38,7 @@ std::vector<double> converter_mdt(std::vector<double> qx) {
 
 std::vector<std::vector<double>> converter_mdt(std::vector<std::vector<double>> qx) {
 	std::vector<std::vector<double>> qxj(3);
-	int tamanho = 3 - qx.size();
+	int tamanho = 3 - (int)qx.size();
 	std::vector<double> zeros(qx[0].size(), 0.0);
 	if (tamanho < 0) {
 		throw std::invalid_argument("O número de tábuas não pode ser maior que 3");
@@ -55,9 +55,9 @@ std::vector<std::vector<double>> converter_mdt(std::vector<std::vector<double>> 
 TabuaMDTCpp::TabuaMDTCpp() : TabuaInterfaceCpp() {
 }
 
-TabuaMDTCpp::TabuaMDTCpp(std::vector<TabuaCpp> tabuas) : TabuaInterfaceCpp(tabuas.size(), 1, extrairTabuasBase(tabuas))
+TabuaMDTCpp::TabuaMDTCpp(std::vector<TabuaCpp> tabuas) : TabuaInterfaceCpp((int)tabuas.size(), 1, extrairTabuasBase(tabuas))
 {
-	m_numero_decrementos = tabuas.size();
+	m_numero_decrementos = (int)tabuas.size();
 	m_tabuas = extrairTabuasBase(tabuas);
 }
 
@@ -119,7 +119,7 @@ std::vector<std::vector<double>> TabuaMDTCpp::t_qx_j(std::vector<int> x, std::ve
 
 double TabuaMDTCpp::qx(std::vector<int> x, double t) const {
 	double ret = 0.0;
-	for (size_t i = 0; i < m_numero_decrementos; i++)
+	for (int i = 0; i < m_numero_decrementos; i++)
 	{
 		ret += qx_j(x, t, i);
 	}

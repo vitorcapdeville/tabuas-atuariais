@@ -48,7 +48,7 @@ double TabuaBaseCpp::lx(double x) const {
     int x_trunc = (int)std::min(x, limite_superior_x);
     double lx_ret = m_lx[x_trunc];
     if (possui_fechamento_plato() && (x > x_trunc)) {
-        int extras = x - x_trunc;
+        int extras = (int)x - x_trunc;
         double qx_last = m_qx.back();
         for (int i = 0; i < extras; i++)
         {
@@ -75,7 +75,7 @@ double TabuaBaseCpp::qx(int x, double t) const {
     if (t < 0) {
         throw std::invalid_argument("t deve ser maior ou igual a 0");
     }
-    int limite_superior_x = std::min(tempo_futuro_maximo(0), (double)(m_qx_size - 1));
+    int limite_superior_x = (int)std::min(tempo_futuro_maximo(0), (double)(m_qx_size - 1));
     x = std::min(x, limite_superior_x);
     double limite_superior_t = std::min(tempo_futuro_maximo(x), (double)(m_qx_size - x - 1));
     t = std::min(t, limite_superior_t);
