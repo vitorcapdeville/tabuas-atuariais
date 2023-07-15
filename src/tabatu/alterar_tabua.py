@@ -60,7 +60,7 @@ def _aumentar_periodicidade(
     return 1 - (1 - qx_reduzido) ** step
 
 
-def alterar_periodicidade(
+def alterar_periodicidade_qx(
     qx: ndarray[float], periodicidade: Periodicidade, nova_periodicidade: Periodicidade
 ) -> ndarray[float]:
     """Altera a periodicidade de um array de taxas. Retorna um novo array de taxas.

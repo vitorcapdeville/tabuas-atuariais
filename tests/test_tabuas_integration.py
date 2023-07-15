@@ -15,7 +15,7 @@ from tabatu.periodicidade import Periodicidade
 from tabatu.periodicidade import converter_periodicidade
 from tabatu import StatusVidasConjuntas
 from tabatu.alterar_tabua import agravar_qx
-from tabatu.alterar_tabua import alterar_periodicidade
+from tabatu.alterar_tabua import alterar_periodicidade_qx
 from tabatu.multiplas_vidas import TabuaMultiplasVidas
 from tabatu.multiplos_decrementos import TabuaMDT
 from tabatu.unico_decremento import Tabua
@@ -211,7 +211,7 @@ def aumentar_periodicidade(request):
     qx_menor_periodicidade = repeat(
         array([0.1, 0.3, 0.5, 1.0]), menor_periodicidade.quantidade_periodos_1_periodicidade(maior_periodicidade)
     )
-    qx_maior_periodicidade = alterar_periodicidade(qx_menor_periodicidade, menor_periodicidade, maior_periodicidade)
+    qx_maior_periodicidade = alterar_periodicidade_qx(qx_menor_periodicidade, menor_periodicidade, maior_periodicidade)
     tabua_menor_periodicidade = Tabua(qx_menor_periodicidade, menor_periodicidade)
     tabua_maior_periodicidade = Tabua(qx_maior_periodicidade, maior_periodicidade)
     return tabua_menor_periodicidade, tabua_maior_periodicidade
@@ -229,7 +229,7 @@ def reduzir_periodicidade(request):
     menor_periodicidade = request.param['menor_periodicidade']
     maior_periodicidade = request.param['maior_periodicidade']
     qx_maior_periodicidade = array([0.1, 0.3, 0.5, 1.0])
-    qx_menor_periodicidade = alterar_periodicidade(qx_maior_periodicidade, maior_periodicidade, menor_periodicidade)
+    qx_menor_periodicidade = alterar_periodicidade_qx(qx_maior_periodicidade, maior_periodicidade, menor_periodicidade)
     tabua_menor_periodicidade = Tabua(qx_menor_periodicidade, menor_periodicidade)
     tabua_maior_periodicidade = Tabua(qx_maior_periodicidade, maior_periodicidade)
     return tabua_menor_periodicidade, tabua_maior_periodicidade
