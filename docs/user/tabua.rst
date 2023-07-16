@@ -36,9 +36,9 @@ array([1.        , 0.49      , 0.2352    , 0.110544  , 0.05085024,
 array([0.51      , 0.2548    , 0.124656  , 0.05969376, 0.02796763,
        0.01281426])
 
-============================================
+
 Comportamento das tábuas após a idade limite
-============================================
+--------------------------------------------
 
 As tábuas possuem uma característica peculiar com relação ao limite de idade que uma pessoa pode chegar viva.
 Em alguns casos, podemos usar uma tábua que termina, digamos, na idade 100 para definir uma população.
@@ -66,9 +66,9 @@ falhar antes do próximo aniversário é 1, e a probabilidade sobrevivver por pe
 array([1., 0., 0., 0.])
 
 
-=====================================
+
 Tábuas fracionadas e tábuas agravadas
-=====================================
+-------------------------------------
 
 Em alguns casos recebemos as probabilidades de falha em uma determinada periodicidade (usualmente anual) e precisamos
 convertê-las para outra periodicidade (usualmente mensal). Além disso, também é comum utilizar versões agravadas ou
@@ -168,9 +168,9 @@ array([0.48])
 >>> tabua_mensal.t_qx([24], np.arange(12,24)).sum()
 0.48000000000000026
 
-===============================
+
 Tábuas de múltiplos decrementos
-===============================
+-------------------------------
 
 Em alguns casos existem mais do que uma causa de falha, como por exemplo em seguros de invalidez. Nesses casos, é
 preciso construir tábuas de múltiplos decremenots. As tábuas de múltiplos decrementos podem ser construídas modelando
@@ -262,9 +262,9 @@ uma para cada causa.
 >>> tabua_mdt_com_cancelamento.t_qx([50, 12], [10])
 array([0.00016557])
 
-=========================
+
 Tábuas de múltiplas vidas
-=========================
+--------------------------
 
 Em alguns casos, existe o interesse de calcular probabilidades de falha de mais de um indivíduo de forma conjunta.
 Isso ocorre em rendas com múltiplos beneficiários, por exemplo, onde as rendas são pagas enquanto pelo menos um

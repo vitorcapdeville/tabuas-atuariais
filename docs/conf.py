@@ -21,6 +21,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.doctest",
+    "sphinx_design",
 ]
 ROOT_SRC_TREE_DIR = Path(__file__).parents[1]
 
@@ -44,8 +45,19 @@ def setup(app):
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = "sphinx_book_theme"
-html_static_path = []
+html_theme = "pydata_sphinx_theme"
+html_static_path = ["_static"]
+html_css_files = [
+    "css/pandas.css",
+]
+html_theme_options = {
+    "external_links": [],
+    "github_url": "https://github.com/vitorcapdeville/tabuas-atuariais",
+    "logo": {
+        "text": "tabatu",
+    },
+}
+
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),

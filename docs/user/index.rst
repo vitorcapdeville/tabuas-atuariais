@@ -6,10 +6,10 @@ Guia de usuário
 Este guia apresenta a visão geral do pacote e como usá-lo de forma efetiva.
 Detalhes podem ser encontrados na :ref:`referência da API <api_ref>`.
 
-Exemplos de uso
----------------
+Guias
+-----
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    tabua
