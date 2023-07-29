@@ -1,23 +1,33 @@
-# tabuas-atuariais
+# tabatu
 Definição de tábuas atuariais em python com códigos em C++ para melhor performance.
 
-## TODO
+## Instalação
 
+O pacote pode ser instalado diretamente do PyPI:
 
-- verificar se eu continuo fazendo a parte de capturar argumentos no pyton msm ou se faço no c++.
+```
+pip install tabatu
+```
 
-- Incluir testes p garantir que os argumentos são flexiveis, isto é, eu posso chamar com int, vetor, array etc.
+## Uso
 
-- Verificar se faz sentido matar o módulo de python e deixar tudo em c++ cython
-- Incluir documentacao.
+O pacote fornece 3 classes para lidar com tábuas atuariais: `Tabua`, `TabuaMDT`e `TabuaMultiplasVidas`.
 
-- Verificar se da p usar herança de alguma forma no cython.
+Uma tábua pode ser criada diretamente a partir de um array de taxas.
 
+```
+>>> from tabatu import Tabua
+>>> qx = [0.1, 0.2, 0.3, 0.4, 0.5, 1.0]
+>>> tabua = Tabua(qx)
+>>> tabua.tpx([2], [1,2,3])
+array([0.7 , 0.42, 0.21])
+tabua.t_qx([2], [1,2,3])
+array([0.28, 0.21, 0.21])
+```
 
-Compilar Cython
+A tábua fornece métodos para cálculo de probabilidades de sobrevivência e morte, além de fornecer algumas utilidades 
+como tempo de vida futuro máximo e um indicador a respeito do fechamento da tábua ser platô ou não.
 
-python setup.py build_ext --inplace
+## Documentação
 
-Intalar pacote (Também compila o cython)
-
-pip install -e . g
+A documentação está disponível [aqui](https://vitorcapdeville.github.io/tabuas-atuariais/).
