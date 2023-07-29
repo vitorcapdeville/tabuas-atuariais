@@ -1,7 +1,7 @@
 [project]
 name = "tabatu"
 
-version = "0.0.1"
+version = "0.0.0"
 
 description = "Tábuas atuariais em C++ com interface em Python."
 

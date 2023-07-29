@@ -2,7 +2,11 @@
 
 
 
-## v0.0.0 (2023-07-29)
+## v0.0.1 (2023-07-29)
+
+### Build
+
+* build: incluind PSR como dependencia ([`94e6a40`](https://github.com/vitorcapdeville/tabuas-atuariais/commit/94e6a401605a63763999014bbd4445a12147e64e))
 
 ### Documentation
 
@@ -10,9 +14,19 @@
 
 * docs: documentação no estilo do pandas ([`bf2ae4c`](https://github.com/vitorcapdeville/tabuas-atuariais/commit/bf2ae4cbed4aa2fc33406f253bd8243bb8780edf))
 
+### Fix
+
+* fix: test commit ([`64c031f`](https://github.com/vitorcapdeville/tabuas-atuariais/commit/64c031f34b582e0f4cc911d951e0f238c98150cf))
+
 ### Unknown
 
+* Merge remote-tracking branch &#39;origin/main&#39; ([`babbba7`](https://github.com/vitorcapdeville/tabuas-atuariais/commit/babbba7332be62515056744dc8b85c2222f33720))
+
 * inclusão readme ([`906b8d9`](https://github.com/vitorcapdeville/tabuas-atuariais/commit/906b8d9e57308e4844a86481b87dce320d35a55c))
+
+* Update documentation.yaml
+
+forcando python 3.9 ([`e20390c`](https://github.com/vitorcapdeville/tabuas-atuariais/commit/e20390c6ffbc693f91fe5d54fb5a4ce3f669ec25))
 
 * inclusao de documentacao sphinx ([`94d8806`](https://github.com/vitorcapdeville/tabuas-atuariais/commit/94d880654e0e2f289eab1f772cd0a841c9743b7a))
 
