@@ -5,3 +5,5 @@ numpy
 tox
 sphinx-book-theme
 sphinx-design
+python-semantic-release
+build

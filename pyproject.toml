@@ -1,147 +1,62 @@
 [project]
-# This is the name of your project. The first time you publish this
-# package, this name will be registered for you. It will determine how
-# users can install this project, e.g.:
-#
-# $ pip install sampleproject
-#
-# And where it will live on PyPI: https://pypi.org/project/sampleproject/
-#
-# There are some restrictions on what makes a valid project name
-# specification here:
-# https://packaging.python.org/specifications/core-metadata/#name
-name = "tabatu"  # Required
+name = "tabatu"
 
-# Versions should comply with PEP 440:
-# https://www.python.org/dev/peps/pep-0440/
-#
-# For a discussion on single-sourcing the version, see
-# https://packaging.python.org/guides/single-sourcing-package-version/
-version = "0.0.1"  # Required
+version = "0.1.1"
 
-# This is a one-line description or tagline of what your project does. This
-# corresponds to the "Summary" metadata field:
-# https://packaging.python.org/specifications/core-metadata/#summary
-description = "Tábuas atuariais em C++ com interface em Python."  # Optional
+description = "Tábuas atuariais em C++ com interface em Python."
 
-# This is an optional longer description of your project that represents
-# the body of text which users will see when they visit PyPI.
-#
-# Often, this is the same as your README, so you can just read it in from
-# that file directly (as we have already done above)
-#
-# This field corresponds to the "Description" metadata field:
-# https://packaging.python.org/specifications/core-metadata/#description-optional
-readme = "README.md" # Optional
+readme = "README.md"
 
-# Specify which Python versions you support. In contrast to the
-# 'Programming Language' classifiers above, 'pip install' will check this
-# and refuse to install the project if the version does not match. See
-# https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
 requires-python = ">=3.7"
 
-# This is either text indicating the license for the distribution, or a file
-# that contains the license
-# https://packaging.python.org/en/latest/specifications/core-metadata/#license
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 
-# This field adds keywords for your project which will appear on the
-# project page. What does your project relate to?
-#
-# Note that this is a list of additional keywords, separated
-# by commas, to be used to assist searching for the distribution in a
-# larger catalog.
-keywords = ["lifetable", "actuary"]  # Optional
+keywords = ["lifetable", "actuary"]
 
-# This should be your name or the name of the organization who originally
-# authored the project, and a valid email address corresponding to the name
-# listed.
 authors = [
-  {name = "Vitor Capdeville", email = "vgcapdeville@hotmail.com" } # Optional
+    { name = "Vitor Capdeville", email = "vgcapdeville@hotmail.com" } # Optional
 ]
 
-# This should be your name or the names of the organization who currently
-# maintains the project, and a valid email address corresponding to the name
-# listed.
 maintainers = [
-  {name = "Vitor Capdeville", email = "vgcapdeville@hotmail.com" } # Optional
+    { name = "Vitor Capdeville", email = "vgcapdeville@hotmail.com" } # Optional
 ]
 
-# Classifiers help users find your project by categorizing it.
-#
-# For a list of valid classifiers, see https://pypi.org/classifiers/
-classifiers = [  # Optional
-  # How mature is this project? Common values are
-  #   3 - Alpha
-  #   4 - Beta
-  #   5 - Production/Stable
-#  "Development Status :: 3 - Alpha",
+classifiers = [# Optional
+    # How mature is this project? Common values are
+    #   3 - Alpha
+    #   4 - Beta
+    #   5 - Production/Stable
+    #  "Development Status :: 3 - Alpha",
 
-  # Indicate who your project is intended for
-#  "Intended Audience :: Developers",
-#  "Topic :: Actuary :: Actuarial Tools",
+    # Indicate who your project is intended for
+    #  "Intended Audience :: Developers",
+    #  "Topic :: Actuary :: Actuarial Tools",
 
-  # Pick your license as you wish
-#  "License :: OSI Approved :: GNU",
+    # Pick your license as you wish
+    #  "License :: OSI Approved :: GNU",
 
-  # Specify the Python versions you support here. In particular, ensure
-  # that you indicate you support Python 3. These classifiers are *not*
-  # checked by "pip install". See instead "python_requires" below.
-#  "Programming Language :: Python :: 3",
-#  "Programming Language :: Python :: 3.7",
-#  "Programming Language :: Python :: 3.8",
-#  "Programming Language :: Python :: 3.9",
-#  "Programming Language :: Python :: 3.10",
-#  "Programming Language :: Python :: 3.11",
-#  "Programming Language :: Python :: 3 :: Only",
+    # Specify the Python versions you support here. In particular, ensure
+    # that you indicate you support Python 3. These classifiers are *not*
+    # checked by "pip install". See instead "python_requires" below.
+    #  "Programming Language :: Python :: 3",
+    #  "Programming Language :: Python :: 3.7",
+    #  "Programming Language :: Python :: 3.8",
+    #  "Programming Language :: Python :: 3.9",
+    #  "Programming Language :: Python :: 3.10",
+    #  "Programming Language :: Python :: 3.11",
+    #  "Programming Language :: Python :: 3 :: Only",
 ]
 
-# This field lists other packages that your project depends on to run.
-# Any package you put here will be installed by pip when your project is
-# installed, so they must be valid existing projects.
-#
-# For an analysis of this field vs pip's requirements files see:
-# https://packaging.python.org/discussions/install-requires-vs-requirements/
-#dependencies = [] # Optional
+dependencies = ["numpy"]
 
-# List additional groups of dependencies here (e.g. development
-# dependencies). Users will be able to install these using the "extras"
-# syntax, for example:
-#
-#   $ pip install sampleproject[dev]
-#
-# Similar to `dependencies` above, these must be valid existing
-# projects.
 [project.optional-dependencies] # Optional
 dev = ["Cython"]
 #test = ["coverage"]
 
-# List URLs that are relevant to your project
-#
-# This field corresponds to the "Project-URL" and "Home-Page" metadata fields:
-# https://packaging.python.org/specifications/core-metadata/#project-url-multiple-use
-# https://packaging.python.org/specifications/core-metadata/#home-page-optional
-#
-# Examples listed include a pattern for specifying where the package tracks
-# issues, where the source is hosted, where to say thanks to the package
-# maintainers, and where to support the project financially. The key is
-# what's used to render the link text on PyPI.
 [project.urls]  # Optional
 "Homepage" = "https://github.com/vitorcapdeville/tabuas-atuariais"
 "Bug Reports" = "https://github.com/vitorcapdeville/tabuas-atuariais/issues"
 "Source" = "https://github.com/vitorcapdeville/tabuas-atuariais"
-
-# The following would provide a command line executable called `sample`
-# which executes the function `main` from this package when invoked.
-# [project.scripts]  # Optional
-# sample = "sample:main"
-
-# This is configuration specific to the `setuptools` build backend.
-# If you are using a different build backend, you will need to change this.
-[tool.setuptools]
-# If there are data files included in your packages that need to be
-# installed, specify them here.
-#package-data = {"sample" = ["*.dat"]}
 
 [build-system]
 # These are the assumed default build requirements from pip:
@@ -154,3 +69,61 @@ addopts = [
     "--import-mode=importlib",
 ]
 doctest_optionflags = "NUMBER"
+
+[semantic_release]
+assets = []
+commit_message = "{version}\n\nAutomatically generated by python-semantic-release"
+commit_parser = "angular"
+logging_use_named_masks = false
+major_on_zero = true
+tag_format = "v{version}"
+
+[semantic_release.branches.main]
+match = "(main|master)"
+prerelease = false
+prerelease_token = "rc"
+
+[semantic_release.changelog]
+template_dir = "templates"
+changelog_file = "CHANGELOG.md"
+exclude_commit_patterns = []
+
+[semantic_release.changelog.environment]
+block_start_string = "{%"
+block_end_string = "%}"
+variable_start_string = "{{"
+variable_end_string = "}}"
+comment_start_string = "{#"
+comment_end_string = "#}"
+trim_blocks = false
+lstrip_blocks = false
+newline_sequence = "\n"
+keep_trailing_newline = false
+extensions = []
+autoescape = true
+
+[semantic_release.commit_author]
+env = "GIT_COMMIT_AUTHOR"
+default = "semantic-release <semantic-release>"
+
+[semantic_release.commit_parser_options]
+allowed_tags = ["build", "chore", "ci", "docs", "feat", "fix", "perf", "style", "refactor", "test"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]
+
+[semantic_release.remote]
+name = "origin"
+type = "github"
+ignore_token_for_push = false
+
+[semantic_release.remote.token]
+env = "GH_TOKEN"
+
+[semantic_release.publish]
+dist_glob_patterns = ["dist/*"]
+upload_to_vcs_release = true
+
+[tool.semantic_release]
+version_toml = [
+    "pyproject.toml:version",
+]
