@@ -1,7 +1,7 @@
 [project]
 name = "tabatu"
 
-version = "0.1.1"
+version = "0.0.1"
 
 description = "Tábuas atuariais em C++ com interface em Python."
 
@@ -124,6 +124,4 @@ dist_glob_patterns = ["dist/*"]
 upload_to_vcs_release = true
 
 [tool.semantic_release]
-version_toml = [
-    "pyproject.toml:version",
-]
+version_variables = ["setup.py:__version__", "pyproject.toml:project.version"]
