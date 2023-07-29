@@ -165,8 +165,8 @@ morrer antes de completar 48 meses de acordo com a tábua mensal.
 >>> tabua_anual.t_qx([2], [1])
 array([0.48])
 
->>> tabua_mensal.t_qx([24], np.arange(12,24)).sum()
-0.48000000000000026
+>>> tabua_mensal.t_qx([24], np.arange(12,24)).sum().round(2)
+0.48
 
 
 Tábuas de múltiplos decrementos

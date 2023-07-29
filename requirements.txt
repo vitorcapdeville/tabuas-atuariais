@@ -1,9 +1,4 @@
-setuptools>=67.7.2
-Cython>=0.29.34
+tox
 pytest
 numpy
-tox
-sphinx-book-theme
-sphinx-design
-python-semantic-release
-build
+-e .
