@@ -90,4 +90,4 @@ upload_to_vcs_release = true
 
 [tool.semantic_release]
 version_variables = ["pyproject.toml:version"]
-build_command = "python -m build"
+build_command = "python -m pip innstall build && python -m build"
