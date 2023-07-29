@@ -54,7 +54,7 @@ jobs:
       with:
         python-version: '3.9'
     - name: install build
-      run: pip install build
+      run: python -m pip install build
 
     - name: Python Semantic Release
       uses: python-semantic-release/python-semantic-release@master
