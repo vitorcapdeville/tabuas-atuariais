@@ -60,6 +60,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     
   build_wheels:
+    needs: cd
     name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -76,7 +77,8 @@ jobs:
         with:
           path: ./wheelhouse/*.whl
 
-  build_sdist:
+  build_sdist:  
+    needs: cd
     name: Build source distribution
     runs-on: ubuntu-latest
     steps:
