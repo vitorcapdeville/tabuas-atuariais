@@ -36,6 +36,9 @@ cdef class TabuaBase:
     def t_qx(self, int x, vector[double] t):
         return np.array(self.c_tabua.t_qx(x, t))
 
+    def pega_qx(self):
+        return self.c_tabua.pega_qx()
+
     def tempo_futuro_maximo(self, x):
         return self.c_tabua.tempo_futuro_maximo(x)
 

@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from tabatu.periodicidade import Periodicidade
 from numpy import ndarray
 
 import tabatu.core as core
+from tabatu.periodicidade import Periodicidade
+from tabatu.tabua_base import TabuaBase
 
 
 class Tabua(core.Tabua):
@@ -110,3 +111,28 @@ class Tabua(core.Tabua):
     def possui_fechamento_plato(self) -> bool:
         """Verifica se a tábua possui fechamento de tipo platô."""
         return super().possui_fechamento_plato()
+    
+    @property
+    def tabuas(self) -> list[TabuaBase]:
+        return [TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas]
+
+    @classmethod
+    def from_tabua_base(cls, tabua: TabuaBase) -> Tabua:
+        """Cria uma Tabua a partir de uma TabuaBase.
+
+        Args:
+            tabua (TabuaBase): TabuaBase a ser usada como base.
+
+        Returns:
+            Tabua: Tabua criada.
+        """
+        return cls(tabua.pega_qx(), tabua.periodicidade)
+
+    def alterar_periodicidade(self, nova_periodicidade: Periodicidade) -> Tabua:
+        """Altera a periodicidade da tábua.
+
+        Args:
+            nova_periodicidade (Periodicidade): Nova periodicidade.
+        """
+        nova_tabua_base = self.tabuas[0].alterar_periodicidade(nova_periodicidade)
+        return Tabua.from_tabua_base(nova_tabua_base)
