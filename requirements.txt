@@ -3,3 +3,4 @@ pytest
 numpy
 -e .
 python-semantic-release
+cython
