@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from typing import Any
-from typing import Iterable
-from typing import Optional
-from typing import Sequence
-from typing import Union
+from typing import Any, Iterable, Optional, Sequence, Union
 
 from numpy import ndarray
 from numpy.typing import ArrayLike
 
 import tabatu.core as core
+from tabatu.periodicidade import Periodicidade
+from tabatu.tabua_base import TabuaBase
 from tabatu.tabua_interface import valida_periodicidade
 from tabatu.unico_decremento import Tabua
 
@@ -34,7 +32,7 @@ def valida_quantidade_tabuas(*args: Any) -> Any:
 
 
 def valida_causa_principal(
-    causa_principal: Union[int, str], causas: dict[str, int]
+    causa_principal: Union[int, str, None], causas: dict[str, int]
 ) -> Optional[str]:
     if causa_principal is None:
         return None
@@ -267,3 +265,22 @@ class TabuaMDT(core.TabuaMDT):
 
     def _padronizar_j(self, j: Iterable[int]) -> list[int]:
         return [self._causas[x] if isinstance(x, str) else x for x in j]
+    
+    @property
+    def tabuas(self) -> list[TabuaBase]:
+        return [TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas]
+
+    def alterar_periodicidade(self, nova_periodicidade: Periodicidade) -> TabuaMDT:
+        """Altera a periodicidade da tábua.
+
+        Args:
+            nova_periodicidade (Periodicidade): Nova periodicidade.
+
+        Returns:
+            TabuaMDT: Tábua com a nova periodicidade.
+        """
+        tabuas = {
+            causa: Tabua.from_tabua_base(tabua.alterar_periodicidade(nova_periodicidade))
+            for tabua, causa in zip(self.tabuas, self._causas.keys())
+        }
+        return TabuaMDT(**tabuas, causa_principal=self._causa_principal)

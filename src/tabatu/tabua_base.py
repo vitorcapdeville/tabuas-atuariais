@@ -4,6 +4,7 @@ from numpy.typing import ArrayLike
 
 import tabatu.core as core
 from tabatu.periodicidade import Periodicidade
+from tabatu.alterar_tabua import alterar_periodicidade_qx
 
 
 def validar_qx(qx: ArrayLike) -> ndarray:
@@ -34,3 +35,7 @@ class TabuaBase(core.TabuaBase):
     @property
     def periodicidade(self) -> Periodicidade:
         return self._periodicidade
+
+    def alterar_periodicidade(self, nova_periodicidade: Periodicidade):
+        qx = alterar_periodicidade_qx(self.pega_qx(), self._periodicidade, nova_periodicidade)
+        return TabuaBase(qx, nova_periodicidade)

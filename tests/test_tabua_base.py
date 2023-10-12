@@ -1,14 +1,13 @@
+from unittest.mock import Mock
+
 import pytest
-from numpy import arange
-from numpy import array
-from numpy import isinf
-from numpy.testing import assert_array_almost_equal
+from numpy import arange, array, isinf
 from numpy.testing import assert_array_equal
 
-from tabatu.tabua_base import TabuaBase
-from tabatu.tabua_base import validar_qx
-from tests.conftest import qx_completo
-from tests.conftest import qx_plato
+import tabatu.tabua_base as tabua_base_modulo
+from tabatu.periodicidade import Periodicidade
+from tabatu.tabua_base import TabuaBase, validar_qx
+from tests.conftest import qx_completo, qx_plato
 
 
 # noinspection PyMethodMayBeStatic
@@ -159,3 +158,18 @@ class TestIntegrationTestsTabuaBaseTqx:
         tabua = TabuaBase(qx_plato)
         with pytest.raises(ValueError):
             tabua.t_qx(-1, [0])
+
+def test_alterar_periodicidade_chama_funcao_alterar_periodicidade_e_gera_nova_tabua_base(monkeypatch):
+    tabua = TabuaBase(qx_completo, Periodicidade.ANUAL)
+
+    mock_init = Mock(return_value=None)
+    mock_alterar_periodicidade = Mock()
+    monkeypatch.setattr(TabuaBase, "__init__", mock_init)
+    monkeypatch.setattr(tabua_base_modulo, "alterar_periodicidade_qx", mock_alterar_periodicidade)
+
+    nova_tabua = tabua.alterar_periodicidade(Periodicidade.MENSAL)
+
+    mock_alterar_periodicidade.assert_called_once_with(qx_completo.tolist(), Periodicidade.ANUAL, Periodicidade.MENSAL)
+    mock_init.assert_called_once_with(mock_alterar_periodicidade.return_value, Periodicidade.MENSAL)
+
+    assert isinstance(nova_tabua, TabuaBase)

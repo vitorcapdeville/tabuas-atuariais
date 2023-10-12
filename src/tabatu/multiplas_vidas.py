@@ -6,6 +6,8 @@ from typing import Iterable
 from numpy import ndarray
 
 import tabatu.core as core
+from tabatu.periodicidade import Periodicidade
+from tabatu.tabua_base import TabuaBase
 from tabatu.tabua_interface import valida_periodicidade
 from tabatu.unico_decremento import Tabua
 
@@ -136,3 +138,19 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
     def possui_fechamento_plato(self) -> bool:
         """Verifica se a tábua possui fechamento de tipo platô."""
         return super().possui_fechamento_plato()
+
+    @property
+    def tabuas(self) -> list[TabuaBase]:
+        return [TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas]
+
+    def alterar_periodicidade(self, nova_periodicidade: Periodicidade) -> TabuaMultiplasVidas:
+        """Altera a periodicidade da tabua.
+
+        Args:
+            nova_periodicidade (Periodicidade): Nova periodicidade.
+
+        Returns:
+            TabuaMultiplasVidas: Tabua com a nova periodicidade.
+        """
+        tabuas = [Tabua.from_tabua_base(tabua.alterar_periodicidade(nova_periodicidade)) for tabua in self.tabuas]
+        return TabuaMultiplasVidas(*tabuas, status=self._status)

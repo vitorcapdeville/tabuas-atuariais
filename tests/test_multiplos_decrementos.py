@@ -1,12 +1,14 @@
-from unittest.mock import Mock
+from unittest.mock import Mock, call
+
 import pytest
 from numpy import array
-from numpy.testing import assert_array_equal
-from numpy.testing import assert_array_almost_equal
+from numpy.testing import assert_array_almost_equal, assert_array_equal
 
+import tabatu.multiplos_decrementos as tabuas_mdt_modulo
+import tabatu.tabua_base as tabua_base_modulo
 from tabatu import TabuaMDT
-from tabatu.multiplos_decrementos import valida_quantidade_tabuas
-from tabatu.multiplos_decrementos import captura_argumentos
+from tabatu.multiplos_decrementos import captura_argumentos, valida_quantidade_tabuas
+from tabatu.periodicidade import Periodicidade
 
 
 class TestCapturaArgumentos:
@@ -21,7 +23,6 @@ class TestCapturaArgumentos:
 
     def test_captura_argumentos_funciona_com_argumentos_nomeados_e_nao_nomeados(self):
         assert captura_argumentos(10, b=20) == {"0": 0, "b": 1}
-
 
 
 class TestValidaQuantidadeDeTabuas:
@@ -44,12 +45,12 @@ class TestValidaQuantidadeDeTabuas:
 
 
 class TestTabuaMDT:
-    def test_init_falha_se_causa_principal_eh_invalida(self, mock_tabua1, mock_tabua2):
+    def test_init_falha_se_causa_principal_eh_invalida(self, tabua_1dt_1, tabua_1dt_2):
         with pytest.raises(ValueError):
-            TabuaMDT(mock_tabua1, mock_tabua2, causa_principal=3)
+            TabuaMDT(tabua_1dt_1, tabua_1dt_2, causa_principal=3)
 
         with pytest.raises(ValueError):
-            TabuaMDT(mock_tabua1, morte=mock_tabua2, causa_principal="invalidez")
+            TabuaMDT(tabua_1dt_1, morte=tabua_1dt_2, causa_principal="invalidez")
 
     def test_tpx_eh_o_produto_dos_tpxs_de_cada_tabua(self, tabua_mdt):
         assert tabua_mdt.numero_decrementos == 2
@@ -83,7 +84,7 @@ class TestTabuaMDT:
         resultado = tabua_mdt.qx_j([0, 1], [0], [1])
         qx1 = tabua_mdt.tabuas[0].qx(0, [0])
         qx2 = tabua_mdt.tabuas[1].qx(1, [0])
-        esperado = qx2 * (1 - 1/2 * qx1)
+        esperado = qx2 * (1 - 1 / 2 * qx1)
 
         assert resultado.item() == esperado.item()
 
@@ -137,3 +138,24 @@ class TestTabuaMDT:
         esperado = tabua_mdt.t_qx_j([1, 2], [0, 1, 2], [1]).sum(axis=0)
         assert_array_equal(resultado, esperado)
         assert resultado.ndim == 1
+
+
+def test_alterar_periodicidade_chama_alterar_periodicidade_da_tabua_base_e_gera_nova_tabua_mdt(
+    monkeypatch, tabua_1dt_1, tabua_1dt_2
+):
+    tabua = TabuaMDT(tabua_1dt_1, inv=tabua_1dt_2, causa_principal="inv")
+
+    monkeypatch.setattr(
+        tabuas_mdt_modulo.Tabua, "from_tabua_base", Mock(return_value=tabua_1dt_1)
+    )
+    mock_alterar_periodicidade = Mock()
+    monkeypatch.setattr(
+        tabua_base_modulo.TabuaBase, "alterar_periodicidade", mock_alterar_periodicidade
+    )
+    nova_tabua = tabua.alterar_periodicidade(Periodicidade.MENSAL)
+
+    mock_alterar_periodicidade.assert_has_calls([call(Periodicidade.MENSAL), call(Periodicidade.MENSAL)])
+
+    assert isinstance(nova_tabua, TabuaMDT)
+    assert nova_tabua.causas == tabua.causas
+    assert nova_tabua.causa_principal == tabua.causa_principal
