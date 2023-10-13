@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from typing import Any, Iterable, Optional, Sequence, Union
+from typing import Any, Iterable, Optional, Union
 
-from numpy import ndarray
+from numpy import float64
 from numpy.typing import ArrayLike
+from numpy.typing import NDArray
 
 import tabatu.core as core
 from tabatu.periodicidade import Periodicidade
 from tabatu.tabua_base import TabuaBase
-from tabatu.tabua_interface import valida_periodicidade
+from tabatu.tabua_base import valida_periodicidade
 from tabatu.unico_decremento import Tabua
 
 
@@ -75,7 +76,7 @@ class TabuaMDT(core.TabuaMDT):
         """Verifica se existe uma causa principal."""
         return self._causa_principal is not None
 
-    def qx_j(self, x: Iterable[int], t: Iterable[int], j: Sequence[int] | Sequence[str]) -> ndarray[float]:
+    def qx_j(self, x: Iterable[int], t: Iterable[int], j: Iterable[int] | Iterable[str]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x + t falhar pela causa j
         antes de completar a idade x + t + 1.
 
@@ -89,7 +90,7 @@ class TabuaMDT(core.TabuaMDT):
                 passadas ou com o nome do argumento, caso tenha sido passada como argumento nomeado.
 
         Returns:
-            ndarray[float]: Array com o mesmo tamanho que t, fornecendo as probabilidades
+            NDArray[float64]: Array com o mesmo tamanho que t, fornecendo as probabilidades
             de falha pela causa j entre x + t e x + t + 1.
 
         Notes:
@@ -116,7 +117,7 @@ class TabuaMDT(core.TabuaMDT):
         j = self._padronizar_j(j)
         return super().qx_j(x, t, j)
 
-    def t_qx_j(self, x: Iterable[int], t: Iterable[int], j: Sequence[int] | Sequence[str]) -> ndarray[float]:
+    def t_qx_j(self, x: Iterable[int], t: Iterable[int], j: Iterable[int] | Iterable[str]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x falhar com
         idade exatamente igual a x + t, pela causa j.
 
@@ -130,7 +131,7 @@ class TabuaMDT(core.TabuaMDT):
                 passadas ou com o nome do argumento, caso tenha sido passada como argumento nomeado.
 
         Returns:
-            ndarray[float]: Probabilidade de um indivíduo com idade x falhar com
+            NDArray[float64]: Probabilidade de um indivíduo com idade x falhar com
             idade exatamente igual a x + t, pela causa j.
 
         Examples:
@@ -153,7 +154,7 @@ class TabuaMDT(core.TabuaMDT):
         j = self._padronizar_j(j)
         return super().t_qx_j(x, t, j)
 
-    def qx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def qx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x + t falhar por qualquer causa
         antes de completar a idade x + t + 1.
 
@@ -163,7 +164,7 @@ class TabuaMDT(core.TabuaMDT):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Array com o mesmo tamanho que t, fornecendo as probabilidades
+            NDArray[float64]: Array com o mesmo tamanho que t, fornecendo as probabilidades
             de falha entre x + t e x + t + 1.
 
         Notes:
@@ -181,7 +182,7 @@ class TabuaMDT(core.TabuaMDT):
         """
         return super().qx(x, t)
 
-    def tpx(self, x: ArrayLike, t: ArrayLike) -> ndarray[float]:
+    def tpx(self, x: ArrayLike, t: ArrayLike) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x sobreviver a idade
         x + t.
 
@@ -205,7 +206,7 @@ class TabuaMDT(core.TabuaMDT):
         """
         return super().tpx(x, t)
 
-    def t_qx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def t_qx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x falhar com
         idade exatamente igual a x + t.
 
@@ -215,7 +216,7 @@ class TabuaMDT(core.TabuaMDT):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Probabilidade de um indivíduo com idade x falhar com
+            NDArray[float64]: Probabilidade de um indivíduo com idade x falhar com
             idade exatamente igual a x + t. Se a tábua possui causa principal, então
             é a probabilidade de falhar pela causa principal. Se não possui causa principal,
             é a probabilidade de falhar por qualquer causa.
@@ -263,7 +264,7 @@ class TabuaMDT(core.TabuaMDT):
         """Verifica se a tábua possui fechamento de tipo platô."""
         return super().possui_fechamento_plato()
 
-    def _padronizar_j(self, j: Iterable[int]) -> list[int]:
+    def _padronizar_j(self, j: Iterable[int] | Iterable[str]) -> list[int]:
         return [self._causas[x] if isinstance(x, str) else x for x in j]
     
     @property

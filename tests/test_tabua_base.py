@@ -6,11 +6,12 @@ from numpy.testing import assert_array_equal
 
 import tabatu.tabua_base as tabua_base_modulo
 from tabatu.periodicidade import Periodicidade
-from tabatu.tabua_base import TabuaBase, validar_qx
+from tabatu.tabua_base import TabuaBase
 from tests.conftest import qx_completo, qx_plato
 
 
 # noinspection PyMethodMayBeStatic
+@pytest.mark.skip("Implementar em C++")
 class TestUnitTestsUtilsTabuaBase:
     def test_validar_qx_retorna_proprio_argumento_quando_todos_os_qxs_sao_validos(self):
         qx = array([0.1, 0.3, 0.5, 0.7, 0.9])

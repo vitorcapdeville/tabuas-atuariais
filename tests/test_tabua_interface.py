@@ -2,7 +2,7 @@ from unittest.mock import Mock
 
 import pytest
 
-from tabatu.tabua_interface import valida_periodicidade
+from tabatu.tabua_base import valida_periodicidade
 from tabatu.periodicidade import Periodicidade
 
 
