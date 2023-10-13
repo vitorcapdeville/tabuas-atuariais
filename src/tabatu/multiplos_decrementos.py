@@ -76,7 +76,9 @@ class TabuaMDT(core.TabuaMDT):
         """Verifica se existe uma causa principal."""
         return self._causa_principal is not None
 
-    def qx_j(self, x: Iterable[int], t: Iterable[int], j: Iterable[int] | Iterable[str]) -> NDArray[float64]:
+    def qx_j(
+        self, x: Iterable[int], t: Iterable[int], j: Iterable[int] | Iterable[str]
+    ) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x + t falhar pela causa j
         antes de completar a idade x + t + 1.
 
@@ -117,7 +119,9 @@ class TabuaMDT(core.TabuaMDT):
         j = self._padronizar_j(j)
         return super().qx_j(x, t, j)
 
-    def t_qx_j(self, x: Iterable[int], t: Iterable[int], j: Iterable[int] | Iterable[str]) -> NDArray[float64]:
+    def t_qx_j(
+        self, x: Iterable[int], t: Iterable[int], j: Iterable[int] | Iterable[str]
+    ) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x falhar com
         idade exatamente igual a x + t, pela causa j.
 
@@ -266,10 +270,12 @@ class TabuaMDT(core.TabuaMDT):
 
     def _padronizar_j(self, j: Iterable[int] | Iterable[str]) -> list[int]:
         return [self._causas[x] if isinstance(x, str) else x for x in j]
-    
+
     @property
     def tabuas(self) -> list[TabuaBase]:
-        return [TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas]
+        return [
+            TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas
+        ]
 
     def alterar_periodicidade(self, nova_periodicidade: Periodicidade) -> TabuaMDT:
         """Altera a periodicidade da tábua.
@@ -281,7 +287,9 @@ class TabuaMDT(core.TabuaMDT):
             TabuaMDT: Tábua com a nova periodicidade.
         """
         tabuas = {
-            causa: Tabua.from_tabua_base(tabua.alterar_periodicidade(nova_periodicidade))
+            causa: Tabua.from_tabua_base(
+                tabua.alterar_periodicidade(nova_periodicidade)
+            )
             for tabua, causa in zip(self.tabuas, self._causas.keys())
         }
         return TabuaMDT(**tabuas, causa_principal=self._causa_principal)
