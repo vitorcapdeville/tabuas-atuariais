@@ -5,9 +5,20 @@ from TabuaCpp cimport TabuaCpp
 from TabuaMDTCpp cimport TabuaMDTCpp
 from TabuaMultiplasVidasCpp cimport TabuaMultiplasVidasCpp
 from TabuaMultiplasVidasCpp cimport StatusVidasConjuntasCpp
+from alterar_tabua cimport alterar_periodicidade_qx_cpp
+from alterar_tabua cimport agravar_qx_cpp
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 import numpy as np
+
+
+def alterar_periodicidade_qx(vector[double] qx, int periodicidade, int nova_periodicidade):
+    return np.array(alterar_periodicidade_qx_cpp(qx, periodicidade, nova_periodicidade))
+
+
+def agravar_qx(vector[double] qx, double percentual):
+    return np.array(agravar_qx_cpp(qx, percentual))
+
 
 cdef extrair_tabuas(vector[TabuaBaseCpp] tabuas_cpp):
     """Transforma um vetor de TabuaBaseCpp em uma tupla de TabuaBase"""
@@ -17,6 +28,7 @@ cdef extrair_tabuas(vector[TabuaBaseCpp] tabuas_cpp):
         tabua.c_tabua = tabuas_cpp[i]
         tabuas.append(tabua)
     return tuple(tabuas)
+
 
 cdef class TabuaBase:
     cdef TabuaBaseCpp c_tabua
@@ -79,6 +91,7 @@ cdef class Tabua:
     def tabuas(self):
         return extrair_tabuas(self.c_tabua.pega_tabuas())
 
+
 cdef class TabuaMDT:
     cdef TabuaMDTCpp c_tabua
 
@@ -121,6 +134,7 @@ cdef class TabuaMDT:
     @property
     def tabuas(self):
         return extrair_tabuas(self.c_tabua.pega_tabuas())
+
 
 cdef extern from "TabuaMultiplasVidasCpp.h" namespace "StatusVidasConjuntasCpp":
     cdef StatusVidasConjuntasCpp JOINT

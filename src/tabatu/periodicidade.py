@@ -1,6 +1,7 @@
 from enum import Enum
 
-from numpy import atleast_1d, ndarray
+from numpy import atleast_1d, float64, int64
+from numpy.typing import NDArray
 from numpy.typing import ArrayLike
 
 
@@ -29,27 +30,27 @@ class Periodicidade(Enum):
         }
         return chaves[self]
 
-    def quantidade_periodos_1_periodicidade(self, periodicidade):
+    def quantidade_periodos_1_periodicidade(self, periodicidade: "Periodicidade") -> float:
         return (
             self.quantidade_periodos_1_ano() / periodicidade.quantidade_periodos_1_ano()
         )
 
-    def __lt__(self, other):
+    def __lt__(self, other: "Periodicidade") -> bool:
         return self.quantidade_periodos_1_ano() > other.quantidade_periodos_1_ano()
 
-    def __gt__(self, other):
+    def __gt__(self, other: "Periodicidade") -> bool:
         return self.quantidade_periodos_1_ano() < other.quantidade_periodos_1_ano()
 
-    def __le__(self, other):
+    def __le__(self, other: "Periodicidade") -> bool:
         return self.quantidade_periodos_1_ano() >= other.quantidade_periodos_1_ano()
 
-    def __ge__(self, other):
+    def __ge__(self, other: "Periodicidade") -> bool:
         return self.quantidade_periodos_1_ano() <= other.quantidade_periodos_1_ano()
 
 
 def converter_periodicidade(
     tempo: ArrayLike, periodicidade: Periodicidade, nova_periodicidade: Periodicidade
-) -> ndarray[float]:
+) -> NDArray[float64]:
     tempo = atleast_1d(tempo)
     if nova_periodicidade == periodicidade:
         return tempo
@@ -58,11 +59,11 @@ def converter_periodicidade(
 
 def meses2periodicidade(
     valor: ArrayLike, periodicidade: Periodicidade
-) -> ndarray[float]:
+) -> NDArray[float64]:
     return converter_periodicidade(valor, Periodicidade.MENSAL, periodicidade)
 
 
-def periodicidade2meses(valor: ArrayLike, periodicidade: Periodicidade) -> ndarray[int]:
+def periodicidade2meses(valor: ArrayLike, periodicidade: Periodicidade) -> NDArray[int64]:
     return converter_periodicidade(valor, periodicidade, Periodicidade.MENSAL).astype(
         int
     )

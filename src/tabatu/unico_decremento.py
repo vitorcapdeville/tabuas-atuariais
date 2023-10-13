@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from typing import Iterable
 
-from numpy import ndarray
+from numpy import float64
+from numpy.typing import NDArray
 
 import tabatu.core as core
 from tabatu.periodicidade import Periodicidade
@@ -13,17 +14,29 @@ class Tabua(core.Tabua):
     __slots__ = "_periodicidade"
 
     def __init__(
-        self, qx: ndarray[float], periodicidade: Periodicidade = Periodicidade.ANUAL
+        self, qx: Iterable[float], periodicidade: Periodicidade = Periodicidade.ANUAL
     ):
         super().__init__(qx)
         self._periodicidade = periodicidade
+
+    @classmethod
+    def from_tabua_base(cls, tabua: TabuaBase) -> Tabua:
+        """Cria uma Tabua a partir de uma TabuaBase.
+
+        Args:
+            tabua (TabuaBase): TabuaBase a ser usada como base.
+
+        Returns:
+            Tabua: Tabua criada.
+        """
+        return cls(tabua.pega_qx(), tabua.periodicidade)
 
     @property
     def periodicidade(self) -> Periodicidade:
         """Periodicidade da tábua."""
         return self._periodicidade
 
-    def qx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def qx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x + t falhar
         antes de completar a idade x + t + 1.
 
@@ -32,7 +45,7 @@ class Tabua(core.Tabua):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Array com o mesmo tamanho que t, fornecendo as probabilidades
+            NDArray[float64]: Array com o mesmo tamanho que t, fornecendo as probabilidades
             de falha entre x + t e x + t + 1.
 
         Examples:
@@ -44,7 +57,7 @@ class Tabua(core.Tabua):
         """
         return super().qx(x, t)
 
-    def tpx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def tpx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x sobreviver a idade
         x + t.
 
@@ -53,7 +66,7 @@ class Tabua(core.Tabua):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Probabilidade de um indivíduo com idade x sobreviver a
+            NDArray[float64]: Probabilidade de um indivíduo com idade x sobreviver a
             idade x + t.
 
         Examples:
@@ -66,7 +79,7 @@ class Tabua(core.Tabua):
         """
         return super().tpx(x, t)
 
-    def t_qx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def t_qx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x falhar com
         idade exatamente igual a x + t.
 
@@ -75,7 +88,7 @@ class Tabua(core.Tabua):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Probabilidade de um indivíduo com idade x falhar com
+            NDArray[float64]: Probabilidade de um indivíduo com idade x falhar com
             idade exatamente igual a x + t.
 
         Examples:
@@ -111,22 +124,12 @@ class Tabua(core.Tabua):
     def possui_fechamento_plato(self) -> bool:
         """Verifica se a tábua possui fechamento de tipo platô."""
         return super().possui_fechamento_plato()
-    
+
     @property
     def tabuas(self) -> list[TabuaBase]:
-        return [TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas]
-
-    @classmethod
-    def from_tabua_base(cls, tabua: TabuaBase) -> Tabua:
-        """Cria uma Tabua a partir de uma TabuaBase.
-
-        Args:
-            tabua (TabuaBase): TabuaBase a ser usada como base.
-
-        Returns:
-            Tabua: Tabua criada.
-        """
-        return cls(tabua.pega_qx(), tabua.periodicidade)
+        return [
+            TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas
+        ]
 
     def alterar_periodicidade(self, nova_periodicidade: Periodicidade) -> Tabua:
         """Altera a periodicidade da tábua.

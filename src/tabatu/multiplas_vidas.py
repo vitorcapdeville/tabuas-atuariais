@@ -3,12 +3,13 @@ from __future__ import annotations
 from enum import Enum
 from typing import Iterable
 
-from numpy import ndarray
+from numpy import float64
+from numpy.typing import NDArray
 
 import tabatu.core as core
 from tabatu.periodicidade import Periodicidade
 from tabatu.tabua_base import TabuaBase
-from tabatu.tabua_interface import valida_periodicidade
+from tabatu.tabua_base import valida_periodicidade
 from tabatu.unico_decremento import Tabua
 
 
@@ -20,7 +21,9 @@ class StatusVidasConjuntas(Enum):
 class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
     __slots__ = "_periodicidade", "_status"
 
-    def __init__(self, *args: Tabua, status: StatusVidasConjuntas = StatusVidasConjuntas.LAST) -> None:
+    def __init__(
+        self, *args: Tabua, status: StatusVidasConjuntas = StatusVidasConjuntas.LAST
+    ) -> None:
         self._periodicidade = valida_periodicidade(*args)
         self._status = status
         super().__init__(*args, status=core.StatusVidasConjuntas(status.value))
@@ -30,7 +33,7 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
         """Status de vida conjunta."""
         return self._status
 
-    def qx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def qx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de falha entre as idades x + t e x + t + 1.
 
         A falha é definida pelo status da tabua. Se o status é "last", então
@@ -44,7 +47,7 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Array com o mesmo tamanho que t, fornecendo as probabilidades
+            NDArray[float64]: Array com o mesmo tamanho que t, fornecendo as probabilidades
             de falha entre x + t e x + t + 1.
 
         Examples:
@@ -63,7 +66,7 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
         """
         return super().qx(x, t)
 
-    def tpx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def tpx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x sobreviver a idade
         x + t.
 
@@ -73,7 +76,7 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Probabilidade de um indivíduo com idade x sobreviver a
+            NDArray[float64]: Probabilidade de um indivíduo com idade x sobreviver a
             idade x + t.
 
         Examples:
@@ -88,7 +91,7 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
         """
         return super().tpx(x, t)
 
-    def t_qx(self, x: Iterable[int], t: Iterable[int]) -> ndarray[float]:
+    def t_qx(self, x: Iterable[int], t: Iterable[int]) -> NDArray[float64]:
         """Probabilidade de um indivíduo com idade x falhar com
         idade exatamente igual a x + t.
 
@@ -98,7 +101,7 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
             t (Iterable[int]): Tempo extra. Pode ser um array com diversos tempos.
 
         Returns:
-            ndarray[float]: Probabilidade de um indivíduo com idade x falhar com
+            NDArray[float64]: Probabilidade de um indivíduo com idade x falhar com
             idade exatamente igual a x + t.
         """
         return super().t_qx(x, t)
@@ -141,9 +144,13 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
 
     @property
     def tabuas(self) -> list[TabuaBase]:
-        return [TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas]
+        return [
+            TabuaBase(tabua.pega_qx(), self._periodicidade) for tabua in super().tabuas
+        ]
 
-    def alterar_periodicidade(self, nova_periodicidade: Periodicidade) -> TabuaMultiplasVidas:
+    def alterar_periodicidade(
+        self, nova_periodicidade: Periodicidade
+    ) -> TabuaMultiplasVidas:
         """Altera a periodicidade da tabua.
 
         Args:
@@ -152,5 +159,8 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
         Returns:
             TabuaMultiplasVidas: Tabua com a nova periodicidade.
         """
-        tabuas = [Tabua.from_tabua_base(tabua.alterar_periodicidade(nova_periodicidade)) for tabua in self.tabuas]
+        tabuas = [
+            Tabua.from_tabua_base(tabua.alterar_periodicidade(nova_periodicidade))
+            for tabua in self.tabuas
+        ]
         return TabuaMultiplasVidas(*tabuas, status=self._status)
