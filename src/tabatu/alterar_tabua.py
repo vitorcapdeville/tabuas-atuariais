@@ -1,7 +1,4 @@
 from typing import Iterable
-from numpy import fromiter, minimum
-from numpy import multiply
-from numpy import ones_like
 from numpy import float64
 from numpy.typing import NDArray
 
@@ -37,8 +34,4 @@ def alterar_periodicidade_qx(
 
 
 def agravar_qx(qx: Iterable[float], percentual: float) -> NDArray[float64]:
-    qx = fromiter(qx, float64)
-    if percentual < 0:
-        raise ValueError("O percentual deve ser positivo.")
-    qx = minimum(multiply(qx, percentual / 100, out=ones_like(qx), where=qx < 1), 1)
-    return qx
+    return core.agravar_qx(qx, percentual)

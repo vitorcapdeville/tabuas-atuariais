@@ -51,3 +51,19 @@ std::vector<double> alterar_periodicidade_qx_cpp(std::vector<double> qx, int per
     return qx;
 
 }
+
+std::vector<double> agravar_qx_cpp(std::vector<double> qx, double percentual) {
+    if (percentual < 0.0) {
+        throw std::invalid_argument("O percentual de agravo deve ser positivo.");
+    }
+    if (percentual == 0.0) {
+        return qx;
+    }
+    std::vector<double> qx_agravado(qx.size(), 1.0);
+    for (int i = 0; i < qx.size(); i++) {
+        if (qx[i] < 1) {
+            qx_agravado[i] = std::min(qx[i] * (percentual / 100), 1.0);
+        }
+    }
+    return qx_agravado;
+};

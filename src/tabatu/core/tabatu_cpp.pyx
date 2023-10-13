@@ -6,12 +6,18 @@ from TabuaMDTCpp cimport TabuaMDTCpp
 from TabuaMultiplasVidasCpp cimport TabuaMultiplasVidasCpp
 from TabuaMultiplasVidasCpp cimport StatusVidasConjuntasCpp
 from alterar_tabua cimport alterar_periodicidade_qx_cpp
+from alterar_tabua cimport agravar_qx_cpp
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 import numpy as np
 
+
 def alterar_periodicidade_qx(vector[double] qx, int periodicidade, int nova_periodicidade):
     return np.array(alterar_periodicidade_qx_cpp(qx, periodicidade, nova_periodicidade))
+
+
+def agravar_qx(vector[double] qx, double percentual):
+    return np.array(agravar_qx_cpp(qx, percentual))
 
 
 cdef extrair_tabuas(vector[TabuaBaseCpp] tabuas_cpp):
