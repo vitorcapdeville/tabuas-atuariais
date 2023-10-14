@@ -13,3 +13,4 @@ Guias
    :maxdepth: 2
 
    tabua
+   juros

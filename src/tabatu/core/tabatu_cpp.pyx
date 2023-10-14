@@ -7,6 +7,7 @@ from TabuaMultiplasVidasCpp cimport TabuaMultiplasVidasCpp
 from TabuaMultiplasVidasCpp cimport StatusVidasConjuntasCpp
 from alterar_tabua cimport alterar_periodicidade_qx_cpp
 from alterar_tabua cimport agravar_qx_cpp
+from JurosConstanteCpp cimport JurosConstanteCpp
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 import numpy as np
@@ -28,6 +29,19 @@ cdef extrair_tabuas(vector[TabuaBaseCpp] tabuas_cpp):
         tabua.c_tabua = tabuas_cpp[i]
         tabuas.append(tabua)
     return tuple(tabuas)
+
+
+cdef class JurosConstante:
+    cdef JurosConstanteCpp c_juros
+
+    def __init__(self, double juros):
+        self.c_juros = JurosConstanteCpp(juros)
+
+    def taxa_juros(self, vector[double] t):
+        return np.array(self.c_juros.taxa_juros(t))
+
+    def taxa_desconto(self, vector[double] t):
+        return np.array(self.c_juros.taxa_desconto(t))
 
 
 cdef class TabuaBase:
