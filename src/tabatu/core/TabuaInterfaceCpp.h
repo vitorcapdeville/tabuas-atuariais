@@ -16,8 +16,7 @@ public:
     virtual double tpx(std::vector<int> x, double t) const = 0;
     virtual double tempo_futuro_maximo(std::vector<int> x) const = 0;
     bool possui_fechamento_plato() const;
-    double t_qx(std::vector<int> x, double t) const;
-    std::vector<double> t_qx(std::vector<int> x, std::vector<double> t) const;
+    virtual double t_qx(std::vector<int> x, double t) const;
     int pega_numero_vidas() const;
     int pega_numero_decrementos() const;
     std::vector<TabuaBaseCpp> pega_tabuas() const;

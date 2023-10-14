@@ -62,7 +62,7 @@ class TabuaMDT(core.TabuaMDT):
             causa_principal, self._causas
         )
         self._periodicidade = valida_periodicidade(*tabuas)
-        super().__init__(*tabuas)
+        super().__init__(*tabuas, causa_principal=self._causas.get(self._causa_principal or "", -1))
 
     @property
     def causas(self) -> dict[str, int]:
@@ -234,9 +234,7 @@ class TabuaMDT(core.TabuaMDT):
             >>> tabua.t_qx([50, 0], [0, 1, 2, 3])
             array([0.5149    , 0.25458048, 0.12325879, 0.0584142 ])
         """
-        if self._causa_principal is None:
-            return super().t_qx(x, t)
-        return self.t_qx_j(x, t, [self._causa_principal]).sum(axis=0)
+        return super().t_qx(x, t)
 
     def tempo_futuro_maximo(self, x: Iterable[int]) -> float:
         """Tempo de vida futuro máximo.
