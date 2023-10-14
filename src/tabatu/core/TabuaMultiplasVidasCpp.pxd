@@ -10,6 +10,7 @@ cdef extern from "TabuaMultiplasVidasCpp.h":
         TabuaMultiplasVidasCpp(vector[TabuaCpp] tabuas, StatusVidasConjuntasCpp status_vidas_conjuntas)
         vector[double] qx(vector[int] x, vector[double] t) except +
         vector[double] tpx(vector[int] x, vector[double] t) except +
+        vector[double] t_qx(vector[int] x, vector[double] t) except +
         double tempo_futuro_maximo(vector[int] x) except +
 
 

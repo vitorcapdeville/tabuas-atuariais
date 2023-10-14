@@ -8,6 +8,7 @@ from TabuaMultiplasVidasCpp cimport StatusVidasConjuntasCpp
 from alterar_tabua cimport alterar_periodicidade_qx_cpp
 from alterar_tabua cimport agravar_qx_cpp
 from JurosConstanteCpp cimport JurosConstanteCpp
+
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 import numpy as np
@@ -109,12 +110,12 @@ cdef class Tabua:
 cdef class TabuaMDT:
     cdef TabuaMDTCpp c_tabua
 
-    def __init__(self, *tabuas):
+    def __init__(self, *tabuas, int causa_principal):
         cdef vector[TabuaCpp] tabuas_vec
         for i in range(len(tabuas)):
             tabua: Tabua = tabuas[i]
             tabuas_vec.push_back(tabua.c_tabua)
-        self.c_tabua = TabuaMDTCpp(tabuas_vec)
+        self.c_tabua = TabuaMDTCpp(tabuas_vec, causa_principal)
 
     def qx_j(self, vector[int] x, vector[double] t, vector[int] j):
         return np.atleast_2d(self.c_tabua.qx_j(x, t, j))

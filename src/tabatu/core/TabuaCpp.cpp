@@ -3,12 +3,12 @@
 #include <stdexcept>
 
 std::vector<TabuaBaseCpp> extrairTabuasBase(std::vector<TabuaCpp> tabuas) {
-	std::vector<TabuaBaseCpp> tabuasBase;
-	tabuasBase.reserve(tabuas.size());
-	for (TabuaCpp tabua : tabuas) {
-		tabuasBase.push_back(tabua.pega_tabuas()[0]);
-	}
-	return tabuasBase;
+    std::vector<TabuaBaseCpp> tabuasBase;
+    tabuasBase.reserve(tabuas.size());
+    for (TabuaCpp tabua : tabuas) {
+        tabuasBase.push_back(tabua.pega_tabuas()[0]);
+    }
+    return tabuasBase;
 }
 
 TabuaCpp::TabuaCpp() : TabuaInterfaceCpp() {
@@ -44,6 +44,19 @@ std::vector<double> TabuaCpp::tpx(std::vector<int> x, std::vector<double> t) con
         throw std::invalid_argument("x deve ter tamanho 1");
     }
     return m_tabuas[0].tpx(x[0], t);
+}
+
+std::vector<double> TabuaCpp::t_qx(std::vector<int> x, std::vector<double> t) const {
+    if (x.size() != m_numero_decrementos * m_numero_vidas) {
+        throw std::invalid_argument("x deve ter o mesmo tamanho que a quantidade de vidas ou decrementos");
+    }
+    std::vector<double> ret(t.size());
+    int n = (int)t.size();
+    for (int i = 0; i < n; i++)
+    {
+        ret[i] = TabuaInterfaceCpp::t_qx(x, t[i]);
+    }
+    return ret;
 }
 
 double TabuaCpp::tempo_futuro_maximo(std::vector<int> x) const {

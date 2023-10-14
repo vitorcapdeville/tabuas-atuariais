@@ -18,6 +18,7 @@ public:
     double tpx(std::vector<int> x, double t) const;
     std::vector<double> qx(std::vector<int> x, std::vector<double> t) const;
     std::vector<double> tpx(std::vector<int> x, std::vector<double> t) const;
+    std::vector<double> t_qx(std::vector<int> x, std::vector<double> t) const;
     double tempo_futuro_maximo(std::vector<int> x) const;
 };
 

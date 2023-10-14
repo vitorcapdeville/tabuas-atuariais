@@ -55,10 +55,11 @@ std::vector<std::vector<double>> converter_mdt(std::vector<std::vector<double>> 
 TabuaMDTCpp::TabuaMDTCpp() : TabuaInterfaceCpp() {
 }
 
-TabuaMDTCpp::TabuaMDTCpp(std::vector<TabuaCpp> tabuas) : TabuaInterfaceCpp((int)tabuas.size(), 1, extrairTabuasBase(tabuas))
+TabuaMDTCpp::TabuaMDTCpp(std::vector<TabuaCpp> tabuas, int causa_principal) : TabuaInterfaceCpp((int)tabuas.size(), 1, extrairTabuasBase(tabuas))
 {
 	m_numero_decrementos = (int)tabuas.size();
 	m_tabuas = extrairTabuasBase(tabuas);
+	m_causa_principal = causa_principal;
 }
 
 // comeco
@@ -75,6 +76,26 @@ double TabuaMDTCpp::qx_j(std::vector<int> x, double t, int j) const {
 		qx.push_back(m_tabuas[i].qx(x[i], t));
 	}
 	return converter_mdt(qx)[j];
+}
+
+double TabuaMDTCpp::t_qx(std::vector<int> x, double t) const {
+	if (m_causa_principal != -1) {
+		return tpx(x, t) * qx_j(x, t, m_causa_principal);
+	}
+	return tpx(x, t) * qx(x, t);
+}
+
+std::vector<double> TabuaMDTCpp::t_qx(std::vector<int> x, std::vector<double> t) const {
+    if (x.size() != m_numero_decrementos * m_numero_vidas) {
+        throw std::invalid_argument("x deve ter o mesmo tamanho que a quantidade de vidas ou decrementos");
+    }
+    std::vector<double> ret(t.size());
+    int n = (int)t.size();
+    for (int i = 0; i < n; i++)
+    {
+        ret[i] = t_qx(x, t[i]);
+    }
+    return ret;
 }
 
 std::vector<double> TabuaMDTCpp::qx_j(std::vector<int> x, std::vector<double> t, int j) const {

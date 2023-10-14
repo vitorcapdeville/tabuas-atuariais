@@ -24,19 +24,6 @@ double TabuaInterfaceCpp::t_qx(std::vector<int> x, double t) const {
 }
 
 
-std::vector<double> TabuaInterfaceCpp::t_qx(std::vector<int> x, std::vector<double> t) const {
-    if (x.size() != m_numero_decrementos * m_numero_vidas) {
-        throw std::invalid_argument("x deve ter o mesmo tamanho que a quantidade de vidas ou decrementos");
-    }
-    std::vector<double> ret(t.size());
-    int n = (int)t.size();
-    for (int i = 0; i < n; i++)
-    {
-        ret[i] = t_qx(x, t[i]);
-    }
-    return ret;
-}
-
 int TabuaInterfaceCpp::pega_numero_vidas() const {
     return m_numero_vidas;
 }
