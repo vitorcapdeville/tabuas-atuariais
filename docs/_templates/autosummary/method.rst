@@ -6,7 +6,7 @@
 
 method
 
-.. auto{{ objtype }}:: {{ objname | replace("matatu.", "matatu::") }}
+.. auto{{ objtype }}:: {{ objname | replace("tabatu.", "tabatu::") }}
 
 {# In the fullname (e.g. `numpy.ma.MaskedArray.methodname`), the module name
 is ambiguous. Using a `::` separator (e.g. `numpy::ma.MaskedArray.methodname`)

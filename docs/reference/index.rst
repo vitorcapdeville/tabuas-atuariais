@@ -11,3 +11,4 @@ O manual de referência fornece detalhe sobre os módulos, funções e classes n
    :maxdepth: 2
 
    tabuas
+   juros
