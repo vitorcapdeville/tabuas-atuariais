@@ -62,7 +62,13 @@ class TabuaMDT(core.TabuaMDT):
             causa_principal, self._causas
         )
         self._periodicidade = valida_periodicidade(*tabuas)
-        super().__init__(*tabuas, causa_principal=self._causas.get(self._causa_principal or "", -1))
+        super().__init__(
+            *tabuas, causa_principal=self._causas.get(self._causa_principal or "", -1)
+        )
+
+    @property
+    def periodicidade(self) -> Periodicidade:
+        return self._periodicidade
 
     @property
     def causas(self) -> dict[str, int]:
