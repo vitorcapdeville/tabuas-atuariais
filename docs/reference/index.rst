@@ -12,3 +12,4 @@ O manual de referência fornece detalhe sobre os módulos, funções e classes n
 
    tabuas
    juros
+   premissas

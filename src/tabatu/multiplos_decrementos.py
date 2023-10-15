@@ -47,6 +47,35 @@ def valida_causa_principal(
 
 
 class TabuaMDT(core.TabuaMDT):
+    """Representação de tábuas de múltiplos decrementos.
+
+    Args:
+        *args (Tabua): Até 3 tábuas de únicos decrementos.
+        causa_principal (int, str, Optional): Causa principal de decremento. Pode ser um inteiro ou uma string.
+        **kwargs (Tabua): Até 3 tábuas de únicos decrementos.
+
+    Notes:
+        As tábuas podem ser fornecidas por posição ou por nome.
+        args e kwargs devem somar no máximo três tábuas. As tábuas fornecidas por posição irão utilizar a sua
+        posição como identificador nos métodos qx_j e t_qx_j. As tábuas fornecidas por nome irão utilizar ou a posição,
+        ou o nome.
+        O argumento causa_principal é um artífico para permitir que seja criada uma tábua de múltiplos decrementos
+        onde o sinistro é definido por apenas um dos decrementos, enquanto os outros decrementos não configuram
+        sinistro, mas encerram a 'vida' do indivíduo. Por exemplo, quando temos uma tábua de morte e uma tábua de
+        cancelamento, usualmente, o t_qx é usado para calcular a probabilidade de sinistro, e não a probabilidade
+        de sinistro ou cancelamento. Dessa forma, a causa principal faz com o t_qx seja calculado apenas
+        com a causa principal. As outras causas podem ter o t_qx calculado especificamente usando o t_qx_j, e o
+        t_qx de todas as causas pode ser calculado passando todas as causas para o t_qx_j e somando.
+
+    Examples:
+
+        >>> import numpy as np
+        >>> qx1 = (np.arange(100) + 1)/100
+        >>> qx2 = np.repeat(0.01, 100)
+        >>> tabua_posicao = TabuaMDT(Tabua(qx1), Tabua(qx2))
+        >>> tabua_posicao_e_nome = TabuaMDT(Tabua(qx1), morte = Tabua(qx2))
+        >>> tabua_nome = TabuaMDT(cancelamento = Tabua(qx1), morte = Tabua(qx2))
+    """
     __slots__ = "_periodicidade", "_causa_principal", "_causas"
 
     def __init__(
@@ -62,7 +91,13 @@ class TabuaMDT(core.TabuaMDT):
             causa_principal, self._causas
         )
         self._periodicidade = valida_periodicidade(*tabuas)
-        super().__init__(*tabuas, causa_principal=self._causas.get(self._causa_principal or "", -1))
+        super().__init__(
+            *tabuas, causa_principal=self._causas.get(self._causa_principal or "", -1)
+        )
+
+    @property
+    def periodicidade(self) -> Periodicidade:
+        return self._periodicidade
 
     @property
     def causas(self) -> dict[str, int]:

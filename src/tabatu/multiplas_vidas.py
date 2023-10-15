@@ -14,11 +14,31 @@ from tabatu.unico_decremento import Tabua
 
 
 class StatusVidasConjuntas(Enum):
+    """
+    Status de vidas conjuntas. "last" significa que a falha total é
+    equivalente à falha de todas as vidas, ou seja, pelo menos
+    uma vida precisa estar viva. "joint" signficia que a falha total
+    é dada pela falha de pelo menos uma das vidas, ou seja, todas as vidas
+    precisam estar vivas.
+    """
     JOINT = b"JOINT"
     LAST = b"LAST"
 
 
 class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
+    """Representação de tábuas de múltiplas vidas.
+
+    Args:
+        *args (Tabua): Uma quantidade arbitrária de tábuas, representando
+            as falhas de cada vida.
+        status (StatusVidasConjuntas): status de vida conjunta.
+
+    Examples:
+
+        >>> import numpy as np
+        >>> qx1 = (np.arange(100) + 1)/100
+        >>> tabua = TabuaMultiplasVidas(Tabua(qx1), Tabua(qx1), status = StatusVidasConjuntas.LAST)
+    """
     __slots__ = "_periodicidade", "_status"
 
     def __init__(
