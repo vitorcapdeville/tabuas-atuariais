@@ -9,9 +9,9 @@ from numpy import repeat
 import pytest
 from tabatu.juros_constante import JurosConstante
 
-from tabatu.premissas import PremissasAtuariais
-from tabatu.premissas import PremissasAtuariaisRenda
-from tabatu.premissas import PremissasAtuariaisRendaInvalidez
+from tabatu.premissas import Premissas
+from tabatu.premissas import PremissasRenda
+from tabatu.premissas import PremissasRendaInvalidez
 from tabatu.periodicidade import Periodicidade
 from tabatu import Tabua, TabuaMDT
 
@@ -95,7 +95,7 @@ def test_tabua_e_juros_precisam_ter_a_mesma_periodicidade(
         mock_tabua_acumulacao_anual, "periodicidade", Periodicidade.MENSAL
     )
     with pytest.raises(ValueError):
-        PremissasAtuariais(mock_tabua_acumulacao_anual, mock_juros_anual)
+        Premissas(mock_tabua_acumulacao_anual, mock_juros_anual)
 
 
 def test_tabua_acumulacao_nao_pode_ter_fechamento_plato(
@@ -108,7 +108,7 @@ def test_tabua_acumulacao_nao_pode_ter_fechamento_plato(
         lambda *args, **kwargs: True,
     )
     with pytest.raises(ValueError):
-        PremissasAtuariais(mock_tabua_acumulacao_anual, mock_juros_anual)
+        Premissas(mock_tabua_acumulacao_anual, mock_juros_anual)
 
 
 def test_alterar_periodicidade_gera_nova_premissa_com_nova_tabua_e_novos_juros(
@@ -125,7 +125,7 @@ def test_alterar_periodicidade_gera_nova_premissa_com_nova_tabua_e_novos_juros(
         mock_juros_anual, "alterar_periodicidade", mock_alterar_periodicidade_juros
     )
 
-    premissas = PremissasAtuariais(mock_tabua_acumulacao_anual, mock_juros_anual)
+    premissas = Premissas(mock_tabua_acumulacao_anual, mock_juros_anual)
     nova_premissas = premissas.alterar_periodicidade(Periodicidade.MENSAL)
 
     mock_alterar_periodicidade_tabua.assert_called_once_with(Periodicidade.MENSAL)
@@ -144,7 +144,7 @@ def test_tabua_concessao_e_outras_premissas_devem_ter_a_mesma_periodicidade(
         mock_tabua_concessao_anual, "periodicidade", Periodicidade.MENSAL
     )
     with pytest.raises(ValueError):
-        PremissasAtuariaisRenda(
+        PremissasRenda(
             tabua=mock_tabua_acumulacao_anual,
             tabua_concessao=mock_tabua_concessao_anual,
             juros=mock_juros_anual,
@@ -164,7 +164,7 @@ def test_tabua_concessao_nao_pode_ter_fechamento_plato(
         lambda *args, **kwargs: True,
     )
     with pytest.raises(ValueError):
-        PremissasAtuariaisRenda(
+        PremissasRenda(
             tabua=mock_tabua_acumulacao_anual,
             tabua_concessao=mock_tabua_concessao_anual,
             juros=mock_juros_anual,
@@ -196,7 +196,7 @@ def test_alterar_periodicidade_gera_nova_premissa_com_nova_tabua_e_novos_juros_e
         mock_alterar_periodicidade_tabua_concessao,
     )
 
-    premissas = PremissasAtuariaisRenda(
+    premissas = PremissasRenda(
         tabua=mock_tabua_acumulacao_anual,
         tabua_concessao=mock_tabua_concessao_anual,
         juros=mock_juros_anual,
@@ -218,7 +218,7 @@ def test_tabua_acumulacao_deve_ter_causa_principal_na_renda_invalidez(
         mock_tabua_mdt_anual, "possui_causa_principal", lambda *args, **kwargs: False
     )
     with pytest.raises(ValueError):
-        PremissasAtuariaisRendaInvalidez(
+        PremissasRendaInvalidez(
             tabua=mock_tabua_mdt_anual,
             tabua_concessao=mock_tabua_concessao_anual,
             juros=mock_juros_anual,

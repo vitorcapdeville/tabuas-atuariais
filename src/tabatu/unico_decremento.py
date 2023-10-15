@@ -11,6 +11,32 @@ from tabatu.tabua_base import TabuaBase
 
 
 class Tabua(core.Tabua):
+    """Representação de tábuas de únicos decrementos.
+
+    Fornece métodos para cálculo das probabilidades de falha e sobrevivência,
+    além de serem blocos para a construção de tábuas de múltiplos decrementos
+    e tábuas de múltiplas vidas.
+
+    Args:
+        qx (Iterable[float]): Array contendo as probabilidades de falha entre x e x + 1,
+            no cenário que essas taxas representam o único decremento existente.
+            Deve estar na periodicidade original da tábua. Para tábuas fracionadas,
+            crie a tábua e use o setter de periodicidade.
+        periodicidade (Periodicidade): Periodicidade das probabilidades
+            de falha fornecidas. Por default, é considerado que as taxas são anuais.
+
+    Note:
+        A periodicidade controla como os métodos devem ser usados.
+
+        Se periodocidade for mensal, então tpx(600, 100) é a probabilidade de
+        um indivíduo com 600 meses não falhar nos próximos 100 meses.
+
+    Examples:
+
+        >>> import numpy as np
+        >>> qx1 = (np.arange(100) + 1)/100
+        >>> tabua = Tabua(qx1, periodicidade=Periodicidade["ANUAL"])
+    """
     __slots__ = "_periodicidade"
 
     def __init__(

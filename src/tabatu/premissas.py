@@ -10,7 +10,14 @@ from tabatu.typing import JurosInterface
 
 
 @dataclass(frozen=True)
-class PremissasAtuariais:
+class Premissas:
+    """Define a estrutura de premissas utilizadas em diversos cálculos atuariais.
+    São realizadas validações para garantir que os componentes são compatíveis entre si.
+
+    Args:
+        tabua (TabuaInterface): Tabua biométrica.
+        juros (JurosInterface): Juros.
+    """
     tabua: TabuaInterface
     juros: JurosInterface
 
@@ -23,16 +30,29 @@ class PremissasAtuariais:
 
     @property
     def periodicidade(self) -> Periodicidade:
+        """Periodicidade das premissas."""
         return self.tabua.periodicidade
 
     def alterar_periodicidade(self, periodicidade: Periodicidade):
+        """Gera uma nova premissa com a periodicidade alterada."""
         nova_tabua = self.tabua.alterar_periodicidade(periodicidade)
         novos_juros = self.juros.alterar_periodicidade(periodicidade)
         return replace(self, tabua=nova_tabua, juros=novos_juros)
 
 
 @dataclass(frozen=True)
-class PremissasAtuariaisRenda(PremissasAtuariais):
+class PremissasRenda(Premissas):
+    """Define a estrutura de premissas utilizadas em diversos cálculos atuariais relacionados 
+    a concessão de rendas.
+    São realizadas validações para garantir que os componentes são compatíveis entre si.
+
+    Args:
+        tabua (TabuaInterface): Tabua biométrica.
+        juros (JurosInterface): Juros.
+        tabua_concessao (TabuaInterface): Tábua biométrica associada a concessão da renda.
+    """
+    tabua: TabuaInterface
+    juros: JurosInterface
     tabua_concessao: TabuaInterface
 
     def __post_init__(self):
@@ -57,8 +77,18 @@ class PremissasAtuariaisRenda(PremissasAtuariais):
         )
 
 
-class PremissasAtuariaisRendaInvalidez(PremissasAtuariaisRenda):
+class PremissasRendaInvalidez(PremissasRenda):
+    """Define a estrutura de premissas utilizadas em cálculos associados a rendas por invalidez.
+    São realizadas validações para garantir que os componentes são compatíveis entre si.
+
+    Args:
+        tabua (TabuaMDT): Tabua biométrica, deve possuir como causa principal a invalidez.
+        juros (JurosInterface): Juros.
+        tabua_concessao (TabuaInterface): Tábua biométrica associada a concessão da renda.
+    """
     tabua: TabuaMDT
+    juros: JurosInterface
+    tabua_concessao: TabuaInterface
 
     def __post_init__(self):
         super().__post_init__()
