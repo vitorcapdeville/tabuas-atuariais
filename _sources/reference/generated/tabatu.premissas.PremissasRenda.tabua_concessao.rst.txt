@@ -1,0 +1,11 @@
+:orphan:
+
+PremissasRenda.tabua\_concessao
+===============================
+
+.. currentmodule:: tabatu.premissas
+
+attribute
+
+.. autoattribute:: PremissasRenda.tabua_concessao
+

@@ -1,0 +1,28 @@
+﻿tabatu.premissas.PremissasRendaInvalidez
+========================================
+
+.. currentmodule:: tabatu.premissas
+
+.. autoclass:: PremissasRendaInvalidez
+
+   
+
+      .. rubric:: Methods
+      .. autosummary::
+         :toctree:
+      
+         PremissasRendaInvalidez.alterar_periodicidade
+
+
+
+   
+
+      .. rubric:: Attributes
+      .. autosummary::
+         :toctree:
+      
+         PremissasRendaInvalidez.periodicidade
+         PremissasRendaInvalidez.tabua
+         PremissasRendaInvalidez.juros
+         PremissasRendaInvalidez.tabua_concessao
+

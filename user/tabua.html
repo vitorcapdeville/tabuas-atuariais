@@ -1,0 +1,761 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="pt_BR" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Tábuas &#8212; documentação tabatu </title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pandas.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/tabua';</script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Buscar" href="../search.html" />
+    <link rel="next" title="Juros" href="juros.html" />
+    <link rel="prev" title="Guia de usuário" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt_BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">tabatu</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Guia de usuário
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Referencia API
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/vitorcapdeville/tabuas-atuariais" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Guia de usuário
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Referencia API
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/vitorcapdeville/tabuas-atuariais" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tábuas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="juros.html">Juros</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Guia de usuário</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Tábuas</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="tabuas">
+<h1>Tábuas<a class="headerlink" href="#tabuas" title="Link permanente para este título">#</a></h1>
+<p>A classe <a class="reference internal" href="../reference/generated/tabatu.Tabua.html#tabatu.Tabua" title="tabatu.Tabua"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tabua</span></code></a> define a distribuição do tempo de vida futuro, a partir de uma array de taxas.</p>
+<p>Essa classe também requer que seja definida uma periodicidade para essas taxas. A periodicidade não faz nada por si só,
+mas garante que ao misturar mais de uma tábua, ou ao usar uma tábua com um juros, tudo continua coerente.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu</span> <span class="kn">import</span> <span class="n">Tabua</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu.periodicidade</span> <span class="kn">import</span> <span class="n">Periodicidade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span> <span class="o">=</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx</span><span class="o">=</span><span class="n">qx1</span><span class="p">,</span> <span class="n">periodicidade</span><span class="o">=</span><span class="n">Periodicidade</span><span class="o">.</span><span class="n">ANUAL</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A partir de uma instância da <a class="reference internal" href="../reference/generated/tabatu.Tabua.html#tabatu.Tabua" title="tabatu.Tabua"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tabua</span></code></a>, é possível cálcular as probabilidades de falha e sobrevivência usuais.
+Por exemplo, como a tábua criada é anual, podemos calcular a probabilidade de um indivíduo de 50 anos sobreviver por mais 10 anos.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span><span class="o">.</span><span class="n">tpx</span><span class="p">([</span><span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+<span class="go">array([0.00029821])</span>
+</pre></div>
+</div>
+<p>Podemos calcular também a probabilidade de um indivíduo com 50 anos morrer com exatamente 60 anos.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span><span class="o">.</span><span class="n">t_qx</span><span class="p">([</span><span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+<span class="go">array([0.00018191])</span>
+</pre></div>
+</div>
+<p>Repare que o output desses métodos sempre é um array do numpy. Além disso, os métodos permitem cálculos vetorizadoos,
+isto é, cálculo para diversos argumentos de uma única vez.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span><span class="o">.</span><span class="n">tpx</span><span class="p">([</span><span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="go">array([1.        , 0.49      , 0.2352    , 0.110544  , 0.05085024,</span>
+<span class="go">       0.02288261])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span><span class="o">.</span><span class="n">t_qx</span><span class="p">([</span><span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+<span class="go">array([0.51      , 0.2548    , 0.124656  , 0.05969376, 0.02796763,</span>
+<span class="go">       0.01281426])</span>
+</pre></div>
+</div>
+<section id="comportamento-das-tabuas-apos-a-idade-limite">
+<h2>Comportamento das tábuas após a idade limite<a class="headerlink" href="#comportamento-das-tabuas-apos-a-idade-limite" title="Link permanente para este título">#</a></h2>
+<p>As tábuas possuem uma característica peculiar com relação ao limite de idade que uma pessoa pode chegar viva.
+Em alguns casos, podemos usar uma tábua que termina, digamos, na idade 100 para definir uma população.
+E essa população pode conter pessoas com mais de 100 anos. Como são definidas as probabilidades nesse caso?</p>
+<p>As Tábuas estão modeladas de forma que dado que a pessoa ta viva e ultrapassou o limite de idade,
+essa pessoa irá morrer com probabilidade 1 antes do próximo aniversário.</p>
+<p>Para a tábua que criamos anteriormente, podemos obter a idade limite.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span><span class="o">.</span><span class="n">tempo_futuro_maximo</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">100.0</span>
+</pre></div>
+</div>
+<p>Se tentamos calcular as probabilidades de sobrevivência para pessoas com mais de 100 anos, obtemos sempre 1 para
+o tempo futuro 0, já que a pessoa sempre está viva no tempo 0, e 0 para todos os outros tempos.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span><span class="o">.</span><span class="n">tpx</span><span class="p">([</span><span class="mi">103</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([1., 0., 0., 0.])</span>
+</pre></div>
+</div>
+<p>O mesmo acontece para a probabilidade de falha. A probabilidade de alguém que superou a idade máxima da tábua
+falhar antes do próximo aniversário é 1, e a probabilidade sobrevivver por pelo menos mais 1 período e falhar em seguida
+é sempre zero.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua</span><span class="o">.</span><span class="n">t_qx</span><span class="p">([</span><span class="mi">103</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="go">array([1., 0., 0., 0.])</span>
+</pre></div>
+</div>
+</section>
+<section id="tabuas-fracionadas-e-tabuas-agravadas">
+<h2>Tábuas fracionadas e tábuas agravadas<a class="headerlink" href="#tabuas-fracionadas-e-tabuas-agravadas" title="Link permanente para este título">#</a></h2>
+<p>Em alguns casos recebemos as probabilidades de falha em uma determinada periodicidade (usualmente anual) e precisamos
+convertê-las para outra periodicidade (usualmente mensal). Além disso, também é comum utilizar versões agravadas ou
+desagravadas de uma tábua que não reflete bem a experiência de uma carteira. Para auxiliar com essas operações,
+o pacote tabatu fornece as funções <code class="xref py py-func docutils literal notranslate"><span class="pre">alterar_periodicidade_qx</span></code> e <code class="xref py py-func docutils literal notranslate"><span class="pre">agravar_qx</span></code>.</p>
+<p>É importante ressaltar que a ordem que essas operações são realizadas importa, e que o agravo deve <strong>SEMPRE</strong> acontecer
+antes da alteração de periodicidade.</p>
+<p>Vamos definir algumas várias para explorar as duas operações.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu</span> <span class="kn">import</span> <span class="n">alterar_periodicidade_qx</span><span class="p">,</span> <span class="n">agravar_qx</span><span class="p">,</span> <span class="n">Tabua</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu.periodicidade</span> <span class="kn">import</span> <span class="n">Periodicidade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx_anual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Com relação ao agravo e desagravo, os taxas resultantes nunca irão ultrapassar 1 ou serem menores que 0.
+Note que quando agravamos o
+antes da alteração de periodicidade.</p>
+<p>Vamos definir algumas várias para explorar as duas operações.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu</span> <span class="kn">import</span> <span class="n">alterar_periodicidade_qx</span><span class="p">,</span> <span class="n">agravar_qx</span><span class="p">,</span> <span class="n">Tabua</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu.periodicidade</span> <span class="kn">import</span> <span class="n">Periodicidade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx_anual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Com relação ao agravo e desagravo, os taxas resultantes nunca irão ultrapassar 1 ou serem menores que 0.
+Note que quando agravamos o
+antes da alteração de periodicidade.</p>
+<p>Vamos definir algumas várias para explorar as duas operações.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu</span> <span class="kn">import</span> <span class="n">alterar_periodicidade_qx</span><span class="p">,</span> <span class="n">agravar_qx</span><span class="p">,</span> <span class="n">Tabua</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu.periodicidade</span> <span class="kn">import</span> <span class="n">Periodicidade</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx_anual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Com relação ao agravo e desagravo, os taxas resultantes nunca irão ultrapassar 1 ou serem menores que 0.
+Note que quando agravamos o <code class="docutils literal notranslate"><span class="pre">qx_anual</span></code> em 150%, a taxa que antes era <code class="docutils literal notranslate"><span class="pre">0.8</span></code> fica limitada em <code class="docutils literal notranslate"><span class="pre">1.0</span></code> ao invés
+de <code class="docutils literal notranslate"><span class="pre">1.2</span></code>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">agravar_qx</span><span class="p">(</span><span class="n">qx_anual</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span>
+<span class="go">array([0.15, 0.3 , 0.6 , 1.  , 1.  ])</span>
+</pre></div>
+</div>
+<p>Para a alteração de periodicidade, quando a periodicidade é reduzida (de anual para mensal, por exemplo), as taxas são
+explodidas de forma que o novo array de taxas possua uma taxa para cada unidade na nova periodicidade.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">qx_mensal</span> <span class="o">=</span> <span class="n">alterar_periodicidade_qx</span><span class="p">(</span><span class="n">qx_anual</span><span class="p">,</span> <span class="n">Periodicidade</span><span class="o">.</span><span class="n">ANUAL</span><span class="p">,</span> <span class="n">Periodicidade</span><span class="o">.</span><span class="n">MENSAL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx_mensal</span>
+<span class="go">array([0.00874161, 0.00874161, 0.00874161, 0.00874161, 0.00874161,</span>
+<span class="go">       0.00874161, 0.00874161, 0.00874161, 0.00874161, 0.00874161,</span>
+<span class="go">       0.00874161, 0.00874161, 0.01842347, 0.01842347, 0.01842347,</span>
+<span class="go">       0.01842347, 0.01842347, 0.01842347, 0.01842347, 0.01842347,</span>
+<span class="go">       0.01842347, 0.01842347, 0.01842347, 0.01842347, 0.04167547,</span>
+<span class="go">       0.04167547, 0.04167547, 0.04167547, 0.04167547, 0.04167547,</span>
+<span class="go">       0.04167547, 0.04167547, 0.04167547, 0.04167547, 0.04167547,</span>
+<span class="go">       0.04167547, 0.12551473, 0.12551473, 0.12551473, 0.12551473,</span>
+<span class="go">       0.12551473, 0.12551473, 0.12551473, 0.12551473, 0.12551473,</span>
+<span class="go">       0.12551473, 0.12551473, 0.12551473, 1.        , 1.        ,</span>
+<span class="go">       1.        , 1.        , 1.        , 1.        , 1.        ,</span>
+<span class="go">       1.        , 1.        , 1.        , 1.        , 1.        ])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">qx_mensal</span><span class="p">)</span>
+<span class="go">60</span>
+</pre></div>
+</div>
+<p>Note que o array original possuia 5 elementos, e o array resultante possui 60 elementos. Isso acontece porque existem 60
+meses em um ano.</p>
+<p>Já quando a periodicidade é aumentada, as taxas são filtradas com o mesmo propósito: obter uma taxa para cada unidade
+na nova periodicidade.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">alterar_periodicidade_qx</span><span class="p">(</span><span class="n">qx_mensal</span><span class="p">,</span> <span class="n">Periodicidade</span><span class="o">.</span><span class="n">MENSAL</span><span class="p">,</span> <span class="n">Periodicidade</span><span class="o">.</span><span class="n">ANUAL</span><span class="p">)</span>
+<span class="go">array([0.1, 0.2, 0.4, 0.8, 1. ])</span>
+</pre></div>
+</div>
+<p>Após ajustar o array de taxas para o agravamento e a periodicidade desejada, as tábuas podem ser criadas como usual.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_anual</span> <span class="o">=</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx_anual</span><span class="p">,</span> <span class="n">Periodicidade</span><span class="o">.</span><span class="n">ANUAL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mensal</span> <span class="o">=</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx_mensal</span><span class="p">,</span> <span class="n">Periodicidade</span><span class="o">.</span><span class="n">MENSAL</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note que a lógica de alteração de periodicidade utilizada preserva as probabilidades nos pontos de quebra.
+Por exemplo, a probabilidade de um indivíduo de 2 anos sobreviver por mais 1 anos na tabua anual é equivalente
+a probabilidade de um indivíduo de 24 meses (2 anos) sobreviver por mais 12 meses (1 ano) na tábua mensal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_anual</span><span class="o">.</span><span class="n">tpx</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">array([0.6])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mensal</span><span class="o">.</span><span class="n">tpx</span><span class="p">([</span><span class="mi">24</span><span class="p">],</span> <span class="p">[</span><span class="mi">12</span><span class="p">])</span>
+<span class="go">array([0.6])</span>
+</pre></div>
+</div>
+<p>Da mesma forma, a probabilidade de um indivíduo de 2 anos sobreviver por mais 1 ano e morrer antes de completar 4 anos
+de acordo com a tábua anual é equivalente a probabilidade de um indivíduo de 24 meses sobreviver por mais 12 meses e
+morrer antes de completar 48 meses de acordo com a tábua mensal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_anual</span><span class="o">.</span><span class="n">t_qx</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">array([0.48])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mensal</span><span class="o">.</span><span class="n">t_qx</span><span class="p">([</span><span class="mi">24</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">24</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">0.48</span>
+</pre></div>
+</div>
+</section>
+<section id="tabuas-de-multiplos-decrementos">
+<h2>Tábuas de múltiplos decrementos<a class="headerlink" href="#tabuas-de-multiplos-decrementos" title="Link permanente para este título">#</a></h2>
+<p>Em alguns casos existem mais do que uma causa de falha, como por exemplo em seguros de invalidez. Nesses casos, é
+preciso construir tábuas de múltiplos decremenots. As tábuas de múltiplos decrementos podem ser construídas modelando
+os eventos de forma conjunta, ou a partir de tábuas que são assumidas independentes, que é o mais usual.
+O pacote tabatu fornece uma interface para o segundo caso através da <a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.html#tabatu.TabuaMDT" title="tabatu.TabuaMDT"><code class="xref py py-class docutils literal notranslate"><span class="pre">TabuaMDT</span></code></a>.</p>
+<p>Esse novo tipo de tábua recebe até 3 <a class="reference internal" href="../reference/generated/tabatu.Tabua.html#tabatu.Tabua" title="tabatu.Tabua"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tabua</span></code></a> como argumentos nomeados ou não nomeados, além de
+opcionalmente receber também um argumento indicando qual é a causa principal.</p>
+<p>Com a tábua de múltiplos decrementos é possível calcular as mesmas quantidades que a <a class="reference internal" href="../reference/generated/tabatu.Tabua.html#tabatu.Tabua" title="tabatu.Tabua"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tabua</span></code></a>, porém
+agora com significado levemente diferente. O método <a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.tpx.html#tabatu.TabuaMDT.tpx" title="tabatu.TabuaMDT.tpx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">tpx</span></code></a> retorna a probabilidade de um
+indivíduo de idade <code class="docutils literal notranslate"><span class="pre">x</span></code> sobreviver por mais <code class="docutils literal notranslate"><span class="pre">t</span></code> períodos, sem sofrer nenhum dos decrementos. O método
+<a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.t_qx.html#tabatu.TabuaMDT.t_qx" title="tabatu.TabuaMDT.t_qx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">t_qx</span></code></a> retorna a probabilidade de um indivíduo de idade <code class="docutils literal notranslate"><span class="pre">x</span></code> sobreviver por mais <code class="docutils literal notranslate"><span class="pre">t</span></code>
+períodos, sem sofrer nenhum dos decrementos, e morrer no período <code class="docutils literal notranslate"><span class="pre">t</span></code> por qualquer decremento.
+O parâmetro <code class="docutils literal notranslate"><span class="pre">causa_principal</span></code> afeta o comportamento do método <a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.t_qx.html#tabatu.TabuaMDT.t_qx" title="tabatu.TabuaMDT.t_qx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">t_qx</span></code></a>, que passa a retornar
+a probabilidade de um indivíduo de idade <code class="docutils literal notranslate"><span class="pre">x</span></code> sobreviver por mais <code class="docutils literal notranslate"><span class="pre">t</span></code> períodos, sem sofrer nenhum dos decrementos, e
+morrer no período <code class="docutils literal notranslate"><span class="pre">t</span></code> pela causa principal. Isso é útil quando se tem uma tábua de múltiplos decrementos onde apenas um
+deles gera o sinistro.
+Além disso, as tábuas de múltiplos decrementos também possuem os métodos <a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.t_qx_j.html#tabatu.TabuaMDT.t_qx_j" title="tabatu.TabuaMDT.t_qx_j"><code class="xref py py-meth docutils literal notranslate"><span class="pre">t_qx_j</span></code></a> e
+<a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.qx_j.html#tabatu.TabuaMDT.qx_j" title="tabatu.TabuaMDT.qx_j"><code class="xref py py-meth docutils literal notranslate"><span class="pre">qx_j</span></code></a>, para obter as probabilidades de falha por decremento.</p>
+<p>Podemos construir uma tábua de múltiplos decrementos usando duas tábuas como argumentos posicionais.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu</span> <span class="kn">import</span> <span class="n">Tabua</span><span class="p">,</span> <span class="n">TabuaMDT</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt</span> <span class="o">=</span> <span class="n">TabuaMDT</span><span class="p">(</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx2</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Dessa forma, essas tábuas serão mapeadas na posição que foram fornecidas.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt</span><span class="o">.</span><span class="n">causas</span>
+<span class="go">{&#39;0&#39;: 0, &#39;1&#39;: 1}</span>
+</pre></div>
+</div>
+<p>E dessa forma será possível calcular as probabilidades de falha para causas específicas utilizando essa posição.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt</span><span class="o">.</span><span class="n">t_qx_j</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">array([[0.04594007]])</span>
+</pre></div>
+</div>
+<p>Se as tábuas tivessem sido passadas como argumentos nomeados, poderíamos acessá-las pelo nome ou pela posição.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_nomeadas</span> <span class="o">=</span> <span class="n">TabuaMDT</span><span class="p">(</span><span class="n">morte</span><span class="o">=</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">invalidez</span><span class="o">=</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_nomeadas</span><span class="o">.</span><span class="n">causas</span>
+<span class="go">{&#39;morte&#39;: 0, &#39;invalidez&#39;: 1}</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_nomeadas</span><span class="o">.</span><span class="n">t_qx_j</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;morte&#39;</span><span class="p">])</span>
+<span class="go">array([[0.04594007]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_nomeadas</span><span class="o">.</span><span class="n">t_qx_j</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">array([[0.04594007]])</span>
+</pre></div>
+</div>
+<p>Note que o output de <a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.t_qx_j.html#tabatu.TabuaMDT.t_qx_j" title="tabatu.TabuaMDT.t_qx_j"><code class="xref py py-meth docutils literal notranslate"><span class="pre">t_qx_j</span></code></a> é um array de duas dimensões, onde cada linha representa
+representa um decremento. Poderíamos então calcular as taxas de falha para cada decremento na mesma expressão.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_nomeadas</span><span class="o">.</span><span class="n">t_qx_j</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;morte&#39;</span><span class="p">,</span> <span class="s1">&#39;invalidez&#39;</span><span class="p">])</span>
+<span class="go">array([[0.04594007],</span>
+<span class="go">       [0.00105167]])</span>
+</pre></div>
+</div>
+<p>Também é possível criar tábuas de múltiplos decrementos onde apenas alguns argumentos são nomeados.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_nomeados_e_posicionais</span> <span class="o">=</span> <span class="n">TabuaMDT</span><span class="p">(</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">invalidez</span> <span class="o">=</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_nomeados_e_posicionais</span><span class="o">.</span><span class="n">causas</span>
+<span class="go">{&#39;0&#39;: 0, &#39;invalidez&#39;: 1}</span>
+</pre></div>
+</div>
+<p>A feature da <code class="docutils literal notranslate"><span class="pre">causa_principal</span></code> pode ser utilizada se referindo a posição da causa principal ou ao nome.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_causa_principal_posicao</span> <span class="o">=</span> <span class="n">TabuaMDT</span><span class="p">(</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx2</span><span class="p">),</span> <span class="n">causa_principal</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_causa_principal_nome</span> <span class="o">=</span> <span class="n">TabuaMDT</span><span class="p">(</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">invalidez</span><span class="o">=</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx2</span><span class="p">),</span> <span class="n">causa_principal</span><span class="o">=</span><span class="s1">&#39;invalidez&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Agora, quando calcularmos <a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.t_qx.html#tabatu.TabuaMDT.t_qx" title="tabatu.TabuaMDT.t_qx"><code class="xref py py-meth docutils literal notranslate"><span class="pre">t_qx</span></code></a> obteremos o mesmo valor que
+<a class="reference internal" href="../reference/generated/tabatu.TabuaMDT.t_qx_j.html#tabatu.TabuaMDT.t_qx_j" title="tabatu.TabuaMDT.t_qx_j"><code class="xref py py-meth docutils literal notranslate"><span class="pre">t_qx_j</span></code></a> para a causa principal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_causa_principal_posicao</span><span class="o">.</span><span class="n">t_qx</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="go">array([0.00105167])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_causa_principal_posicao</span><span class="o">.</span><span class="n">t_qx_j</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">array([[0.00105167]])</span>
+</pre></div>
+</div>
+<p>Ainda podemos recuperar a probabilidade de falha por qualquer causa ao calcular o t_qx_j para todas as causas e somar.
+&gt;&gt;&gt; tabua_mdt_causa_principal_posicao.t_qx_j([30, 30], [5], [0, 1]).sum()
+0.04699174108523214</p>
+<p>Um caso comum de uso de tábuas de múltiplos decrementos é para incluir as probabilidades de cancelamento junto com probabilidades
+de sinistro. Neste caso, surge uma complicação extra, pois as probabilidades de sinistro geralmente possuem como origem
+o nascimento do segurado, enquanto as probabilidades de cancelamento possuem como origem a data de início da vigência.
+As tábuas de múltiplos decrementos permitem que sejam passadas duas idades diferentes para os cálculos das probabilidades,
+uma para cada causa.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_com_cancelamento</span> <span class="o">=</span> <span class="n">TabuaMDT</span><span class="p">(</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_mdt_com_cancelamento</span><span class="o">.</span><span class="n">t_qx</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+<span class="go">array([0.00016557])</span>
+</pre></div>
+</div>
+</section>
+<section id="tabuas-de-multiplas-vidas">
+<h2>Tábuas de múltiplas vidas<a class="headerlink" href="#tabuas-de-multiplas-vidas" title="Link permanente para este título">#</a></h2>
+<p>Em alguns casos, existe o interesse de calcular probabilidades de falha de mais de um indivíduo de forma conjunta.
+Isso ocorre em rendas com múltiplos beneficiários, por exemplo, onde as rendas são pagas enquanto pelo menos um
+beneficiário estiver vivo ou enquanto todos os beneficiários estiverem vivos.
+O pacote tabatu fornece uma interface para este tipo de tábua também, através da classe
+<a class="reference internal" href="../reference/generated/tabatu.TabuaMultiplasVidas.html#tabatu.TabuaMultiplasVidas" title="tabatu.TabuaMultiplasVidas"><code class="xref py py-class docutils literal notranslate"><span class="pre">TabuaMultiplasVidas</span></code></a>.</p>
+<p>Essa tábua funciona de forma parecida com a tábua de múltiplos decrementos, porém não há limitação para a quantidade
+de vidas que serão consideradas, e as tábuas são passadas sempre como argumentos posicionais (não-nomeados). Além disso,
+é possível escolher o status de vida conjunta que será utilizado - JOINT ou LAST. O status joint indica que a falha ocorre
+na primeira falah, enquanto que o status last indica que a falha ocorre na última falha.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tabatu</span> <span class="kn">import</span> <span class="n">Tabua</span><span class="p">,</span> <span class="n">TabuaMultiplasVidas</span><span class="p">,</span> <span class="n">StatusVidasConjuntas</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qx1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_last</span> <span class="o">=</span> <span class="n">TabuaMultiplasVidas</span><span class="p">(</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">status</span><span class="o">=</span><span class="n">StatusVidasConjuntas</span><span class="o">.</span><span class="n">LAST</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_joint</span> <span class="o">=</span> <span class="n">TabuaMultiplasVidas</span><span class="p">(</span><span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">Tabua</span><span class="p">(</span><span class="n">qx1</span><span class="p">),</span> <span class="n">status</span><span class="o">=</span><span class="n">StatusVidasConjuntas</span><span class="o">.</span><span class="n">JOINT</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Com a tábua de multiplas vidas geralmente existe interesse em calcular as probabilidades de sobrevivência.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_last</span><span class="o">.</span><span class="n">tpx</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="go">array([1.        , 0.9349    , 0.86908304, 0.80311964, 0.73758507])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_joint</span><span class="o">.</span><span class="n">tpx</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="go">array([1.        , 0.5451    , 0.28912104, 0.14915754, 0.07481742])</span>
+</pre></div>
+</div>
+<p>Dependendo o status de vida conjunta, o tempo futuro máximo da tábua também é adaptado. Para uma tábua com status joint,
+o tempo futuro máximo é o menor dos tempos futuros máximos de cada beneficiário, enquanto que para uma tábua com status
+last, o tempo futuro máximo é o maior dos tempos futuros máximos de cada beneficiário.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_last</span><span class="o">.</span><span class="n">tempo_futuro_maximo</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="go">80.0</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tabua_joint</span><span class="o">.</span><span class="n">tempo_futuro_maximo</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span>
+<span class="go">70.0</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Guia de usuário</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="juros.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">Juros</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comportamento-das-tabuas-apos-a-idade-limite">Comportamento das tábuas após a idade limite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabuas-fracionadas-e-tabuas-agravadas">Tábuas fracionadas e tábuas agravadas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabuas-de-multiplos-decrementos">Tábuas de múltiplos decrementos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tabuas-de-multiplas-vidas">Tábuas de múltiplas vidas</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user/tabua.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Exibir Fonte
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Vitor Capdeville.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 4.5.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

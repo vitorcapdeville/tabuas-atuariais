@@ -1,0 +1,27 @@
+﻿tabatu.JurosConstante
+=====================
+
+.. currentmodule:: tabatu
+
+.. autoclass:: JurosConstante
+
+   
+
+      .. rubric:: Methods
+      .. autosummary::
+         :toctree:
+      
+         JurosConstante.alterar_periodicidade
+         JurosConstante.taxa_desconto
+         JurosConstante.taxa_juros
+
+
+
+   
+
+      .. rubric:: Attributes
+      .. autosummary::
+         :toctree:
+      
+         JurosConstante.periodicidade
+

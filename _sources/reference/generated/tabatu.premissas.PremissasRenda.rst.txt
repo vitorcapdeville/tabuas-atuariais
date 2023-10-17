@@ -1,0 +1,28 @@
+﻿tabatu.premissas.PremissasRenda
+===============================
+
+.. currentmodule:: tabatu.premissas
+
+.. autoclass:: PremissasRenda
+
+   
+
+      .. rubric:: Methods
+      .. autosummary::
+         :toctree:
+      
+         PremissasRenda.alterar_periodicidade
+
+
+
+   
+
+      .. rubric:: Attributes
+      .. autosummary::
+         :toctree:
+      
+         PremissasRenda.periodicidade
+         PremissasRenda.tabua
+         PremissasRenda.juros
+         PremissasRenda.tabua_concessao
+

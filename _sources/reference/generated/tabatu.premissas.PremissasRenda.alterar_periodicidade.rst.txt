@@ -1,0 +1,11 @@
+:orphan:
+
+PremissasRenda.alterar\_periodicidade
+=====================================
+
+.. currentmodule:: tabatu.premissas
+
+method
+
+.. automethod:: PremissasRenda.alterar_periodicidade
+

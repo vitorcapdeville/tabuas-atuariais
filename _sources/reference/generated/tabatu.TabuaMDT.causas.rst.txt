@@ -1,0 +1,15 @@
+
+:orphan:
+
+
+TabuaMDT.causas
+===============
+
+.. currentmodule:: tabatu
+
+
+property
+
+
+.. autoproperty:: TabuaMDT.causas
+

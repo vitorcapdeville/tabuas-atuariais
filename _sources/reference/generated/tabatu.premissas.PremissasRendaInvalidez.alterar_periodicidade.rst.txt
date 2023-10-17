@@ -1,0 +1,11 @@
+:orphan:
+
+PremissasRendaInvalidez.alterar\_periodicidade
+==============================================
+
+.. currentmodule:: tabatu.premissas
+
+method
+
+.. automethod:: PremissasRendaInvalidez.alterar_periodicidade
+

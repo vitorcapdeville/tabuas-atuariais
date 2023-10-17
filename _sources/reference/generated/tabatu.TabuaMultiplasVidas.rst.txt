@@ -1,0 +1,34 @@
+﻿tabatu.TabuaMultiplasVidas
+==========================
+
+.. currentmodule:: tabatu
+
+.. autoclass:: TabuaMultiplasVidas
+
+   
+
+      .. rubric:: Methods
+      .. autosummary::
+         :toctree:
+      
+         TabuaMultiplasVidas.alterar_periodicidade
+         TabuaMultiplasVidas.possui_fechamento_plato
+         TabuaMultiplasVidas.qx
+         TabuaMultiplasVidas.t_qx
+         TabuaMultiplasVidas.tempo_futuro_maximo
+         TabuaMultiplasVidas.tpx
+
+
+
+   
+
+      .. rubric:: Attributes
+      .. autosummary::
+         :toctree:
+      
+         TabuaMultiplasVidas.numero_decrementos
+         TabuaMultiplasVidas.numero_vidas
+         TabuaMultiplasVidas.periodicidade
+         TabuaMultiplasVidas.status
+         TabuaMultiplasVidas.tabuas
+

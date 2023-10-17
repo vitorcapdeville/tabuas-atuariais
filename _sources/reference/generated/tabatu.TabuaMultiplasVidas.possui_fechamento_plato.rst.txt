@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMultiplasVidas.possui\_fechamento\_plato
+=============================================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: TabuaMultiplasVidas.possui_fechamento_plato
+

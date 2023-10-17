@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMDT.tempo\_futuro\_maximo
+==============================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: TabuaMDT.tempo_futuro_maximo
+

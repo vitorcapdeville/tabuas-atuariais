@@ -1,0 +1,34 @@
+﻿tabatu.Tabua
+============
+
+.. currentmodule:: tabatu
+
+.. autoclass:: Tabua
+
+   
+
+      .. rubric:: Methods
+      .. autosummary::
+         :toctree:
+      
+         Tabua.alterar_periodicidade
+         Tabua.from_tabua_base
+         Tabua.possui_fechamento_plato
+         Tabua.qx
+         Tabua.t_qx
+         Tabua.tempo_futuro_maximo
+         Tabua.tpx
+
+
+
+   
+
+      .. rubric:: Attributes
+      .. autosummary::
+         :toctree:
+      
+         Tabua.numero_decrementos
+         Tabua.numero_vidas
+         Tabua.periodicidade
+         Tabua.tabuas
+

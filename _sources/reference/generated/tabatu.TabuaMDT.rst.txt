@@ -1,0 +1,38 @@
+﻿tabatu.TabuaMDT
+===============
+
+.. currentmodule:: tabatu
+
+.. autoclass:: TabuaMDT
+
+   
+
+      .. rubric:: Methods
+      .. autosummary::
+         :toctree:
+      
+         TabuaMDT.alterar_periodicidade
+         TabuaMDT.possui_causa_principal
+         TabuaMDT.possui_fechamento_plato
+         TabuaMDT.qx
+         TabuaMDT.qx_j
+         TabuaMDT.t_qx
+         TabuaMDT.t_qx_j
+         TabuaMDT.tempo_futuro_maximo
+         TabuaMDT.tpx
+
+
+
+   
+
+      .. rubric:: Attributes
+      .. autosummary::
+         :toctree:
+      
+         TabuaMDT.causa_principal
+         TabuaMDT.causas
+         TabuaMDT.numero_decrementos
+         TabuaMDT.numero_vidas
+         TabuaMDT.periodicidade
+         TabuaMDT.tabuas
+

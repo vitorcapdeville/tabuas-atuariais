@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMultiplasVidas.t\_qx
+=========================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: TabuaMultiplasVidas.t_qx
+

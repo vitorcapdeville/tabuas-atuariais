@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMultiplasVidas.numero\_vidas
+=================================
+
+.. currentmodule:: tabatu
+
+attribute
+
+.. autoattribute:: TabuaMultiplasVidas.numero_vidas
+

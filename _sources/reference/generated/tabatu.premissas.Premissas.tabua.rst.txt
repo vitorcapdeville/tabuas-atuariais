@@ -1,0 +1,11 @@
+:orphan:
+
+Premissas.tabua
+===============
+
+.. currentmodule:: tabatu.premissas
+
+attribute
+
+.. autoattribute:: Premissas.tabua
+

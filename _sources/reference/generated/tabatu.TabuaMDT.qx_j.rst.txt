@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMDT.qx\_j
+==============
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: TabuaMDT.qx_j
+

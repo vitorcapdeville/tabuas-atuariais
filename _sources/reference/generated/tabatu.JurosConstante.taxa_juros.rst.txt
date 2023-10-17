@@ -1,0 +1,11 @@
+:orphan:
+
+JurosConstante.taxa\_juros
+==========================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: JurosConstante.taxa_juros
+

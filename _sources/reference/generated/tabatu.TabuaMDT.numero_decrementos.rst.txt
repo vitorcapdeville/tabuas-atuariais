@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMDT.numero\_decrementos
+============================
+
+.. currentmodule:: tabatu
+
+attribute
+
+.. autoattribute:: TabuaMDT.numero_decrementos
+

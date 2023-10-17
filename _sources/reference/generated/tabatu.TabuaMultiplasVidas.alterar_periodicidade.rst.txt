@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMultiplasVidas.alterar\_periodicidade
+==========================================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: TabuaMultiplasVidas.alterar_periodicidade
+

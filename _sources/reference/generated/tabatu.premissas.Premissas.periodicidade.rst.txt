@@ -1,0 +1,15 @@
+
+:orphan:
+
+
+Premissas.periodicidade
+=======================
+
+.. currentmodule:: tabatu.premissas
+
+
+property
+
+
+.. autoproperty:: Premissas.periodicidade
+

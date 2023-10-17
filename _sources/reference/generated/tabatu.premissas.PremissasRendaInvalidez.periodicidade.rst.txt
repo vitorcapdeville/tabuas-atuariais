@@ -1,0 +1,15 @@
+
+:orphan:
+
+
+PremissasRendaInvalidez.periodicidade
+=====================================
+
+.. currentmodule:: tabatu.premissas
+
+
+property
+
+
+.. autoproperty:: PremissasRendaInvalidez.periodicidade
+

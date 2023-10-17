@@ -1,0 +1,15 @@
+
+:orphan:
+
+
+TabuaMultiplasVidas.status
+==========================
+
+.. currentmodule:: tabatu
+
+
+property
+
+
+.. autoproperty:: TabuaMultiplasVidas.status
+

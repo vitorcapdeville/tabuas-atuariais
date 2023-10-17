@@ -1,0 +1,11 @@
+:orphan:
+
+Tabua.from\_tabua\_base
+=======================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: Tabua.from_tabua_base
+

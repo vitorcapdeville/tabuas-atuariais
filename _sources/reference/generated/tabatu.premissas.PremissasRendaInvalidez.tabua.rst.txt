@@ -1,0 +1,11 @@
+:orphan:
+
+PremissasRendaInvalidez.tabua
+=============================
+
+.. currentmodule:: tabatu.premissas
+
+attribute
+
+.. autoattribute:: PremissasRendaInvalidez.tabua
+

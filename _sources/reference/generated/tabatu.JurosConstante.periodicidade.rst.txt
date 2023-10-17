@@ -1,0 +1,15 @@
+
+:orphan:
+
+
+JurosConstante.periodicidade
+============================
+
+.. currentmodule:: tabatu
+
+
+property
+
+
+.. autoproperty:: JurosConstante.periodicidade
+

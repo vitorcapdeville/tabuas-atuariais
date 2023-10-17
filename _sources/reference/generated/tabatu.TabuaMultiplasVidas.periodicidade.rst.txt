@@ -1,0 +1,15 @@
+
+:orphan:
+
+
+TabuaMultiplasVidas.periodicidade
+=================================
+
+.. currentmodule:: tabatu
+
+
+property
+
+
+.. autoproperty:: TabuaMultiplasVidas.periodicidade
+

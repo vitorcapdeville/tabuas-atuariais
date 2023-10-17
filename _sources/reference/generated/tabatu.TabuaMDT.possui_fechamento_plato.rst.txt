@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMDT.possui\_fechamento\_plato
+==================================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: TabuaMDT.possui_fechamento_plato
+

@@ -1,0 +1,559 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="pt_BR" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Tabua.possui_fechamento_plato &#8212; documentação tabatu </title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/pandas.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/generated/tabatu.Tabua.possui_fechamento_plato';</script>
+    <link rel="index" title="Índice" href="../../genindex.html" />
+    <link rel="search" title="Buscar" href="../../search.html" />
+    <link rel="next" title="Tabua.qx" href="tabatu.Tabua.qx.html" />
+    <link rel="prev" title="Tabua.from_tabua_base" href="tabatu.Tabua.from_tabua_base.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="pt_BR"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">tabatu</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user/index.html">
+                        Guia de usuário
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Referencia API
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/vitorcapdeville/tabuas-atuariais" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Buscar" aria-label="Buscar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user/index.html">
+                        Guia de usuário
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        Referencia API
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/vitorcapdeville/tabuas-atuariais" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../tabuas.html">Tábuas</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="tabatu.Tabua.html">tabatu.Tabua</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.alterar_periodicidade.html">Tabua.alterar_periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.from_tabua_base.html">Tabua.from_tabua_base</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Tabua.possui_fechamento_plato</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.qx.html">Tabua.qx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.t_qx.html">Tabua.t_qx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.tempo_futuro_maximo.html">Tabua.tempo_futuro_maximo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.tpx.html">Tabua.tpx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.numero_decrementos.html">Tabua.numero_decrementos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.numero_vidas.html">Tabua.numero_vidas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.periodicidade.html">Tabua.periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.Tabua.tabuas.html">Tabua.tabuas</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabatu.TabuaMDT.html">tabatu.TabuaMDT</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.alterar_periodicidade.html">TabuaMDT.alterar_periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.possui_causa_principal.html">TabuaMDT.possui_causa_principal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.possui_fechamento_plato.html">TabuaMDT.possui_fechamento_plato</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.qx.html">TabuaMDT.qx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.qx_j.html">TabuaMDT.qx_j</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.t_qx.html">TabuaMDT.t_qx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.t_qx_j.html">TabuaMDT.t_qx_j</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.tempo_futuro_maximo.html">TabuaMDT.tempo_futuro_maximo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.tpx.html">TabuaMDT.tpx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.causa_principal.html">TabuaMDT.causa_principal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.causas.html">TabuaMDT.causas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.numero_decrementos.html">TabuaMDT.numero_decrementos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.numero_vidas.html">TabuaMDT.numero_vidas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.periodicidade.html">TabuaMDT.periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMDT.tabuas.html">TabuaMDT.tabuas</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.html">tabatu.TabuaMultiplasVidas</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.alterar_periodicidade.html">TabuaMultiplasVidas.alterar_periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.possui_fechamento_plato.html">TabuaMultiplasVidas.possui_fechamento_plato</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.qx.html">TabuaMultiplasVidas.qx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.t_qx.html">TabuaMultiplasVidas.t_qx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.tempo_futuro_maximo.html">TabuaMultiplasVidas.tempo_futuro_maximo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.tpx.html">TabuaMultiplasVidas.tpx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.numero_decrementos.html">TabuaMultiplasVidas.numero_decrementos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.numero_vidas.html">TabuaMultiplasVidas.numero_vidas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.periodicidade.html">TabuaMultiplasVidas.periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.status.html">TabuaMultiplasVidas.status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.TabuaMultiplasVidas.tabuas.html">TabuaMultiplasVidas.tabuas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../juros.html">Juros</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabatu.JurosConstante.html">tabatu.JurosConstante</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.JurosConstante.alterar_periodicidade.html">JurosConstante.alterar_periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.JurosConstante.taxa_desconto.html">JurosConstante.taxa_desconto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.JurosConstante.taxa_juros.html">JurosConstante.taxa_juros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.JurosConstante.periodicidade.html">JurosConstante.periodicidade</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../premissas.html">Premissas</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabatu.premissas.Premissas.html">tabatu.premissas.Premissas</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.Premissas.alterar_periodicidade.html">Premissas.alterar_periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.Premissas.periodicidade.html">Premissas.periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.Premissas.tabua.html">Premissas.tabua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.Premissas.juros.html">Premissas.juros</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabatu.premissas.PremissasRenda.html">tabatu.premissas.PremissasRenda</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRenda.alterar_periodicidade.html">PremissasRenda.alterar_periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRenda.periodicidade.html">PremissasRenda.periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRenda.tabua.html">PremissasRenda.tabua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRenda.juros.html">PremissasRenda.juros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRenda.tabua_concessao.html">PremissasRenda.tabua_concessao</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="tabatu.premissas.PremissasRendaInvalidez.html">tabatu.premissas.PremissasRendaInvalidez</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRendaInvalidez.alterar_periodicidade.html">PremissasRendaInvalidez.alterar_periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRendaInvalidez.periodicidade.html">PremissasRendaInvalidez.periodicidade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRendaInvalidez.tabua.html">PremissasRendaInvalidez.tabua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRendaInvalidez.juros.html">PremissasRendaInvalidez.juros</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tabatu.premissas.PremissasRendaInvalidez.tabua_concessao.html">PremissasRendaInvalidez.tabua_concessao</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Referencia API</a></li>
+    
+    
+    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    
+    
+    <li class="breadcrumb-item"><a href="tabatu.Tabua.html" class="nav-link">tabatu.Tabua</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Tabua.possui_fechamento_plato</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="tabua-possui-fechamento-plato">
+<h1>Tabua.possui_fechamento_plato<a class="headerlink" href="#tabua-possui-fechamento-plato" title="Link permanente para este título">#</a></h1>
+<p>method</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tabatu.Tabua.possui_fechamento_plato">
+<span class="sig-prename descclassname"><span class="pre">Tabua.</span></span><span class="sig-name descname"><span class="pre">possui_fechamento_plato</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(em Python v3.12)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#tabatu.Tabua.possui_fechamento_plato" title="Link permanente para esta definição">#</a></dt>
+<dd><p>Verifica se a tábua possui fechamento de tipo platô.</p>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="tabatu.Tabua.from_tabua_base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">anterior</p>
+        <p class="prev-next-title">Tabua.from_tabua_base</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="tabatu.Tabua.qx.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">próximo</p>
+        <p class="prev-next-title">Tabua.qx</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../../_sources/reference/generated/tabatu.Tabua.possui_fechamento_plato.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Exibir Fonte
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Vitor Capdeville.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Criada usando <a href="https://www.sphinx-doc.org/pt_BR/master">Sphinx</a> 4.5.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

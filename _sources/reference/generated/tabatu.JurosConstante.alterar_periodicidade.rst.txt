@@ -1,0 +1,11 @@
+:orphan:
+
+JurosConstante.alterar\_periodicidade
+=====================================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: JurosConstante.alterar_periodicidade
+

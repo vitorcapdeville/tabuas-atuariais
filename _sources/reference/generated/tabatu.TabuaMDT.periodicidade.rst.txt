@@ -1,0 +1,15 @@
+
+:orphan:
+
+
+TabuaMDT.periodicidade
+======================
+
+.. currentmodule:: tabatu
+
+
+property
+
+
+.. autoproperty:: TabuaMDT.periodicidade
+

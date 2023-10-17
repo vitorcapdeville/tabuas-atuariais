@@ -1,0 +1,11 @@
+:orphan:
+
+JurosConstante.taxa\_desconto
+=============================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: JurosConstante.taxa_desconto
+

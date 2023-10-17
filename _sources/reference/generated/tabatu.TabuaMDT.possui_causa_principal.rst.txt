@@ -1,0 +1,11 @@
+:orphan:
+
+TabuaMDT.possui\_causa\_principal
+=================================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: TabuaMDT.possui_causa_principal
+

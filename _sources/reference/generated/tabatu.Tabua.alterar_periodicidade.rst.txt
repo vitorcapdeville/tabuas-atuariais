@@ -1,0 +1,11 @@
+:orphan:
+
+Tabua.alterar\_periodicidade
+============================
+
+.. currentmodule:: tabatu
+
+method
+
+.. automethod:: Tabua.alterar_periodicidade
+

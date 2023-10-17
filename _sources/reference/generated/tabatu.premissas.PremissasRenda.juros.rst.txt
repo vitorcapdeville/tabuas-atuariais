@@ -1,0 +1,11 @@
+:orphan:
+
+PremissasRenda.juros
+====================
+
+.. currentmodule:: tabatu.premissas
+
+attribute
+
+.. autoattribute:: PremissasRenda.juros
+

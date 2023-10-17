@@ -1,0 +1,27 @@
+﻿tabatu.premissas.Premissas
+==========================
+
+.. currentmodule:: tabatu.premissas
+
+.. autoclass:: Premissas
+
+   
+
+      .. rubric:: Methods
+      .. autosummary::
+         :toctree:
+      
+         Premissas.alterar_periodicidade
+
+
+
+   
+
+      .. rubric:: Attributes
+      .. autosummary::
+         :toctree:
+      
+         Premissas.periodicidade
+         Premissas.tabua
+         Premissas.juros
+
