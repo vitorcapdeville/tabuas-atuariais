@@ -49,6 +49,10 @@ class TabuaMultiplasVidas(core.TabuaMultiplasVidas):
         super().__init__(*args, status=core.StatusVidasConjuntas(status.value))
 
     @property
+    def periodicidade(self) -> Periodicidade:
+        return self._periodicidade
+
+    @property
     def status(self) -> StatusVidasConjuntas:
         """Status de vida conjunta."""
         return self._status
